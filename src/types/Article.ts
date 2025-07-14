@@ -5,6 +5,8 @@ export interface Article {
     slug: string;
     thumbnail: string;
     content: string;
+    article_categories: string;
+    article_sub_categories: string;
     status: string;
     created_at: string;
     updated_at: string;
