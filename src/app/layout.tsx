@@ -1,4 +1,4 @@
-import { geistSans, geistMono } from "@/base/fonts/Fonts";
+import { lato, playfair } from "@/base/fonts/Fonts";
 
 import { metadata } from "@/base/meta/Metadata";
 
@@ -8,6 +8,8 @@ export { metadata };
 
 metadata.manifest = "/manifest.json";
 
+import Header from "@/components/layout/Header/Header";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -16,9 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${lato.variable} ${playfair.variable} antialiased`}
       >
-        {children}
+        <main className="overflow-hidden">
+          <Header />
+          {children}
+        </main>
       </body>
     </html>
   );
