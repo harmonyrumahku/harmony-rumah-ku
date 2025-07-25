@@ -8,12 +8,15 @@ import { fetchProyekData } from "@/utils/FetchProyek";
 
 import HomePageSkeleton from "@/base/helper/HomePageSkelaton";
 
+import { fetchHomeData } from "@/utils/FetchHome";
+
 export default async function Page() {
   try {
     const projectData = await fetchProyekData();
+    const homeData = await fetchHomeData();
 
     return <Fragment>
-      <HomePage />
+      <HomePage homeData={homeData} />
       <ProjectContent projectData={projectData} />
     </Fragment>;
   } catch (error) {

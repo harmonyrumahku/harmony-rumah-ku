@@ -11,13 +11,11 @@ import { Proyek } from '@/types/Proyek';
 export default function ProjectContent({ projectData }: { projectData: Proyek[] }) {
     const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
     const scrollRef = React.useRef<HTMLDivElement>(null);
-    console.log(projectData);
 
     React.useEffect(() => {
         const el = scrollRef.current;
         if (!el) return;
         const onWheel = (e: WheelEvent) => {
-            // Jika ada scroll vertical, ubah ke horizontal
             if (e.deltaY !== 0) {
                 e.preventDefault();
                 el.scrollLeft += e.deltaY;
