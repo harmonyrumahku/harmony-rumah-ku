@@ -46,7 +46,7 @@ export default function Footer() {
                         </Link>
                     </div>
 
-                    <nav className="flex flex-col gap-2 text-base text-gray-700">
+                    <nav className="flex flex-wrap md:flex-col gap-8 md:gap-4 text-base text-gray-700">
                         <a href="#" className="hover:underline">Project</a>
                         <a href="#" className="hover:underline">Awards</a>
                         <a href="#" className="hover:underline">About</a>
