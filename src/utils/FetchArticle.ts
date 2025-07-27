@@ -22,8 +22,7 @@ export const fetchArticleData = async (): Promise<Article[]> => {
     }
 
     const apiResponse: ArticlesResponse = await response.json();
-    // Filter hanya artikel dengan status "published"
-    return apiResponse.data.filter((article) => article.status === "published");
+    return apiResponse.data;
   } catch (error) {
     console.error("Error fetching Article data:", error);
     return [];
