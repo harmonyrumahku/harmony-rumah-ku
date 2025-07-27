@@ -35,7 +35,7 @@ export default function ArticlePage({ articleData }: { articleData: Article[] })
 
                 {/* Right Section - Article Previews */}
                 <div className="lg:col-span-2 overflow-x-auto">
-                    <div className="flex min-w-0 sm:min-w-max gap-4 sm:gap-6">
+                    <div className="flex min-w-0 sm:min-w-max">
                         {articleData.map((article) => (
                             <article key={article.id} className="w-64 sm:w-80 flex-shrink-0">
                                 {/* Article Image */}
