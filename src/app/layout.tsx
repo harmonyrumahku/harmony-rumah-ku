@@ -10,6 +10,8 @@ metadata.manifest = "/manifest.json";
 
 import Header from "@/components/layout/Header/Header";
 
+import Footer from "@/components/layout/Footer/Footer";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,6 +25,7 @@ export default function RootLayout({
         <main className="overflow-hidden">
           <Header />
           {children}
+          <Footer />
         </main>
       </body>
     </html>
