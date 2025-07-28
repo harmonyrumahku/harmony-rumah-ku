@@ -79,16 +79,13 @@ export default function ProyekLayout({ projectData }: { projectData: Proyek[] })
                                         opacity: hoveredIdx === idx ? 1 : 0,
                                     }}
                                 >
-                                    <div className="text-white text-center px-2 sm:px-4">
+                                    <div className="text-white px-2 sm:px-4">
                                         <div className="space-y-1 sm:space-y-2">
-                                            <h3 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-light leading-tight">
-                                                {project.proyek_type_name}
-                                            </h3>
                                             <h4 className="text-base sm:text-lg lg:text-xl xl:text-2xl font-light leading-tight">
                                                 {project.title}
                                             </h4>
                                             <p className="text-sm sm:text-base lg:text-lg font-light">
-                                                {project.proyek_city_name}
+                                                {project.city}
                                             </p>
                                         </div>
                                     </div>
