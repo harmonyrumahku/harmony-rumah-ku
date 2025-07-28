@@ -1,19 +1,39 @@
-export interface Proyek {
-  id: number;
+export interface Information {
+  name: string;
+  intro: string;
+  years: string;
+  location: string;
+  deskripsi: string;
+}
+
+export interface TimelineItem {
+  image: string[];
+  label: string;
   title: string;
-  description: string;
-  slug: string;
+  deskripsi: string;
+}
+
+export interface TeamMember {
+  name: string;
+  position: string;
+}
+
+export interface Proyek {
+  title: string;
+  information: Information[];
+  proyek_layanan_name: string[];
+  timeline: TimelineItem[];
+  deadline: string;
   image_urls: string[];
-  content: string;
-  status: string;
-  created_at: string;
-  updated_at: string;
-  author_id: string;
-  display_name: string;
-  photo_url: string;
+  proyek_type_name: string;
+  proyek_city_name: string;
   bedroom_count: number;
   surface_area: string;
   bathroom_count: number;
+  garage_count: number;
+  team: TeamMember[];
+  template_message: string;
+  content: string | null;
   type: string;
   city: string;
 }
@@ -26,4 +46,4 @@ export interface ApiResponse<T> {
   data: T;
 }
 
-export type ProyekResponse = ApiResponse<Proyek[]>;
+export type ProyekResponse = ApiResponse<Proyek>;

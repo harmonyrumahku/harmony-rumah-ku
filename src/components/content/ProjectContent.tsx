@@ -10,13 +10,56 @@ import { Proyek } from '@/types/Proyek';
 
 export default function ProjectContent({ projectData }: { projectData: Proyek[] }) {
     const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
+    const [isInSection, setIsInSection] = React.useState(false);
     const scrollRef = React.useRef<HTMLDivElement>(null);
+    const sectionRef = React.useRef<HTMLElement>(null);
+
+    // Deteksi posisi scroll untuk menentukan apakah user berada di section project
+    React.useEffect(() => {
+        const handleScroll = () => {
+            if (!sectionRef.current) return;
+
+            const rect = sectionRef.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            // Section dianggap "dalam view" jika bagian atas section sudah masuk viewport
+            // dan bagian bawah section belum keluar dari viewport
+            const isVisible = rect.top < windowHeight && rect.bottom > 0;
+            setIsInSection(isVisible);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check initial position
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     React.useEffect(() => {
         const el = scrollRef.current;
         if (!el) return;
+
         const onWheel = (e: WheelEvent) => {
             if (e.deltaY !== 0) {
+                // Hanya lakukan scroll horizontal jika berada di dalam section
+                if (!isInSection) {
+                    return;
+                }
+
+                // Cek apakah sudah mencapai ujung kanan atau kiri
+                const isAtRightEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
+                const isAtLeftEnd = el.scrollLeft <= 1;
+
+                // Jika scroll ke kanan dan sudah di ujung kanan, biarkan scroll vertikal normal
+                if (e.deltaY > 0 && isAtRightEnd) {
+                    return;
+                }
+
+                // Jika scroll ke kiri dan sudah di ujung kiri, biarkan scroll vertikal normal
+                if (e.deltaY < 0 && isAtLeftEnd) {
+                    return;
+                }
+
+                // Jika belum di ujung, lakukan scroll horizontal
                 e.preventDefault();
                 el.scrollLeft += e.deltaY;
             }
@@ -25,17 +68,24 @@ export default function ProjectContent({ projectData }: { projectData: Proyek[] 
         return () => {
             el.removeEventListener('wheel', onWheel);
         };
-    }, []);
+    }, [isInSection]);
 
     return (
-        <section className="w-full py-10 bg-[#fff7e6]">
+        <section ref={sectionRef} className="w-full py-10 bg-[#fff7e6]">
             <div className="flex justify-between items-center mb-6 px-10">
                 <h2 className="text-3xl font-bold text-[#333333]">Project</h2>
 
                 <Link href="/proyek" className="text-[#708B75] font-medium hover:underline" rel='project'>VIEW MORE</Link>
             </div>
 
-            <div className="overflow-x-auto" ref={scrollRef} style={{ scrollbarWidth: 'none' }}>
+            <div
+                className="overflow-x-auto scrollbar-hide"
+                ref={scrollRef}
+                style={{
+                    scrollBehavior: 'smooth',
+                    scrollbarWidth: 'none'
+                }}
+            >
                 <div className="grid grid-flow-col grid-rows-2 auto-cols-max">
                     {projectData.map((project, idx) => (
                         <div
@@ -46,7 +96,7 @@ export default function ProjectContent({ projectData }: { projectData: Proyek[] 
                         >
                             {/* Gambar utama */}
                             <Image
-                                src={project.photo_url}
+                                src={project.image_urls[0]}
                                 alt={project.title}
                                 quality={100}
                                 fill
@@ -61,7 +111,7 @@ export default function ProjectContent({ projectData }: { projectData: Proyek[] 
                             />
                             {/* Gambar hover */}
                             <Image
-                                src={project.photo_url}
+                                src={project.image_urls[1]}
                                 alt={project.title + ' hover'}
                                 quality={100}
                                 fill
@@ -81,13 +131,17 @@ export default function ProjectContent({ projectData }: { projectData: Proyek[] 
                                     background: 'linear-gradient(to right, rgba(44,44,44,0.92) 0%, rgba(44,44,44,0.7) 60%, rgba(44,44,44,0) 100%)'
                                 }}
                             />
-                            <div className="absolute left-4 bottom-10 z-20 text-[#FFFFFF] flex items-center gap-2">
+                            <div className="absolute left-4 bottom-10 z-20 text-[#FFFFFF] flex flex-col gap-2">
+                                <div className='flex items-center gap-2'>
+                                    <h3 className='text-lg font-semibold leading-tight'>Arsitektur</h3>
+                                    <span
+                                        className="w-1.5 h-1.5 rounded-full bg-white inline-block"
+                                        style={{ opacity: 0.7 }}
+                                    ></span>
+                                    <div className="text-lg font-semibold leading-tight">{project.city}</div>
+                                </div>
+
                                 <div className="text-lg font-semibold leading-tight capitalize">{project.type}</div>
-                                <span
-                                    className="w-1.5 h-1.5 rounded-full bg-white inline-block"
-                                    style={{ opacity: 0.7 }}
-                                ></span>
-                                <div className="text-lg font-semibold leading-tight">{project.city}</div>
                             </div>
                         </div>
                     ))}
