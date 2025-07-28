@@ -35,9 +35,9 @@ export default async function Page() {
       <HomePage homeData={homeData} />
       <ProjectContent projectData={projectData} />
       <AboutPage aboutData={aboutData} />
+      <AwardPage />
       <ArticlePage articleData={articleData} />
       <ContactPage contactData={contactData} />
-      <AwardPage />
     </Fragment>;
   } catch (error) {
     console.error('Error fetching Project data:', error);
