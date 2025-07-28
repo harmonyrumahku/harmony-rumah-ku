@@ -46,4 +46,4 @@ export interface ApiResponse<T> {
   data: T;
 }
 
-export type ProyekResponse = ApiResponse<Proyek>;
+export type ProyekResponse = ApiResponse<Proyek[]>;

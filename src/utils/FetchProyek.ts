@@ -22,8 +22,7 @@ export const fetchProyekData = async (): Promise<Proyek[]> => {
     }
 
     const apiResponse: ProyekResponse = await response.json();
-    // Filter hanya artikel dengan status "published"
-    return apiResponse.data.filter((proyek) => proyek.status === "published");
+    return apiResponse.data;
   } catch (error) {
     console.error("Error fetching Proyek data:", error);
     return [];
