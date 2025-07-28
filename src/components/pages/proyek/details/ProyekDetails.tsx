@@ -18,6 +18,12 @@ import meter from "@/base/assets/meter.png"
 
 import deadline from "@/base/assets/deadline.png"
 
+import Timeline from '../Timeline';
+
+import { Button } from '@/components/ui/button';
+
+import Link from 'next/link'
+
 export default function ProyekDetails({ projectData }: { projectData: Proyek }) {
     const info = projectData.information[0] || {};
     const layanan = projectData.proyek_layanan_name?.join(', ');
@@ -26,7 +32,7 @@ export default function ProyekDetails({ projectData }: { projectData: Proyek }) 
 
     return (
         <section className="min-h-screen py-10 pt-28 bg-[#fff7e6]">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pb-10">
                 {/* Kiri: Info */}
                 <div className="flex flex-col gap-6 justify-between relative z-10 px-4 md:px-16">
                     <div>
@@ -109,6 +115,20 @@ export default function ProyekDetails({ projectData }: { projectData: Proyek }) 
                         ))}
                     </div>
                 </div>
+            </div>
+
+            {projectData.timeline && <Timeline items={projectData.timeline} />}
+
+            <div className='px-4 md:px-28 pt-14 flex flex-col'>
+                <h3 className='text-2xl font-bold'>👷 Tim dengan Proyek Penuh Hati</h3>
+
+                <p className='text-sm text-gray-500 mt-4 max-w-[550px] whitespace-pre-line'>{projectData.template_message}</p>
+
+                <Link className='flex justify-center' href={`mailto:rr@rr-design.com`}>
+                    <Button className='text-black mt-10'>
+                        📩 Hubungi kami – Kami siap mendengarkan.
+                    </Button>
+                </Link>
             </div>
         </section>
     )
