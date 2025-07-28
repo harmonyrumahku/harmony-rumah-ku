@@ -10,6 +10,8 @@ import ArticlePage from "@/components/content/ArticlePage";
 
 import ContactPage from "@/components/content/ContactPage";
 
+import AwardPage from "@/components/content/AwardPage";
+
 import HomePageSkeleton from "@/base/helper/HomePageSkelaton";
 
 import { fetchProyekData } from "@/utils/FetchProyek";
@@ -35,6 +37,7 @@ export default async function Page() {
       <AboutPage aboutData={aboutData} />
       <ArticlePage articleData={articleData} />
       <ContactPage contactData={contactData} />
+      <AwardPage />
     </Fragment>;
   } catch (error) {
     console.error('Error fetching Project data:', error);
