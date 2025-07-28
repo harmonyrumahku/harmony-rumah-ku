@@ -1,9 +1,15 @@
 "use client"
 
 import React from 'react'
+
 import { Search } from 'lucide-react'
+
+import Link from 'next/link'
+
 import { Input } from '@/components/ui/input'
+
 import Image from 'next/image'
+
 import { Proyek } from '@/types/Proyek'
 
 export default function ProyekLayout({ projectData }: { projectData: Proyek[] }) {
@@ -50,7 +56,8 @@ export default function ProyekLayout({ projectData }: { projectData: Proyek[] })
                 <div className="overflow-y-auto lg:max-h-screen scrollbar-hide lg:col-span-2 pt-4 sm:pt-6 lg:pt-15">
                     <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {projectData.map((project, idx) => (
-                            <div
+                            <Link
+                                href={`/proyek/${project.slug}`}
                                 key={idx}
                                 className="relative h-40 sm:h-48 lg:h-52 overflow-hidden group cursor-pointer"
                                 onMouseEnter={() => setHoveredIdx(idx)}
@@ -90,7 +97,7 @@ export default function ProyekLayout({ projectData }: { projectData: Proyek[] })
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

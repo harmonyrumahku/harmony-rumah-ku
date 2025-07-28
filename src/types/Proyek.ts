@@ -36,6 +36,7 @@ export interface Proyek {
   content: string | null;
   type: string;
   city: string;
+  slug: string;
 }
 
 export interface ApiResponse<T> {

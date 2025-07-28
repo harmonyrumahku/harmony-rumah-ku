@@ -28,3 +28,33 @@ export const fetchProyekData = async (): Promise<Proyek[]> => {
     return [];
   }
 };
+
+export const fetchProyekBySlug = async (
+  slug: string
+): Promise<Proyek | null> => {
+  try {
+    if (!process.env.NEXT_PUBLIC_API_PROYEK) {
+      console.warn("NEXT_PUBLIC_API_PROYEK not available during build time");
+      return null;
+    }
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_PROYEK}/${slug}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_SECRET}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const apiResponse = await response.json();
+    return apiResponse.data || null;
+  } catch (error) {
+    console.error("Error fetching proyek by slug:", error);
+    return null;
+  }
+};
