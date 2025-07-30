@@ -37,10 +37,10 @@ export default function ProyekDetails({ projectData }: { projectData: Proyek }) 
     const images = projectData.image_urls || [];
 
     return (
-        <section className="min-h-screen py-10 pt-28 bg-[#fff7e6]">
+        <section className="min-h-screen py-10 pt-20 md:pt-28 bg-[#fff7e6]">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pb-10">
                 {/* Kiri: Info */}
-                <div className="flex flex-col gap-6 justify-between relative z-10 px-4 md:px-16">
+                <div className="flex flex-col gap-6 relative z-10 px-4 md:px-16">
                     <div>
                         <h1 className="text-3xl md:text-4xl font-bold font-playfair mb-6 leading-tight">
                             {projectData.title}
@@ -66,7 +66,7 @@ export default function ProyekDetails({ projectData }: { projectData: Proyek }) 
                     <Image src={Blobs} alt="blobs" className="absolute top-0 -left-20 z-0" />
 
                     {/* Info box */}
-                    <div className="bg-[rgb(255, 247, 230)] rounded-lg border border-white grid grid-cols-3 gap-6 text-center py-2">
+                    <div className="bg-[rgb(255, 247, 230)] rounded-lg border border-white grid grid-cols-3 gap-6 text-center py-2 mt-6 md:mt-10">
                         <div className='flex flex-col items-center'>
                             <Image src={meter} alt="bathroom" className='w-10 h-10' />
                             <span className="text-lg font-bold">{projectData.surface_area || '-'} m²</span>
@@ -157,7 +157,7 @@ export default function ProyekDetails({ projectData }: { projectData: Proyek }) 
             <div className='px-4 md:px-16'>
                 <h3 className='text-2xl font-bold mb-6'>👷 Tim dengan Proyek Penuh Hati</h3>
                 {/* Tabel Tim */}
-                <div className="overflow-x-auto mb-6 pl-10">
+                <div className="overflow-x-auto mb-6 pl-0 md:pl-10">
                     <Table className="bg-white rounded-lg border border-gray-300 text-sm shadow-sm w-full max-w-[350px] border-separate border-spacing-0">
                         <TableHeader>
                             <TableRow className="bg-gray-100">

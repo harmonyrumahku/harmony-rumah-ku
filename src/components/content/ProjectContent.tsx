@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 import Image from 'next/image'
 
@@ -9,21 +9,18 @@ import Link from 'next/link';
 import { Proyek } from '@/types/Proyek';
 
 export default function ProjectContent({ projectData }: { projectData: Proyek[] }) {
-    const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
-    const [isInSection, setIsInSection] = React.useState(false);
-    const scrollRef = React.useRef<HTMLDivElement>(null);
-    const sectionRef = React.useRef<HTMLElement>(null);
+    const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+    const [isInSection, setIsInSection] = useState(false);
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const sectionRef = useRef<HTMLElement>(null);
 
-    // Deteksi posisi scroll untuk menentukan apakah user berada di section project
-    React.useEffect(() => {
+    useEffect(() => {
         const handleScroll = () => {
             if (!sectionRef.current) return;
 
             const rect = sectionRef.current.getBoundingClientRect();
             const windowHeight = window.innerHeight;
 
-            // Section dianggap "dalam view" jika bagian atas section sudah masuk viewport
-            // dan bagian bawah section belum keluar dari viewport
             const isVisible = rect.top < windowHeight && rect.bottom > 0;
             setIsInSection(isVisible);
         };
@@ -34,7 +31,7 @@ export default function ProjectContent({ projectData }: { projectData: Proyek[] 
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const el = scrollRef.current;
         if (!el) return;
 
@@ -88,7 +85,8 @@ export default function ProjectContent({ projectData }: { projectData: Proyek[] 
             >
                 <div className="grid grid-flow-col grid-rows-2 auto-cols-max">
                     {projectData.map((project, idx) => (
-                        <div
+                        <Link
+                            href={`/proyek/${project.slug}`}
                             key={idx}
                             className="relative h-64 w-[450px] overflow-hidden group"
                             onMouseEnter={() => setHoveredIdx(idx)}
@@ -143,7 +141,7 @@ export default function ProjectContent({ projectData }: { projectData: Proyek[] 
 
                                 <div className="text-lg font-semibold leading-tight capitalize">{project.type}</div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>
