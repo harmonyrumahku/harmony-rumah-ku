@@ -68,9 +68,9 @@ export default function ProjectContent({ projectData }: { projectData: Proyek[] 
     }, [isInSection]);
 
     return (
-        <section ref={sectionRef} className="w-full py-10 bg-[#fff7e6]">
-            <div className="flex justify-between items-center mb-6 px-10">
-                <h2 className="text-3xl font-bold text-[#333333]">Project</h2>
+        <section ref={sectionRef} className="w-full py-4 bg-[#fff7e6]">
+            <div className="flex justify-between items-center mb-6 px-4 md:px-10">
+                <h2 className="text-md md:text-3xl font-bold text-[#333333]">Project</h2>
 
                 <Link href="/proyek" className="text-[#708B75] font-medium hover:underline" rel='project'>VIEW MORE</Link>
             </div>
@@ -88,7 +88,7 @@ export default function ProjectContent({ projectData }: { projectData: Proyek[] 
                         <Link
                             href={`/proyek/${project.slug}`}
                             key={idx}
-                            className="relative h-64 w-[450px] overflow-hidden group"
+                            className="relative h-72 w-[300px] md:w-[500px] overflow-hidden group"
                             onMouseEnter={() => setHoveredIdx(idx)}
                             onMouseLeave={() => setHoveredIdx(null)}
                         >

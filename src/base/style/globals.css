@@ -86,6 +86,10 @@
 h2 {
   font-family: var(--font-playfair), serif;
   font-size: 40px;
+
+  @media only screen and (max-width: 468px) {
+    font-size: 28px;
+  }
 }
 
 /* Hide scrollbar for webkit browsers */

@@ -1,8 +1,11 @@
 "use client"
 
 import React from 'react'
+
 import Image from 'next/image'
+
 import { easeOut, motion } from 'framer-motion'
+
 import { HomeResponse } from '@/types/Home'
 
 export default function HomePage({ homeData }: { homeData: HomeResponse }) {
@@ -57,12 +60,12 @@ export default function HomePage({ homeData }: { homeData: HomeResponse }) {
     }
 
     return (
-        <section className="w-full min-h-screen flex flex-col lg:flex-row font-sans">
+        <section className="w-full min-h-full lg:min-h-screen flex flex-col lg:flex-row font-sans">
             {/* Kiri */}
             <div className="w-full lg:w-[28%] lg:min-w-[320px] bg-[var(--background)] flex flex-col justify-between order-2 lg:order-1">
-                <div className='flex flex-col justify-between h-full'>
+                <div className='flex flex-row lg:flex-col justify-between h-full'>
                     {/* Logo Placeholder */}
-                    <div className='w-full h-80 lg:h-full bg-[#f5ecdc] flex items-center justify-center py-8 lg:py-10'>
+                    <div className='w-full h-60 lg:h-full bg-[#f5ecdc] flex items-center justify-center py-8 lg:py-10'>
                         <motion.div
                             className="aspect-square w-1/3 lg:w-1/3"
                             variants={logoVariants}
@@ -82,9 +85,9 @@ export default function HomePage({ homeData }: { homeData: HomeResponse }) {
                         </motion.div>
                     </div>
 
-                    <div className='w-full h-48 lg:h-full flex flex-col justify-center px-6 lg:pl-10 bg-[#344D3D]'>
+                    <div className='w-full h-60 lg:h-full flex flex-col justify-center px-6 lg:pl-10 bg-[#344D3D]'>
                         <motion.h3
-                            className="text-gray-200 text-lg lg:text-2xl font-semibold leading-relaxed mb-2 max-w-[350px] md:max-w-[250px]"
+                            className="text-gray-200 text-lg lg:text-2xl font-semibold leading-relaxed mb-2 max-w-[350px] lg:max-w-[250px]"
                             variants={textVariants}
                             initial="hidden"
                             whileInView="visible"
@@ -97,7 +100,7 @@ export default function HomePage({ homeData }: { homeData: HomeResponse }) {
             </div>
 
             {/* Kanan */}
-            <div className="w-full lg:w-[72%] relative flex items-center justify-center bg-[#e5e5e5] overflow-hidden h-96 lg:h-auto order-1 lg:order-2">
+            <div className="w-full lg:w-[72%] relative flex items-center justify-center bg-[#e5e5e5] overflow-hidden h-[50dvh] lg:h-auto order-1 lg:order-2">
                 {/* Gambar Rumah Placeholder */}
                 <div className="absolute inset-0">
                     <Image
@@ -111,7 +114,7 @@ export default function HomePage({ homeData }: { homeData: HomeResponse }) {
                 </div>
 
                 {/* Overlay Teks */}
-                <div className="absolute left-4 lg:left-32 bottom-4 lg:bottom-20 max-w-xl px-4 lg:px-0">
+                <div className="absolute left-0 md:left-4 lg:left-32 bottom-4 md:bottom-10 lg:bottom-20 max-w-xl px-4 lg:px-0">
                     <motion.h1
                         className="text-white text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold leading-tight mb-2 lg:mb-3 drop-shadow-lg"
                         style={{ maxWidth: '100%' }}
