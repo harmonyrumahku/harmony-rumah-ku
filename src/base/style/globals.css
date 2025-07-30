@@ -92,6 +92,10 @@ h2 {
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Hide scrollbar for webkit browsers */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;

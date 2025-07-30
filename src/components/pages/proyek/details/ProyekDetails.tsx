@@ -18,7 +18,7 @@ import meter from "@/base/assets/meter.png"
 
 import deadline from "@/base/assets/deadline.png"
 
-import Timeline from '../Timeline';
+import Timeline from '@/components/pages/proyek/Timeline';
 
 import { H1, H2, H3, H4, P, Blockquote, List, Table as TableTypo, InlineCode, Small } from '@/components/ui/typography';
 
