@@ -37,7 +37,7 @@ export default function Header() {
                                 <NavigationMenuLink href="/tentang-kami" className="px-4 py-2 bg-transparent hover:bg-transparent hover:text-[var(--primary)]">TENTANG KAMI</NavigationMenuLink>
                             </NavigationMenuItem>
                             <NavigationMenuItem>
-                                <NavigationMenuLink href="http://localhost:3000/#kontak" className="px-4 py-2 bg-transparent hover:bg-transparent hover:text-[var(--primary)]">KONTAK</NavigationMenuLink>
+                                <NavigationMenuLink href={`${process.env.NEXT_PUBLIC_URL}/#kontak`} className="px-4 py-2 bg-transparent hover:bg-transparent hover:text-[var(--primary)]">KONTAK</NavigationMenuLink>
                             </NavigationMenuItem>
                         </NavigationMenuList>
                     </NavigationMenu>
