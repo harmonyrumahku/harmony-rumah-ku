@@ -31,6 +31,7 @@ export interface Proyek {
   surface_area: string;
   bathroom_count: number;
   garage_count: number;
+  layanan:string;
   team: TeamMember[];
   template_message: string;
   content: string | null;

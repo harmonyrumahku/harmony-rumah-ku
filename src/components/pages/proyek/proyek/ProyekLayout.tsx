@@ -1,8 +1,29 @@
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Search } from 'lucide-react'
+
+import { Check, ChevronsUpDown } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from "@/components/ui/command";
+
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+
+import { cn } from "@/lib/utils";
 
 import Link from 'next/link'
 
@@ -13,7 +34,38 @@ import Image from 'next/image'
 import { Proyek } from '@/types/Proyek'
 
 export default function ProyekLayout({ projectData }: { projectData: Proyek[] }) {
-    const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
+    const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+    const [search, setSearch] = useState('');
+    const [selectedKategori, setSelectedKategori] = useState('');
+    const [openKategori, setOpenKategori] = useState(false);
+    const [selectedLayanan, setSelectedLayanan] = useState("");
+    const [openLayanan, setOpenLayanan] = useState(false);
+    const [selectedWilayah, setSelectedWilayah] = useState("");
+    const [openWilayah, setOpenWilayah] = useState(false);
+
+    // Ambil unique kategori
+    const kategoriOptions = Array.from(new Set(projectData.map(p => p.type)));
+
+    // Ambil unique layanan
+    const layananOptions = Array.from(new Set(projectData.map(p => p.layanan).filter(Boolean)));
+
+    // Ambil unique wilayah
+    const wilayahOptions = Array.from(new Set(projectData.map(p => p.city).filter(Boolean)));
+
+    // Filter berdasarkan search dan combobox
+    const filteredProjects = projectData.filter(project => {
+        const searchLower = search.toLowerCase();
+        const matchSearch = searchLower === '' ||
+            project.title.toLowerCase().includes(searchLower) ||
+            project.city.toLowerCase().includes(searchLower) ||
+            (project.layanan && project.layanan.toLowerCase().includes(searchLower));
+
+        const matchKategori = selectedKategori ? project.type === selectedKategori : true;
+        const matchLayanan = selectedLayanan ? project.layanan === selectedLayanan : true;
+        const matchWilayah = selectedWilayah ? project.city === selectedWilayah : true;
+
+        return matchSearch && matchKategori && matchLayanan && matchWilayah;
+    });
 
     return (
         <section className="min-h-screen bg-[#fff7e6]">
@@ -25,37 +77,172 @@ export default function ProyekLayout({ projectData }: { projectData: Proyek[] })
                     </p>
 
                     {/* Search Bar */}
-                    <div className="space-y-4">
+                    <div className="flex flex-col space-y-6">
                         <div className="relative">
                             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 sm:w-5 sm:h-5" />
                             <Input
-                                placeholder="Cari"
+                                placeholder="Apa yang ingin kamu cari ?"
                                 className="pl-9 sm:pl-10 border-dashed border-2 border-muted-foreground bg-transparent text-sm sm:text-base"
+                                value={search}
+                                onChange={e => setSearch(e.target.value)}
                             />
                         </div>
-                    </div>
 
-                    {/* Navigation Links */}
-                    <div className="space-y-4">
-                        <h3 className="font-semibold text-accent text-base sm:text-lg">Filter</h3>
-                        <div className="space-y-2 sm:space-y-3">
-                            <button className="block text-left text-accent hover:text-primary transition-colors text-sm sm:text-base">
-                                Kategori
-                            </button>
-                            <button className="block text-left text-accent hover:text-primary transition-colors text-sm sm:text-base">
-                                Layanan
-                            </button>
-                            <button className="block text-left text-accent hover:text-primary transition-colors text-sm sm:text-base">
-                                Wilayah
-                            </button>
+                        <div className="flex flex-col gap-2">
+                            <h3 className="font-semibold text-accent text-base sm:text-lg mb-2">Filter</h3>
+
+                            <Popover open={openKategori} onOpenChange={setOpenKategori}>
+                                <PopoverTrigger asChild className='bg-[#fff7e6] border-0 shadow-0'>
+                                    <Button
+                                        variant="outline"
+                                        role="combobox"
+                                        aria-expanded={openKategori}
+                                        className="w-full justify-between"
+                                    >
+                                        {selectedKategori
+                                            ? kategoriOptions.find((kat) => kat === selectedKategori)
+                                            : "Pilih Kategori..."}
+                                        <ChevronsUpDown className="opacity-50" />
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-full p-0">
+                                    <Command>
+                                        <CommandInput placeholder="Cari kategori..." className="h-9" />
+                                        <CommandList>
+                                            <CommandEmpty>Tidak ada kategori.</CommandEmpty>
+                                            <CommandGroup>
+                                                {kategoriOptions.map((kat) => (
+                                                    <CommandItem
+                                                        key={kat}
+                                                        value={kat}
+                                                        onSelect={(currentValue) => {
+                                                            setSelectedKategori(currentValue === selectedKategori ? "" : currentValue);
+                                                            setOpenKategori(false);
+                                                        }}
+                                                    >
+                                                        {kat}
+                                                        <Check
+                                                            className={cn(
+                                                                "ml-auto",
+                                                                selectedKategori === kat ? "opacity-100" : "opacity-0"
+                                                            )}
+                                                        />
+                                                    </CommandItem>
+                                                ))}
+                                            </CommandGroup>
+                                        </CommandList>
+                                    </Command>
+                                </PopoverContent>
+                            </Popover>
+
+                            <Popover open={openLayanan} onOpenChange={setOpenLayanan}>
+                                <PopoverTrigger asChild className='bg-[#fff7e6] border-0 shadow-0'>
+                                    <Button
+                                        variant="outline"
+                                        role="combobox"
+                                        aria-expanded={openLayanan}
+                                        className="w-full justify-between"
+                                    >
+                                        {selectedLayanan
+                                            ? layananOptions.find((layanan) => layanan === selectedLayanan)
+                                            : "Pilih Layanan..."}
+                                        <ChevronsUpDown className="opacity-50" />
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-full p-0">
+                                    <Command>
+                                        <CommandInput placeholder="Cari layanan..." className="h-9" />
+                                        <CommandList>
+                                            <CommandEmpty>Tidak ada layanan.</CommandEmpty>
+                                            <CommandGroup>
+                                                {layananOptions.map((layanan) => (
+                                                    <CommandItem
+                                                        key={layanan}
+                                                        value={layanan}
+                                                        onSelect={(currentValue) => {
+                                                            setSelectedLayanan(currentValue === selectedLayanan ? "" : currentValue);
+                                                            setOpenLayanan(false);
+                                                        }}
+                                                    >
+                                                        {layanan}
+                                                        <Check
+                                                            className={cn(
+                                                                "ml-auto",
+                                                                selectedLayanan === layanan ? "opacity-100" : "opacity-0"
+                                                            )}
+                                                        />
+                                                    </CommandItem>
+                                                ))}
+                                            </CommandGroup>
+                                        </CommandList>
+                                    </Command>
+                                </PopoverContent>
+                            </Popover>
+
+                            <Popover open={openWilayah} onOpenChange={setOpenWilayah}>
+                                <PopoverTrigger asChild className='bg-[#fff7e6] border-0 shadow-0'>
+                                    <Button
+                                        variant="outline"
+                                        role="combobox"
+                                        aria-expanded={openWilayah}
+                                        className="w-full justify-between"
+                                    >
+                                        {selectedWilayah
+                                            ? wilayahOptions.find((wilayah) => wilayah === selectedWilayah)
+                                            : "Pilih Wilayah..."}
+                                        <ChevronsUpDown className="opacity-50" />
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-full p-0">
+                                    <Command>
+                                        <CommandInput placeholder="Cari wilayah..." className="h-9" />
+                                        <CommandList>
+                                            <CommandEmpty>Tidak ada wilayah.</CommandEmpty>
+                                            <CommandGroup>
+                                                {wilayahOptions.map((wilayah) => (
+                                                    <CommandItem
+                                                        key={wilayah}
+                                                        value={wilayah}
+                                                        onSelect={(currentValue) => {
+                                                            setSelectedWilayah(currentValue === selectedWilayah ? "" : currentValue);
+                                                            setOpenWilayah(false);
+                                                        }}
+                                                    >
+                                                        {wilayah}
+                                                        <Check
+                                                            className={cn(
+                                                                "ml-auto",
+                                                                selectedWilayah === wilayah ? "opacity-100" : "opacity-0"
+                                                            )}
+                                                        />
+                                                    </CommandItem>
+                                                ))}
+                                            </CommandGroup>
+                                        </CommandList>
+                                    </Command>
+                                </PopoverContent>
+                            </Popover>
+
+                            <Button
+                                variant="outline"
+                                onClick={() => {
+                                    setSearch('');
+                                    setSelectedKategori('');
+                                    setSelectedLayanan('');
+                                    setSelectedWilayah('');
+                                }}
+                                className='bg-[#fff7e6]'
+                            >
+                                Clear Filter
+                            </Button>
                         </div>
                     </div>
                 </div>
 
                 {/* Right Column - Vertical Scrolling Grid */}
-                <div className="overflow-y-auto lg:max-h-screen scrollbar-hide lg:col-span-2 pt-4 sm:pt-6 lg:pt-15">
+                <div className="overflow-y-auto lg:max-h-screen scrollbar-hide lg:col-span-2 pt-4 sm:pt-6 lg:pt-20">
                     <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                        {projectData.map((project, idx) => (
+                        {filteredProjects.map((project, idx) => (
                             <Link
                                 href={`/proyek/${project.slug}`}
                                 key={idx}
