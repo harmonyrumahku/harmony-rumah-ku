@@ -6,10 +6,9 @@ import Image from 'next/image'
 
 import Link from 'next/link';
 
-import { Proyek } from '@/types/Proyek';
+import { ProyekHome } from '@/types/Proyek';
 
-export default function ProjectContent({ projectData }: { projectData: Proyek[] }) {
-    const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+export default function ProjectContent({ projectData }: { projectData: ProyekHome[] }) {
     const [isInSection, setIsInSection] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
     const sectionRef = useRef<HTMLElement>(null);
@@ -37,7 +36,6 @@ export default function ProjectContent({ projectData }: { projectData: Proyek[] 
 
         const onWheel = (e: WheelEvent) => {
             if (e.deltaY !== 0) {
-                // Hanya lakukan scroll horizontal jika berada di dalam section
                 if (!isInSection) {
                     return;
                 }
@@ -88,48 +86,30 @@ export default function ProjectContent({ projectData }: { projectData: Proyek[] 
                         <Link
                             href={`/proyek/${project.slug}`}
                             key={idx}
-                            className="relative h-72 w-[300px] md:w-[500px] overflow-hidden group"
-                            onMouseEnter={() => setHoveredIdx(idx)}
-                            onMouseLeave={() => setHoveredIdx(null)}
+                            className="relative h-72 w-[300px] md:w-[500px] overflow-hidden group brightness-70 hover:brightness-100 transition-all duration-300"
                         >
                             {/* Gambar utama */}
                             <Image
-                                src={project.image_urls[0]}
+                                src={project.image_urls}
                                 alt={project.title}
                                 quality={100}
                                 fill
                                 loading='lazy'
-                                className="w-full h-full object-cover transition-opacity duration-500"
+                                className="w-full h-full object-cover"
                                 style={{
-                                    opacity: hoveredIdx === idx ? 0 : 1,
                                     position: 'absolute',
                                     inset: 0,
                                     zIndex: 1,
                                 }}
                             />
-                            {/* Gambar hover */}
-                            <Image
-                                src={project.image_urls[1]}
-                                alt={project.title + ' hover'}
-                                quality={100}
-                                fill
-                                loading='lazy'
-                                className="w-full h-full object-cover transition-opacity duration-500"
-                                style={{
-                                    opacity: hoveredIdx === idx ? 1 : 0,
-                                    position: 'absolute',
-                                    inset: 0,
-                                    zIndex: 2,
-                                }}
-                            />
                             {/* Overlay gradasi hanya setengah kiri */}
                             <div
-                                className="absolute inset-y-0 left-0 w-2/3 h-full z-10 pointer-events-none"
+                                className="absolute inset-y-0 left-0 w-2/3 h-full z-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-300"
                                 style={{
                                     background: 'linear-gradient(to right, rgba(44,44,44,0.92) 0%, rgba(44,44,44,0.7) 60%, rgba(44,44,44,0) 100%)'
                                 }}
                             />
-                            <div className="absolute left-4 bottom-10 z-20 text-[#FFFFFF] flex flex-col gap-2">
+                            <div className="absolute left-4 bottom-10 z-20 text-[#FFFFFF] flex flex-col gap-2 py-0 px-0 group-hover:py-2 group-hover:px-4 bg-transparent backdrop-blur-none group-hover:backdrop-blur-sm group-hover:bg-black/20 rounded-md transition-all duration-300">
                                 <div className='flex items-center gap-2'>
                                     <h3 className='text-lg font-semibold leading-tight'>Arsitektur</h3>
                                     <span

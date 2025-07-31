@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
-import { Proyek } from "@/types/Proyek";
+import type { ProyekDetails } from "@/types/Proyek";
 
-export async function getProyek(slug: string): Promise<Proyek | null> {
+export async function getProyek(slug: string): Promise<ProyekDetails | null> {
   try {
     if (!process.env.NEXT_PUBLIC_API_PROYEK) {
       console.warn("NEXT_PUBLIC_API_PROYEK not available during build time");
@@ -35,9 +35,9 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const proyek = await getProyek(params.slug);
+  const proyekDetails = await getProyek(params.slug);
 
-  if (!proyek) {
+  if (!proyekDetails) {
     return {
       title: "Proyek Not Found",
       description: "The requested Proyek item could not be found.",
@@ -54,32 +54,33 @@ export async function generateMetadata({
     };
   }
 
-  const description = proyek.information[0].intro || `Proyek ${proyek.title}`;
+  const description =
+    proyekDetails.information[0].intro || `Proyek ${proyekDetails.title}`;
 
-  const imageUrl = proyek.image_urls
-    ? Array.isArray(proyek.image_urls)
-      ? proyek.image_urls[0]
-      : proyek.image_urls
+  const imageUrl = proyekDetails.image_urls
+    ? Array.isArray(proyekDetails.image_urls)
+      ? proyekDetails.image_urls[0]
+      : proyekDetails.image_urls
     : undefined;
 
   return {
-    title: `Proyek - ${proyek.title}`,
+    title: `Proyek - ${proyekDetails.title}`,
     description: description,
     openGraph: {
-      title: `Proyek - ${proyek.title}`,
+      title: `Proyek - ${proyekDetails.title}`,
       description: description,
       type: "website",
       images: imageUrl ? [{ url: imageUrl }] : [],
-      url: `${process.env.NEXT_PUBLIC_API_PROYEK}/${proyek.slug}`,
+      url: `${process.env.NEXT_PUBLIC_API_PROYEK}/${proyekDetails.slug}`,
     },
     twitter: {
       card: "summary_large_image",
-      title: `Proyek - ${proyek.title}`,
+      title: `Proyek - ${proyekDetails.title}`,
       description: description,
       images: imageUrl ? [imageUrl] : [],
     },
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_API_PROYEK}/${proyek.slug}`,
+      canonical: `${process.env.NEXT_PUBLIC_API_PROYEK}/${proyekDetails.slug}`,
     },
   };
 }

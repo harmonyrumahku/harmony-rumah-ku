@@ -18,7 +18,7 @@ export interface TeamMember {
   position: string;
 }
 
-export interface Proyek {
+export interface ProyekDetails {
   title: string;
   information: Information[];
   proyek_layanan_name: string[];
@@ -31,10 +31,19 @@ export interface Proyek {
   surface_area: string;
   bathroom_count: number;
   garage_count: number;
-  layanan:string;
+  layanan: string;
   team: TeamMember[];
   template_message: string;
   content: string | null;
+  type: string;
+  city: string;
+  slug: string;
+}
+
+export interface ProyekHome {
+  title: string;
+  image_urls: string;
+  layanan: string;
   type: string;
   city: string;
   slug: string;
@@ -48,4 +57,11 @@ export interface ApiResponse<T> {
   data: T;
 }
 
-export type ProyekResponse = ApiResponse<Proyek[]>;
+// Response untuk list/array proyek (halaman daftar)
+export type ProyekListResponse = ApiResponse<ProyekDetails[]>;
+
+// Response untuk single proyek (halaman detail)
+export type ProyekDetailResponse = ApiResponse<ProyekDetails>;
+
+// Response untuk proyek home (data yang ditampilkan di homepage)
+export type ProyekHomeResponse = ApiResponse<ProyekHome[]>;

@@ -1,10 +1,22 @@
 import React from 'react'
 
-import { Proyek } from '@/types/Proyek'
+import Image from 'next/image'
+
+import Link from 'next/link'
+
+import parse, { domToReact, Element, DOMNode } from 'html-react-parser'
+
+import type { ProyekDetails } from '@/types/Proyek'
+
+import { H1, H2, H3, H4, P, Blockquote, List, Table as TableTypo, InlineCode, Small } from '@/components/ui/typography'
+
+import { Button } from '@/components/ui/button'
+
+import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from '@/components/ui/table'
+
+import Timeline from '@/components/pages/proyek/details/Timeline'
 
 import Blobs from "@/base/assets/blobs.png"
-
-import Image from 'next/image'
 
 import Bathroom from "@/base/assets/bathroom.png"
 
@@ -18,19 +30,7 @@ import meter from "@/base/assets/meter.png"
 
 import deadline from "@/base/assets/deadline.png"
 
-import Timeline from '@/components/pages/proyek/Timeline';
-
-import { H1, H2, H3, H4, P, Blockquote, List, Table as TableTypo, InlineCode, Small } from '@/components/ui/typography';
-
-import parse, { domToReact, Element, DOMNode } from 'html-react-parser';
-
-import Link from 'next/link';
-
-import { Button } from '@/components/ui/button';
-
-import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from '@/components/ui/table';
-
-export default function ProyekDetails({ projectData }: { projectData: Proyek }) {
+export default function ProyekDetails({ projectData }: { projectData: ProyekDetails }) {
     const info = projectData.information[0] || {};
     const layanan = projectData.proyek_layanan_name?.join(', ');
     const team = projectData.team.map((t) => t.position).join(', ');

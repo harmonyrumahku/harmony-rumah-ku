@@ -1,6 +1,11 @@
-import { Proyek, ProyekResponse } from "@/types/Proyek";
+import {
+  ProyekDetails,
+  ProyekHome,
+  ProyekHomeResponse,
+  ProyekDetailResponse,
+} from "@/types/Proyek";
 
-export const fetchProyekData = async (): Promise<Proyek[]> => {
+export const fetchProyekData = async (): Promise<ProyekHome[]> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_PROYEK) {
       console.warn("NEXT_PUBLIC_API_PROYEK not available during build time");
@@ -21,7 +26,7 @@ export const fetchProyekData = async (): Promise<Proyek[]> => {
       throw new Error("Network response was not ok");
     }
 
-    const apiResponse: ProyekResponse = await response.json();
+    const apiResponse: ProyekHomeResponse = await response.json();
     return apiResponse.data;
   } catch (error) {
     console.error("Error fetching Proyek data:", error);
@@ -31,7 +36,7 @@ export const fetchProyekData = async (): Promise<Proyek[]> => {
 
 export const fetchProyekBySlug = async (
   slug: string
-): Promise<Proyek | null> => {
+): Promise<ProyekDetails | null> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_PROYEK) {
       console.warn("NEXT_PUBLIC_API_PROYEK not available during build time");
@@ -51,7 +56,7 @@ export const fetchProyekBySlug = async (
       throw new Error("Network response was not ok");
     }
 
-    const apiResponse = await response.json();
+    const apiResponse: ProyekDetailResponse = await response.json();
     return apiResponse.data || null;
   } catch (error) {
     console.error("Error fetching proyek by slug:", error);

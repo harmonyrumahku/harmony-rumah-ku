@@ -4,26 +4,7 @@ import React, { useState } from 'react'
 
 import { Search } from 'lucide-react'
 
-import { Check, ChevronsUpDown } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
-
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-} from "@/components/ui/command";
-
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
-
-import { cn } from "@/lib/utils";
 
 import Link from 'next/link'
 
@@ -31,9 +12,9 @@ import { Input } from '@/components/ui/input'
 
 import Image from 'next/image'
 
-import { Proyek } from '@/types/Proyek'
+import { ProyekHome } from '@/types/Proyek'
 
-export default function ProyekLayout({ projectData }: { projectData: Proyek[] }) {
+export default function ProyekLayout({ projectData }: { projectData: ProyekHome[] }) {
     const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
     const [search, setSearch] = useState('');
     const [selectedKategori, setSelectedKategori] = useState('');
@@ -88,153 +69,156 @@ export default function ProyekLayout({ projectData }: { projectData: Proyek[] })
                             />
                         </div>
 
-                        <div className="flex flex-col gap-2">
-                            <h3 className="font-semibold text-accent text-base sm:text-lg mb-2">Filter</h3>
+                        <div className="flex flex-col gap-4">
+                            {/* Kategori Filter */}
+                            <div className="relative">
+                                <Button
+                                    variant="ghost"
+                                    onClick={() => {
+                                        setOpenKategori(!openKategori);
+                                        setOpenLayanan(false);
+                                        setOpenWilayah(false);
+                                    }}
+                                    className="w-full justify-between p-0 h-auto text-left font-bold text-[#173C29] hover:text-[#173C29] hover:bg-transparent border-none shadow-none"
+                                >
+                                    <span className="text-sm">
+                                        {selectedKategori || "Kategory"}
+                                    </span>
+                                </Button>
 
-                            <Popover open={openKategori} onOpenChange={setOpenKategori}>
-                                <PopoverTrigger asChild className='bg-[#fff7e6] border-0 shadow-0'>
-                                    <Button
-                                        variant="outline"
-                                        role="combobox"
-                                        aria-expanded={openKategori}
-                                        className="w-full justify-between"
-                                    >
-                                        {selectedKategori
-                                            ? kategoriOptions.find((kat) => kat === selectedKategori)
-                                            : "Pilih Kategori..."}
-                                        <ChevronsUpDown className="opacity-50" />
-                                    </Button>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-full p-0">
-                                    <Command>
-                                        <CommandInput placeholder="Cari kategori..." className="h-9" />
-                                        <CommandList>
-                                            <CommandEmpty>Tidak ada kategori.</CommandEmpty>
-                                            <CommandGroup>
-                                                {kategoriOptions.map((kat) => (
-                                                    <CommandItem
-                                                        key={kat}
-                                                        value={kat}
-                                                        onSelect={(currentValue) => {
-                                                            setSelectedKategori(currentValue === selectedKategori ? "" : currentValue);
-                                                            setOpenKategori(false);
-                                                        }}
-                                                    >
-                                                        {kat}
-                                                        <Check
-                                                            className={cn(
-                                                                "ml-auto",
-                                                                selectedKategori === kat ? "opacity-100" : "opacity-0"
-                                                            )}
-                                                        />
-                                                    </CommandItem>
-                                                ))}
-                                            </CommandGroup>
-                                        </CommandList>
-                                    </Command>
-                                </PopoverContent>
-                            </Popover>
+                                {openKategori && (
+                                    <div className="absolute top-full left-0 right-0 z-[9999] mt-2 bg-[#fff7e6] max-h-60 overflow-y-auto min-w-48 scrollbar-hide">
+                                        <div className="py-2">
+                                            <button
+                                                onClick={() => {
+                                                    setSelectedKategori('');
+                                                    setOpenKategori(false);
+                                                }}
+                                                className={`w-full text-left py-2 text-sm ${!selectedKategori ? ' font-medium' : ''}`}
+                                            >
+                                                All
+                                            </button>
+                                            {kategoriOptions.map((kat) => (
+                                                <button
+                                                    key={kat}
+                                                    onClick={() => {
+                                                        setSelectedKategori(kat);
+                                                        setOpenKategori(false);
+                                                    }}
+                                                    className={`w-full text-left py-2 text-s ${selectedKategori === kat ? ' font-medium' : ''}`}
+                                                >
+                                                    {kat}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
 
-                            <Popover open={openLayanan} onOpenChange={setOpenLayanan}>
-                                <PopoverTrigger asChild className='bg-[#fff7e6] border-0 shadow-0'>
-                                    <Button
-                                        variant="outline"
-                                        role="combobox"
-                                        aria-expanded={openLayanan}
-                                        className="w-full justify-between"
-                                    >
-                                        {selectedLayanan
-                                            ? layananOptions.find((layanan) => layanan === selectedLayanan)
-                                            : "Pilih Layanan..."}
-                                        <ChevronsUpDown className="opacity-50" />
-                                    </Button>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-full p-0">
-                                    <Command>
-                                        <CommandInput placeholder="Cari layanan..." className="h-9" />
-                                        <CommandList>
-                                            <CommandEmpty>Tidak ada layanan.</CommandEmpty>
-                                            <CommandGroup>
-                                                {layananOptions.map((layanan) => (
-                                                    <CommandItem
-                                                        key={layanan}
-                                                        value={layanan}
-                                                        onSelect={(currentValue) => {
-                                                            setSelectedLayanan(currentValue === selectedLayanan ? "" : currentValue);
-                                                            setOpenLayanan(false);
-                                                        }}
-                                                    >
-                                                        {layanan}
-                                                        <Check
-                                                            className={cn(
-                                                                "ml-auto",
-                                                                selectedLayanan === layanan ? "opacity-100" : "opacity-0"
-                                                            )}
-                                                        />
-                                                    </CommandItem>
-                                                ))}
-                                            </CommandGroup>
-                                        </CommandList>
-                                    </Command>
-                                </PopoverContent>
-                            </Popover>
+                            {/* Layanan Filter */}
+                            <div className="relative">
+                                <Button
+                                    variant="ghost"
+                                    onClick={() => {
+                                        setOpenLayanan(!openLayanan);
+                                        setOpenKategori(false);
+                                        setOpenWilayah(false);
+                                    }}
+                                    className="w-full justify-between p-0 h-auto text-left font-bold text-[#173C29] hover:text-[#173C29] hover:bg-transparent border-none shadow-none"
+                                >
+                                    <span className="text-sm">
+                                        {selectedLayanan || "Layanan"}
+                                    </span>
+                                </Button>
 
-                            <Popover open={openWilayah} onOpenChange={setOpenWilayah}>
-                                <PopoverTrigger asChild className='bg-[#fff7e6] border-0 shadow-0'>
-                                    <Button
-                                        variant="outline"
-                                        role="combobox"
-                                        aria-expanded={openWilayah}
-                                        className="w-full justify-between"
-                                    >
-                                        {selectedWilayah
-                                            ? wilayahOptions.find((wilayah) => wilayah === selectedWilayah)
-                                            : "Pilih Wilayah..."}
-                                        <ChevronsUpDown className="opacity-50" />
-                                    </Button>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-full p-0">
-                                    <Command>
-                                        <CommandInput placeholder="Cari wilayah..." className="h-9" />
-                                        <CommandList>
-                                            <CommandEmpty>Tidak ada wilayah.</CommandEmpty>
-                                            <CommandGroup>
-                                                {wilayahOptions.map((wilayah) => (
-                                                    <CommandItem
-                                                        key={wilayah}
-                                                        value={wilayah}
-                                                        onSelect={(currentValue) => {
-                                                            setSelectedWilayah(currentValue === selectedWilayah ? "" : currentValue);
-                                                            setOpenWilayah(false);
-                                                        }}
-                                                    >
-                                                        {wilayah}
-                                                        <Check
-                                                            className={cn(
-                                                                "ml-auto",
-                                                                selectedWilayah === wilayah ? "opacity-100" : "opacity-0"
-                                                            )}
-                                                        />
-                                                    </CommandItem>
-                                                ))}
-                                            </CommandGroup>
-                                        </CommandList>
-                                    </Command>
-                                </PopoverContent>
-                            </Popover>
+                                {openLayanan && (
+                                    <div className="absolute top-full left-0 right-0 z-[9999] mt-2 bg-[#fff7e6] max-h-60 overflow-y-auto min-w-48 scrollbar-hide">
+                                        <div className="py-2">
+                                            <button
+                                                onClick={() => {
+                                                    setSelectedLayanan('');
+                                                    setOpenLayanan(false);
+                                                }}
+                                                className={`w-full text-left py-2 text-sm  ${!selectedLayanan ? ' font-medium' : ''}`}
+                                            >
+                                                All
+                                            </button>
+                                            {layananOptions.map((layanan) => (
+                                                <button
+                                                    key={layanan}
+                                                    onClick={() => {
+                                                        setSelectedLayanan(layanan);
+                                                        setOpenLayanan(false);
+                                                    }}
+                                                    className={`w-full text-left py-2 text-sm transition-colors ${selectedLayanan === layanan ? ' font-medium' : ''}`}
+                                                >
+                                                    {layanan}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
 
-                            <Button
-                                variant="outline"
-                                onClick={() => {
-                                    setSearch('');
-                                    setSelectedKategori('');
-                                    setSelectedLayanan('');
-                                    setSelectedWilayah('');
-                                }}
-                                className='bg-[#fff7e6]'
-                            >
-                                Clear Filter
-                            </Button>
+                            {/* Wilayah Filter */}
+                            <div className="relative">
+                                <Button
+                                    variant="ghost"
+                                    onClick={() => {
+                                        setOpenWilayah(!openWilayah);
+                                        setOpenKategori(false);
+                                        setOpenLayanan(false);
+                                    }}
+                                    className="w-full justify-between p-0 h-auto text-left font-bold text-[#173C29] hover:text-[#173C29] hover:bg-transparent border-none shadow-none"
+                                >
+                                    <span className="text-sm">
+                                        {selectedWilayah || "Wilayah"}
+                                    </span>
+                                </Button>
+
+                                {openWilayah && (
+                                    <div className="absolute top-full left-0 right-0 z-[9999] mt-2 bg-[#fff7e6] max-h-60 overflow-y-auto min-w-48 scrollbar-hide">
+                                        <div className="py-2">
+                                            <button
+                                                onClick={() => {
+                                                    setSelectedWilayah('');
+                                                    setOpenWilayah(false);
+                                                }}
+                                                className={`w-full text-left py-2 text-sm ${!selectedWilayah ? ' font-medium' : ''}`}
+                                            >
+                                                All
+                                            </button>
+                                            {wilayahOptions.map((wilayah) => (
+                                                <button
+                                                    key={wilayah}
+                                                    onClick={() => {
+                                                        setSelectedWilayah(wilayah);
+                                                        setOpenWilayah(false);
+                                                    }}
+                                                    className={`w-full text-left py-2 text-sm  ${selectedWilayah === wilayah ? ' font-medium' : ''}`}
+                                                >
+                                                    {wilayah}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            {(selectedKategori || selectedLayanan || selectedWilayah) && (
+                                <Button
+                                    variant="ghost"
+                                    onClick={() => {
+                                        setSearch('');
+                                        setSelectedKategori('');
+                                        setSelectedLayanan('');
+                                        setSelectedWilayah('');
+                                    }}
+                                    className='p-0 h-auto text-left font-normal border-none shadow-none text-sm'
+                                >
+                                    Clear all filters
+                                </Button>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -252,7 +236,7 @@ export default function ProyekLayout({ projectData }: { projectData: Proyek[] })
                             >
                                 {/* Gambar utama */}
                                 <Image
-                                    src={project.image_urls[0]}
+                                    src={project.image_urls}
                                     alt={project.title}
                                     quality={100}
                                     fill
@@ -268,12 +252,16 @@ export default function ProyekLayout({ projectData }: { projectData: Proyek[] })
 
                                 {/* Hover Overlay */}
                                 <div
-                                    className="absolute inset-0 bg-[#ff8a65] transition-all duration-700 ease-in-out flex items-center justify-center z-10"
+                                    className="absolute inset-0 transition-all duration-700 ease-in-out flex items-center justify-center z-10"
                                     style={{
-                                        opacity: hoveredIdx === idx ? 1 : 0,
+                                        backgroundColor: hoveredIdx === idx ? 'rgba(255, 138, 101, 0.9)' : 'transparent',
                                     }}
                                 >
-                                    <div className="text-white px-2 sm:px-4">
+                                    <div className="text-white px-2 sm:px-4 transition-all duration-700 ease-in-out"
+                                        style={{
+                                            opacity: hoveredIdx === idx ? 1 : 0,
+                                        }}
+                                    >
                                         <div className="space-y-1 sm:space-y-2">
                                             <h4 className="text-base sm:text-lg lg:text-xl xl:text-2xl font-light leading-tight">
                                                 {project.title}
