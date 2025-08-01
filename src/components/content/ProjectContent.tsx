@@ -35,6 +35,9 @@ export default function ProjectContent({ projectData }: { projectData: ProyekHom
         if (!el) return;
 
         const onWheel = (e: WheelEvent) => {
+            // Deteksi scroll dari touchpad (biasanya deltaY lebih kecil dan lebih halus)
+            const isTouchpadScroll = Math.abs(e.deltaY) < 100;
+
             if (e.deltaY !== 0) {
                 if (!isInSection) {
                     return;
@@ -56,7 +59,10 @@ export default function ProjectContent({ projectData }: { projectData: ProyekHom
 
                 // Jika belum di ujung, lakukan scroll horizontal
                 e.preventDefault();
-                el.scrollLeft += e.deltaY;
+
+                // Kurangi kecepatan scroll sedikit lagi untuk kontrol yang lebih halus
+                const scrollSpeed = isTouchpadScroll ? 0.4 : 0.7;
+                el.scrollLeft += e.deltaY * scrollSpeed;
             }
         };
         el.addEventListener('wheel', onWheel, { passive: false });
@@ -77,8 +83,9 @@ export default function ProjectContent({ projectData }: { projectData: ProyekHom
                 className="overflow-x-auto scrollbar-hide"
                 ref={scrollRef}
                 style={{
-                    scrollBehavior: 'smooth',
-                    scrollbarWidth: 'none'
+                    scrollBehavior: 'auto',
+                    scrollbarWidth: 'none',
+                    WebkitOverflowScrolling: 'touch'
                 }}
             >
                 <div className="grid grid-flow-col grid-rows-2 auto-cols-max">

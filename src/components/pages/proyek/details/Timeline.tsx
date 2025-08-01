@@ -39,6 +39,9 @@ export default function Timeline({ items }: TimelineProps) {
         if (!el) return;
 
         const onWheel = (e: WheelEvent) => {
+            // Deteksi scroll dari touchpad (biasanya deltaY lebih kecil dan lebih halus)
+            const isTouchpadScroll = Math.abs(e.deltaY) < 100;
+
             if (e.deltaY !== 0) {
                 // Hanya lakukan scroll horizontal jika berada di dalam section
                 if (!isInSection) {
@@ -61,9 +64,13 @@ export default function Timeline({ items }: TimelineProps) {
 
                 // Jika belum di ujung, lakukan scroll horizontal
                 e.preventDefault();
-                el.scrollLeft += e.deltaY;
+
+                // Kurangi kecepatan scroll sedikit lagi untuk kontrol yang lebih halus
+                const scrollSpeed = isTouchpadScroll ? 0.6 : 0.9;
+                el.scrollLeft += e.deltaY * scrollSpeed;
             }
         };
+
         el.addEventListener('wheel', onWheel, { passive: false });
         return () => {
             el.removeEventListener('wheel', onWheel);
@@ -76,8 +83,9 @@ export default function Timeline({ items }: TimelineProps) {
                 className="overflow-x-auto scrollbar-hide"
                 ref={scrollRef}
                 style={{
-                    scrollBehavior: 'smooth',
-                    scrollbarWidth: 'none'
+                    scrollBehavior: 'auto',
+                    scrollbarWidth: 'none',
+                    WebkitOverflowScrolling: 'touch'
                 }}
             >
                 <div className="relative flex flex-row items-stretch gap-8 sm:gap-24 min-w-max px-10 sm:pl-72 before:absolute before:left-0 before:right-0 before:top-1/2 before:-translate-y-1/2 before:h-1 before:bg-[#b3a49d] before:rounded-full">
