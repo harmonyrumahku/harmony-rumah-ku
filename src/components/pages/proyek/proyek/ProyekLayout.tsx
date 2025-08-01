@@ -13,9 +13,12 @@ import { Input } from '@/components/ui/input'
 import Image from 'next/image'
 
 import { ProyekHome } from '@/types/Proyek'
+import LoadingOverlay from '@/base/Loading/LoadingOverlay';
 
 export default function ProyekLayout({ projectData }: { projectData: ProyekHome[] }) {
     const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [loadingMessage, setLoadingMessage] = useState("Memuat halaman proyek...");
     const [search, setSearch] = useState('');
     const [selectedKategori, setSelectedKategori] = useState('');
     const [openKategori, setOpenKategori] = useState(false);
@@ -23,6 +26,11 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
     const [openLayanan, setOpenLayanan] = useState(false);
     const [selectedWilayah, setSelectedWilayah] = useState("");
     const [openWilayah, setOpenWilayah] = useState(false);
+
+    const handleLinkClick = (projectTitle: string) => {
+        setLoadingMessage(`Memuat detail untuk "${projectTitle}"...`);
+        setIsLoading(true);
+    };
 
     // Ambil unique kategori
     const kategoriOptions = Array.from(new Set(projectData.map(p => p.type)));
@@ -233,6 +241,14 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                 className="relative h-40 sm:h-48 lg:h-52 overflow-hidden group cursor-pointer"
                                 onMouseEnter={() => setHoveredIdx(idx)}
                                 onMouseLeave={() => setHoveredIdx(null)}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleLinkClick(project.title);
+                                    // Navigate after a short delay to show loading
+                                    setTimeout(() => {
+                                        window.location.href = `/proyek/${project.slug}`;
+                                    }, 100);
+                                }}
                             >
                                 {/* Gambar utama */}
                                 <Image
@@ -277,6 +293,11 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                     </div>
                 </div>
             </div>
+
+            <LoadingOverlay
+                isLoading={isLoading}
+                message={loadingMessage}
+            />
         </section>
     )
 }

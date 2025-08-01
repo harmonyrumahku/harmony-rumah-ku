@@ -8,10 +8,23 @@ import Link from 'next/link';
 
 import { ProyekHome } from '@/types/Proyek';
 
+import LoadingOverlay from '@/base/Loading/LoadingOverlay';
+
 export default function ProjectContent({ projectData }: { projectData: ProyekHome[] }) {
     const [isInSection, setIsInSection] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [loadingMessage, setLoadingMessage] = useState("Memuat halaman proyek...");
     const scrollRef = useRef<HTMLDivElement>(null);
     const sectionRef = useRef<HTMLElement>(null);
+
+    const handleLinkClick = (projectTitle?: string) => {
+        if (projectTitle) {
+            setLoadingMessage(`Memuat detail untuk "${projectTitle}"`);
+        } else {
+            setLoadingMessage("Memuat halaman proyek...");
+        }
+        setIsLoading(true);
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -76,7 +89,14 @@ export default function ProjectContent({ projectData }: { projectData: ProyekHom
             <div className="flex justify-between items-center mb-6 px-4 md:px-10">
                 <h2 className="text-md md:text-3xl font-bold text-[#333333]">Project</h2>
 
-                <Link href="/proyek" className="text-[#708B75] font-medium hover:underline" rel='project'>VIEW MORE</Link>
+                <Link
+                    href="/proyek"
+                    className="text-[#708B75] font-medium hover:underline"
+                    rel='project'
+                    onClick={() => handleLinkClick()}
+                >
+                    VIEW MORE
+                </Link>
             </div>
 
             <div
@@ -94,6 +114,14 @@ export default function ProjectContent({ projectData }: { projectData: ProyekHom
                             href={`/proyek/${project.slug}`}
                             key={idx}
                             className="relative h-72 w-[300px] md:w-[500px] overflow-hidden group brightness-70 hover:brightness-100 transition-all duration-300"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleLinkClick(project.title);
+                                // Navigate after a short delay to show loading
+                                setTimeout(() => {
+                                    window.location.href = `/proyek/${project.slug}`;
+                                }, 100);
+                            }}
                         >
                             {/* Gambar utama */}
                             <Image
@@ -132,6 +160,11 @@ export default function ProjectContent({ projectData }: { projectData: ProyekHom
                     ))}
                 </div>
             </div>
+
+            <LoadingOverlay
+                isLoading={isLoading}
+                message={loadingMessage}
+            />
         </section>
     )
 }
