@@ -18,8 +18,9 @@ import { Button } from '@/components/ui/button'
 
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from '@/components/ui/table'
 
-import Timeline from '@/components/pages/proyek/details/Timeline'
-import ImagePreview from '@/components/pages/proyek/details/ImagePreview'
+import Timeline from '@/components/pages/proyek/details/components/Timeline'
+
+import ImagePreview from '@/components/pages/proyek/details/components/ImagePreview'
 
 import Blobs from "@/base/assets/blobs.png"
 
