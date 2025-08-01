@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
 
@@ -128,17 +129,26 @@ function NavigationMenuViewport({
 
 function NavigationMenuLink({
   className,
+  href,
+  children,
   ...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.Link>) {
+}: {
+  className?: string
+  href: string
+  children: React.ReactNode
+} & React.ComponentProps<typeof Link>) {
   return (
-    <NavigationMenuPrimitive.Link
+    <Link
+      href={href}
       data-slot="navigation-menu-link"
       className={cn(
         "flex flex-col gap-1 rounded-sm p-2 text-sm outline-none focus-visible:ring-[3px] focus-visible:outline-1 focus-visible:ring-ring/50 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}
-    />
+    >
+      {children}
+    </Link>
   )
 }
 

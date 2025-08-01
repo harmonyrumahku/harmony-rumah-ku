@@ -1,10 +1,14 @@
-import React from 'react'
+"use client"
+
+import React, { useState, useEffect } from 'react'
 
 import Image from 'next/image'
 
 import Link from 'next/link'
 
 import parse, { domToReact, Element, DOMNode } from 'html-react-parser'
+
+import { motion, AnimatePresence } from 'framer-motion'
 
 import type { ProyekDetails } from '@/types/Proyek'
 
@@ -35,12 +39,24 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
     const layanan = projectData.proyek_layanan_name?.join(', ');
     const team = projectData.team.map((t) => t.position).join(', ');
     const images = projectData.image_urls || [];
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    // Auto-play functionality
+    useEffect(() => {
+        if (images.length <= 1) return;
+
+        const interval = setInterval(() => {
+            setCurrentImageIndex((prev) => (prev + 1) % images.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, [images.length]);
 
     return (
         <section className="min-h-screen py-10 pt-20 md:pt-28 bg-[#fff7e6]">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 pb-10">
                 {/* Kiri: Info */}
-                <div className="flex flex-col gap-6 relative z-10 px-4 md:px-16">
+                <div className="flex flex-col gap-6 relative z-10 px-4 md:px-16 order-2 md:order-1">
                     <div>
                         <h1 className="text-3xl md:text-4xl font-bold font-playfair mb-6 leading-tight">
                             {projectData.title}
@@ -100,25 +116,54 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
                     </div>
                 </div>
 
-                {/* Kanan: Foto */}
-                <div className="overflow-y-auto lg:max-h-[120dvh] scrollbar-hide">
-                    <div className='columns-2 gap-3 space-y-3'>
-                        {images.map((img, i) => (
-                            <div
-                                key={i}
-                                className="overflow-hidden rounded-lg bg-gray-200 w-full mb-3 break-inside-avoid"
-                            >
-                                <Image
-                                    src={img}
-                                    alt={`proyek-image-${i}`}
-                                    className="object-cover w-full h-auto hover:scale-105 transition-transform duration-300"
-                                    width={1080}
-                                    height={1080}
-                                    quality={100}
-                                    loading="lazy"
-                                />
-                            </div>
-                        ))}
+                {/* Kanan: Images */}
+                <div className="overflow-y-auto lg:max-h-[120dvh] scrollbar-hide px-2 md:px-0 order-1 md:order-2">
+                    {/* Mobile/Tablet: Slider */}
+                    <div className="lg:hidden overflow-hidden">
+                        <div className="relative h-[250px] md:h-[350px] overflow-hidden rounded-lg bg-gray-100">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={currentImageIndex}
+                                    initial={{ opacity: 0, scale: 1.1 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.9 }}
+                                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                                    className="relative w-full h-full"
+                                >
+                                    <Image
+                                        src={images[currentImageIndex]}
+                                        alt={`proyek-image-${currentImageIndex}`}
+                                        fill
+                                        className="object-cover"
+                                        quality={85}
+                                        priority={currentImageIndex === 0}
+                                    />
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+                    </div>
+
+                    {/* Desktop: Masonry Layout */}
+                    <div className="hidden lg:block">
+                        <div className='columns-2 gap-3 space-y-3'>
+                            {images.map((img, i) => (
+                                <div
+                                    key={i}
+                                    className="overflow-hidden rounded-lg bg-gray-200 w-full mb-3 break-inside-avoid group"
+                                >
+                                    <Image
+                                        src={img}
+                                        alt={`proyek-image-${i}`}
+                                        className="object-cover w-full h-auto group-hover:scale-105 transition-transform duration-500 ease-out"
+                                        width={800}
+                                        height={600}
+                                        quality={85}
+                                        loading="lazy"
+                                        sizes="(max-width: 1280px) 50vw, 50vw"
+                                    />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
