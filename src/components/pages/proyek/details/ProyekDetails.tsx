@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/button'
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from '@/components/ui/table'
 
 import Timeline from '@/components/pages/proyek/details/Timeline'
+import ImagePreview from '@/components/pages/proyek/details/ImagePreview'
 
 import Blobs from "@/base/assets/blobs.png"
 
@@ -40,6 +41,7 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
     const team = projectData.team.map((t) => t.position).join(', ');
     const images = projectData.image_urls || [];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     // Auto-play functionality
     useEffect(() => {
@@ -120,7 +122,10 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
                 <div className="overflow-y-auto lg:max-h-[120dvh] scrollbar-hide px-2 md:px-0 order-1 md:order-2">
                     {/* Mobile/Tablet: Slider */}
                     <div className="lg:hidden overflow-hidden">
-                        <div className="relative h-[250px] md:h-[350px] overflow-hidden rounded-lg bg-gray-100">
+                        <div
+                            className="relative h-[250px] md:h-[350px] overflow-hidden rounded-lg bg-gray-100 cursor-pointer"
+                            onClick={() => setSelectedImage(images[currentImageIndex])}
+                        >
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={currentImageIndex}
@@ -149,7 +154,8 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
                             {images.map((img, i) => (
                                 <div
                                     key={i}
-                                    className="overflow-hidden rounded-lg bg-gray-200 w-full mb-3 break-inside-avoid group"
+                                    className="overflow-hidden rounded-lg bg-gray-200 w-full mb-3 break-inside-avoid group cursor-pointer"
+                                    onClick={() => setSelectedImage(img)}
                                 >
                                     <Image
                                         src={img}
@@ -231,6 +237,14 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
                     </Button>
                 </Link>
             </div>
+
+            {/* Image Preview Modal */}
+            <ImagePreview
+                selectedImage={selectedImage}
+                setSelectedImage={setSelectedImage}
+                images={images}
+                setCurrentImageIndex={setCurrentImageIndex}
+            />
         </section>
     )
 }
