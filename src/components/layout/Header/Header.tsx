@@ -14,8 +14,8 @@ import Link from 'next/link'
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false)
     return (
-        <header className="fixed top-0 left-0 w-full bg-[#fff7e6] py-3 z-[200]">
-            <nav className='flex items-center justify-between w-full px-4 lg:px-10'>
+        <header className="fixed top-0 left-0 w-full z-[200]">
+            <nav className='bg-[#fff7e6] py-3 container flex items-center justify-between w-full px-4 lg:px-10'>
                 <Link href="/" className="text-3xl font-normal text-[#8a9987] tracking-wide select-none" rel='home'>
                     HarmonyrumahKU
                 </Link>

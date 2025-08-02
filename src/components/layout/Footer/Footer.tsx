@@ -19,7 +19,7 @@ import { Textarea } from '@/components/ui/textarea'
 
 export default function Footer() {
     return (
-        <footer className="w-full flex flex-col md:flex-row bg-[#f9f4ea] min-h-[400px]">
+        <footer className="w-full flex flex-col md:flex-row bg-[#f9f4ea] min-h-[400px] container">
             {/* Kiri: Logo, Nama, Alamat */}
             <div className="flex flex-col md:flex-row items-start p-8 w-full gap-4">
                 <div className='flex flex-col gap-6 mb-4 md:mb-0'>

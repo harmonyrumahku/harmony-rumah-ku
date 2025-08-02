@@ -58,10 +58,10 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
     });
 
     return (
-        <section className="min-h-screen bg-[#fff7e6]">
+        <section className="min-h-screen bg-[#fff7e6] container">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-12 min-h-screen">
                 {/* Left Column - Text and Navigation */}
-                <div className="space-y-6 sm:space-y-8 lg:sticky lg:top-8 lg:h-fit lg:col-span-1 px-4 sm:px-6 lg:pl-10 pt-18 lg:pt-10">
+                <div className="space-y-6 sm:space-y-8 lg:sticky lg:top-8 lg:h-fit lg:col-span-1 px-4 sm:px-6 lg:pl-10 pt-18 lg:pt-18">
                     <p className="text-base sm:text-lg leading-relaxed text-accent max-w-lg">
                         Kami Hadir untuk Setiap Langkah Perjalanan Hunian Anda. Dari merancang ruang yang nyaman, memastikan struktur yang kokoh, hingga mengelola proyek dengan penuh tanggung jawab — <strong>semua kami hadirkan untuk menciptakan rumah yang selaras dengan hidup Anda.</strong>
                     </p>

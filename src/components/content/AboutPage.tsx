@@ -8,7 +8,7 @@ import Image from 'next/image'
 
 export default function AboutPage({ aboutData }: { aboutData: About[] }) {
     return (
-        <section className='bg-[#fff7e6] py-0 md:py-3'>
+        <section className='bg-[#fff7e6] py-0 md:py-3 container'>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 px-4 sm:px-6 lg:px-10 gap-4">
                 <h2 className="font-bold text-[#333333] text-xl sm:text-2xl">About</h2>
 

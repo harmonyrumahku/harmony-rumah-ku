@@ -17,7 +17,7 @@ export default function ArticlePage({ articleData }: { articleData: Article[] })
     }
 
     return (
-        <section className='bg-[#fff7e6]'>
+        <section className='bg-[#fff7e6] container'>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-2 sm:gap-4 px-4 sm:px-10">
                 <h2 className="font-bold text-[#333333] text-lg sm:text-xl md:text-2xl">Article</h2>
                 <Link href="/article" className="text-[#708B75] font-medium hover:underline text-xs sm:text-sm md:text-base" rel='article'>

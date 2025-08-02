@@ -56,7 +56,7 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
     }, [images.length]);
 
     return (
-        <section className="min-h-screen py-10 pt-20 md:pt-28 bg-[#fff7e6]">
+        <section className="min-h-screen py-10 pt-20 md:pt-28 bg-[#fff7e6] container relative">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 pb-10">
                 {/* Kiri: Info */}
                 <div className="flex flex-col gap-6 relative z-10 px-4 md:px-16 order-2 md:order-1">
@@ -82,7 +82,7 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
                         </div>
                     </div>
 
-                    <Image src={Blobs} alt="blobs" className="absolute top-0 -left-20 z-0" />
+                    <Image src={Blobs} alt="blobs" className="absolute top-0 -left-20 z-0 bg-hidden" />
 
                     {/* Info box */}
                     <div className="bg-[rgb(255, 247, 230)] rounded-lg border border-white grid grid-cols-3 gap-6 text-center py-2 mt-6 md:mt-10">
