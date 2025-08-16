@@ -30,6 +30,8 @@ export interface ArticleDetails {
     description: string;
     content: string;
     thumbnail: string[];
+    label_image: string;
+    closing_text: string
     status: string;
     article_categories: string;
     article_sub_categories: string;

@@ -4,7 +4,7 @@ import React from 'react'
 
 import { format } from 'date-fns'
 
-import { Share2, Facebook, Twitter, Instagram, Linkedin, Mail } from 'lucide-react'
+import { Share2, Facebook, Twitter, Instagram, Linkedin, Mail, ArrowLeft } from 'lucide-react'
 
 import type { ArticleDetails } from '@/types/Article'
 
@@ -164,6 +164,16 @@ export default function ArticleDetails({ articleData }: { articleData: ArticleDe
                             className="object-cover"
                             alt="Urban Landscape"
                         />
+                    </div>
+
+                    <h3 className='text-center text-base mt-10'>{articleData.label_image}</h3>
+                </div>
+
+                <div className='flex flex-col gap-2 max-w-2xl'>
+                    <span className='font-bold text-gray-800'>Conclusion</span>
+                    <h3 className='text-base text-gray-800 leading-relaxed'>{articleData.closing_text}</h3>
+                    <div className='mt-4'>
+                        <ArrowLeft size={28} />
                     </div>
                 </div>
             </header>

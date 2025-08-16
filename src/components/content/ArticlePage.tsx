@@ -42,7 +42,7 @@ export default function ArticlePage({ articleData }: { articleData: Article[] })
                                     {/* Article Image */}
                                     <div className="relative h-60 sm:h-96 w-full aspect-[4/5]">
                                         <Image
-                                            src={article.thumbnail[0]}
+                                            src={article.thumbnail}
                                             alt={article.title}
                                             fill
                                             className="object-cover"
