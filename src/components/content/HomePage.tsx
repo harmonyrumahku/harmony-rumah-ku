@@ -113,7 +113,7 @@ export default function HomePage({ homeData }: { homeData: HomeResponse }) {
     }
 
     return (
-        <section className="w-full min-h-full lg:min-h-screen flex flex-col lg:flex-row font-sans container">
+        <section className="w-full min-h-full lg:min-h-screen flex flex-col lg:flex-row font-sans container" id='home'>
             {/* Kiri */}
             <div className="w-full lg:w-[28%] lg:min-w-[320px] bg-[var(--background)] flex flex-col justify-between order-2 lg:order-1">
                 <div className='flex flex-row lg:flex-col justify-between h-full'>
