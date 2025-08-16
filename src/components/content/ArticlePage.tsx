@@ -37,43 +37,45 @@ export default function ArticlePage({ articleData }: { articleData: Article[] })
                 <div className="lg:col-span-2 overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
                     <div className="flex min-w-0 sm:min-w-max">
                         {articleData.map((article) => (
-                            <article key={article.id} className="w-64 sm:w-80 flex-shrink-0">
-                                {/* Article Image */}
-                                <div className="relative h-60 sm:h-96 w-full aspect-[4/5]">
-                                    <Image
-                                        src={article.thumbnail}
-                                        alt={article.title}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                </div>
-
-                                {/* Article Content */}
-                                <div className="py-3 sm:py-4 flex flex-col gap-2 sm:gap-4">
-                                    {/* Date */}
-                                    <div className='flex flex-col md:flex-row gap-2 sm:gap-4'>
-                                        <p className="text-xs sm:text-sm text-[#708B75]">
-                                            {formatDate(article.created_at)}
-                                        </p>
-
-                                        {/* Tags */}
-                                        <div className="flex flex-wrap gap-1 sm:gap-2">
-                                            <span className="px-2 py-1 bg-[#d96f4e] text-white text-[10px] sm:text-xs rounded-sm">
-                                                {article.article_categories}
-                                            </span>
-
-                                            <span className="px-2 py-1 bg-[#d96f4e] text-white text-[10px] sm:text-xs rounded-sm">
-                                                {article.article_sub_categories}
-                                            </span>
-                                        </div>
+                            <Link href={`/blog/${article.slug}`} key={article.id}>
+                                <article className="w-64 sm:w-80 flex-shrink-0">
+                                    {/* Article Image */}
+                                    <div className="relative h-60 sm:h-96 w-full aspect-[4/5]">
+                                        <Image
+                                            src={article.thumbnail[0]}
+                                            alt={article.title}
+                                            fill
+                                            className="object-cover"
+                                        />
                                     </div>
 
-                                    {/* Title */}
-                                    <h3 className="font-bold text-[#333333] text-xs sm:text-sm leading-tight line-clamp-3 flex-grow">
-                                        {article.title}
-                                    </h3>
-                                </div>
-                            </article>
+                                    {/* Article Content */}
+                                    <div className="py-3 sm:py-4 flex flex-col gap-2 sm:gap-4">
+                                        {/* Date */}
+                                        <div className='flex flex-col md:flex-row gap-2 sm:gap-4'>
+                                            <p className="text-xs sm:text-sm text-[#708B75]">
+                                                {formatDate(article.created_at)}
+                                            </p>
+
+                                            {/* Tags */}
+                                            <div className="flex flex-wrap gap-1 sm:gap-2">
+                                                <span className="px-2 py-1 bg-[#d96f4e] text-white text-[10px] sm:text-xs rounded-sm">
+                                                    {article.article_categories}
+                                                </span>
+
+                                                <span className="px-2 py-1 bg-[#d96f4e] text-white text-[10px] sm:text-xs rounded-sm">
+                                                    {article.article_sub_categories}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        {/* Title */}
+                                        <h3 className="font-bold text-[#333333] text-xs sm:text-sm leading-tight line-clamp-3 flex-grow">
+                                            {article.title}
+                                        </h3>
+                                    </div>
+                                </article>
+                            </Link>
                         ))}
                     </div>
                 </div>

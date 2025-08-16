@@ -12,6 +12,8 @@ import Header from "@/components/layout/Header/Header";
 
 import Footer from "@/components/layout/Footer/Footer";
 
+import LenisProvider from '@/base/helper/SmoothScroll'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,9 +25,11 @@ export default function RootLayout({
         className={`${lato.variable} ${playfair.variable} antialiased`}
       >
         <main className="overflow-hidden">
-          <Header />
-          {children}
-          <Footer />
+          <LenisProvider>
+            <Header />
+            {children}
+            <Footer />
+          </LenisProvider>
         </main>
       </body>
     </html>
