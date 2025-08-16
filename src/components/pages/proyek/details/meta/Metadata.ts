@@ -39,17 +39,21 @@ export async function generateMetadata({
 
   if (!proyekDetails) {
     return {
-      title: "Proyek Not Found",
-      description: "The requested Proyek item could not be found.",
+      title: "Proyek Tidak Ditemukan | HarmonyrumahKU",
+      description: "Proyek yang Anda cari tidak dapat ditemukan.",
       openGraph: {
-        title: "Proyek Not Found",
-        description: "The requested Proyek item could not be found.",
+        title: "Proyek Tidak Ditemukan | HarmonyrumahKU",
+        description: "Proyek yang Anda cari tidak dapat ditemukan.",
         type: "website",
+        siteName: "HarmonyrumahKU",
+        locale: "id_ID",
       },
       twitter: {
         card: "summary",
-        title: "Proyek Not Found",
-        description: "The requested Proyek item could not be found.",
+        title: "Proyek Tidak Ditemukan | HarmonyrumahKU",
+        description: "Proyek yang Anda cari tidak dapat ditemukan.",
+        creator: "@harmonyrumahku",
+        site: "@harmonyrumahku",
       },
     };
   }
@@ -63,24 +67,53 @@ export async function generateMetadata({
       : proyekDetails.image_urls
     : undefined;
 
+  const BASE_URL = process.env.NEXT_PUBLIC_URL as string;
+
   return {
-    title: `Proyek - ${proyekDetails.title}`,
+    title: `Proyek - ${proyekDetails.title} | HarmonyrumahKU`,
     description: description,
+    keywords: [
+      "Portofolio Proyek",
+      proyekDetails.title,
+      "HarmonyrumahKU",
+      "Desain Rumah",
+      "Arsitektur",
+      proyekDetails.proyek_type_name,
+      proyekDetails.proyek_city_name,
+      proyekDetails.layanan,
+    ].filter(Boolean),
+    authors: [{ name: "HarmonyrumahKU Team" }],
     openGraph: {
-      title: `Proyek - ${proyekDetails.title}`,
+      title: `Proyek - ${proyekDetails.title} | HarmonyrumahKU`,
       description: description,
       type: "website",
-      images: imageUrl ? [{ url: imageUrl }] : [],
-      url: `${process.env.NEXT_PUBLIC_API_PROYEK}/${proyekDetails.slug}`,
+      url: `${BASE_URL}/proyek/${proyekDetails.slug}`,
+      siteName: "HarmonyrumahKU",
+      locale: "id_ID",
+      images: imageUrl ? [{
+        url: imageUrl,
+        width: 1200,
+        height: 630,
+        alt: proyekDetails.title,
+      }] : [],
     },
     twitter: {
       card: "summary_large_image",
-      title: `Proyek - ${proyekDetails.title}`,
+      title: `Proyek - ${proyekDetails.title} | HarmonyrumahKU`,
       description: description,
+      creator: "@harmonyrumahku",
+      site: "@harmonyrumahku",
       images: imageUrl ? [imageUrl] : [],
     },
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_API_PROYEK}/${proyekDetails.slug}`,
+      canonical: `${BASE_URL}/proyek/${proyekDetails.slug}`,
+      languages: {
+        "id-ID": `${BASE_URL}/proyek/${proyekDetails.slug}`,
+      },
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

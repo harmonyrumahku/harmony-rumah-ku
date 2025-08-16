@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Metadata } from 'next';
 
-import ArticleDetails from '@/components/pages/blog/details/ArticleDetails';
+import ArticleDetails from '@/components/pages/blog/details/BlogDetails';
 
 import { fetchArticleBySlug } from '@/utils/FetchArticle';
 

@@ -4,21 +4,23 @@ import { Metadata } from 'next'
 
 import BlogLayout from '@/components/pages/blog/BlogLayout'
 
-import ProyekSkelaton from '@/components/pages/proyek/proyek/ProyekSkelaton'
+import { fetchArticleData } from '@/utils/FetchArticle'
 
-export const metadata: Metadata = {
-    title: 'Blog - HarmonyrumahKU',
-    description: 'Blog - HarmonyrumahKU',
-}
+import BlogSkelaton from '@/components/pages/blog/BlogSkelaton'
+
+import { blogMetadata } from '@/components/pages/blog/meta/Metadata'
+
+export const metadata: Metadata = blogMetadata
 
 export default async function Page() {
     try {
+        const articleData = await fetchArticleData();
         return (
-            <BlogLayout />
+            <BlogLayout articleData={articleData} />
         );
     } catch {
         return (
-            <ProyekSkelaton />
+            <BlogSkelaton />
         );
     }
 }

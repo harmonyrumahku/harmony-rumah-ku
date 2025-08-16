@@ -10,7 +10,19 @@ import type { ArticleDetails } from '@/types/Article'
 
 import Image from 'next/image'
 
+import { Button } from '@/components/ui/button'
+
+import { useManagementBlog } from '@/components/pages/blog/details/lib/useManagementBlog'
+
 export default function ArticleDetails({ articleData }: { articleData: ArticleDetails }) {
+    const {
+        isLoading,
+        previousArticle,
+        handlePreviousArticle,
+        leftColumnContent,
+        rightColumnContent
+    } = useManagementBlog(articleData)
+
     const formatDate = (dateString: string) => {
         try {
             return format(new Date(dateString), 'MMMM dd, yyyy')
@@ -18,39 +30,6 @@ export default function ArticleDetails({ articleData }: { articleData: ArticleDe
             return format(new Date(), 'MMMM dd, yyyy')
         }
     }
-
-    // Function to parse HTML content and extract structured data
-    const parseArticleContent = (htmlContent: string) => {
-        // Remove HTML tags and extract clean text
-        const cleanText = htmlContent.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
-
-        // Extract paragraphs with their styling information
-        const paragraphs = htmlContent.match(/<p[^>]*>(.*?)<\/p>/g)?.map(p => {
-            const text = p.replace(/<[^>]*>/g, '').trim()
-            const hasStrong = p.includes('<strong>')
-            const hasCenterAlign = p.includes('ql-align-center')
-            return { text, isBold: hasStrong, centerAlign: hasCenterAlign }
-        }).filter(p => p.text.length > 0 && p.text !== '<br>' && p.text !== '') || []
-
-        // Use all paragraphs without filtering duplicates
-        const uniqueParagraphs = paragraphs
-
-        return {
-            cleanText,
-            paragraphs: uniqueParagraphs,
-            wordCount: cleanText.split(' ').length
-        }
-    }
-
-    // Parse the article content
-    const parsedContent = parseArticleContent(articleData.content)
-
-    // Split all paragraphs into two parts for two-column layout
-    // Ensure right column has enough content
-    const totalParagraphs = parsedContent.paragraphs.length
-    const leftColumnCount = Math.min(8, Math.ceil(totalParagraphs * 0.6)) // Left column gets 60% or max 8 paragraphs
-    const leftColumnContent = parsedContent.paragraphs.slice(0, leftColumnCount)
-    const rightColumnContent = parsedContent.paragraphs.slice(leftColumnCount)
 
     return (
         <section className="min-h-screen bg-[#fff7e6] container">
@@ -173,7 +152,17 @@ export default function ArticleDetails({ articleData }: { articleData: ArticleDe
                     <span className='font-bold text-gray-800'>Conclusion</span>
                     <h3 className='text-base text-gray-800 leading-relaxed'>{articleData.closing_text}</h3>
                     <div className='mt-4'>
-                        <ArrowLeft size={28} />
+                        {previousArticle ? (
+                            <Button
+                                onClick={handlePreviousArticle}
+                                disabled={isLoading}
+                                className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed bg-transparent hover:bg-transparent border-0 outline-0 shadow-none cursor-pointer"
+                            >
+                                <ArrowLeft size={28} />
+                            </Button>
+                        ) : (
+                            <div className="text-gray-400 text-sm">Tidak ada artikel sebelumnya yang tersedia</div>
+                        )}
                     </div>
                 </div>
             </header>

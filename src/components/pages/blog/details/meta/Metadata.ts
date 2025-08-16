@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
-import type { Article } from "@/types/Article";
+import type { ArticleDetails } from "@/types/Article";
 
-export async function getArticle(slug: string): Promise<Article | null> {
+export async function getArticle(slug: string): Promise<ArticleDetails | null> {
   try {
     if (!process.env.NEXT_PUBLIC_API_ARTICLE) {
       console.warn("NEXT_PUBLIC_API_ARTICLE not available during build time");
@@ -39,23 +39,27 @@ export async function generateMetadata({
 
   if (!article) {
     return {
-      title: "Article Not Found",
-      description: "The requested Article item could not be found.",
+      title: "Blog Tidak Ditemukan | HarmonyrumahKU",
+      description: "Blog yang Anda cari tidak dapat ditemukan.",
       openGraph: {
-        title: "Article Not Found",
-        description: "The requested Article item could not be found.",
+        title: "Blog Tidak Ditemukan | HarmonyrumahKU",
+        description: "Blog yang Anda cari tidak dapat ditemukan.",
         type: "website",
+        siteName: "HarmonyrumahKU",
+        locale: "id_ID",
       },
       twitter: {
         card: "summary",
-        title: "Article Not Found",
-        description: "The requested Article item could not be found.",
+        title: "Blog Tidak Ditemukan | HarmonyrumahKU",
+        description: "Blog yang Anda cari tidak dapat ditemukan.",
+        creator: "@harmonyrumahku",
+        site: "@harmonyrumahku",
       },
     };
   }
 
   const description =
-    article.description || `Article ${article.title}`;
+    article.description || `Blog ${article.title}`;
 
   const imageUrl = article.thumbnail
     ? Array.isArray(article.thumbnail)
@@ -63,24 +67,54 @@ export async function generateMetadata({
       : article.thumbnail
     : undefined;
 
+  const BASE_URL = process.env.NEXT_PUBLIC_URL as string;
+
   return {
-    title: `Article - ${article.title}`,
+    title: `Blog - ${article.title} | HarmonyrumahKU`,
     description: description,
+    keywords: [
+      "Blog Arsitektur",
+      article.title,
+      "HarmonyrumahKU",
+      "Desain Rumah",
+      "Arsitektur",
+      article.article_categories,
+      article.article_sub_categories,
+    ].filter(Boolean),
+    authors: [{ name: "HarmonyrumahKU Team" }],
     openGraph: {
-      title: `Article - ${article.title}`,
+      title: `Blog - ${article.title} | HarmonyrumahKU`,
       description: description,
-      type: "website",
-      images: imageUrl ? [{ url: imageUrl }] : [],
-      url: `${process.env.NEXT_PUBLIC_API_ARTICLE}/${article.slug}`,
+      type: "article",
+      url: `${BASE_URL}/blog/${article.slug}`,
+      siteName: "HarmonyrumahKU",
+      locale: "id_ID",
+      images: imageUrl ? [{
+        url: imageUrl,
+        width: 1200,
+        height: 630,
+        alt: article.title,
+      }] : [],
+      publishedTime: article.created_at,
+      modifiedTime: article.updated_at,
     },
     twitter: {
       card: "summary_large_image",
-      title: `Article - ${article.title}`,
+      title: `Blog - ${article.title} | HarmonyrumahKU`,
       description: description,
+      creator: "@harmonyrumahku",
+      site: "@harmonyrumahku",
       images: imageUrl ? [imageUrl] : [],
     },
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_API_ARTICLE}/${article.slug}`,
+      canonical: `${BASE_URL}/blog/${article.slug}`,
+      languages: {
+        "id-ID": `${BASE_URL}/blog/${article.slug}`,
+      },
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

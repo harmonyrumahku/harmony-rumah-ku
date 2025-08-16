@@ -1,7 +1,7 @@
 import React from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
 
-export default function ProyekSkelaton() {
+export default function BlogSkelaton() {
     return (
         <section className="min-h-screen bg-[#fff7e6] container">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-12 min-h-screen">

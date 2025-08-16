@@ -83,6 +83,27 @@
   }
 }
 
+/* Prevent body scroll when mobile menu is open */
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Mobile menu specific styles */
+.mobile-menu-overlay {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Ensure mobile menu items are properly spaced and visible */
+.mobile-menu-item {
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 h2 {
   font-family: var(--font-playfair), serif;
   font-size: 40px;

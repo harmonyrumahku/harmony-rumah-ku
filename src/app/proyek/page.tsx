@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
 import { Metadata } from 'next'
 
@@ -8,17 +8,16 @@ import { fetchProyekData } from '@/utils/FetchProyek'
 
 import ProyekSkelaton from '@/components/pages/proyek/proyek/ProyekSkelaton'
 
-export const metadata: Metadata = {
-    title: 'Proyek - HarmonyrumahKU',
-    description: 'Proyek - HarmonyrumahKU',
-}
+import { proyekMetadata } from '@/components/pages/proyek/proyek/meta/Metadata'
+
+export const metadata: Metadata = proyekMetadata
 
 export default async function Page() {
     try {
         const projectData = await fetchProyekData();
-        return <Fragment>
+        return (
             <ProyekLayout projectData={projectData} />
-        </Fragment>;
+        );
     } catch {
         return (
             <ProyekSkelaton />

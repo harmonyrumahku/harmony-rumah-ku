@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import { Search } from 'lucide-react'
 
@@ -27,6 +27,10 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
     const [openLayanan, setOpenLayanan] = useState(false);
     const [selectedWilayah, setSelectedWilayah] = useState("");
     const [openWilayah, setOpenWilayah] = useState(false);
+    const [isInSection, setIsInSection] = useState(false);
+
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const sectionRef = useRef<HTMLElement>(null);
 
     const handleLinkClick = (projectTitle: string) => {
         setLoadingMessage(`Memuat detail untuk "${projectTitle}"...`);
@@ -57,8 +61,69 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
         return matchSearch && matchKategori && matchLayanan && matchWilayah;
     });
 
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!sectionRef.current) return;
+
+            const rect = sectionRef.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            const isVisible = rect.top < windowHeight && rect.bottom > 0;
+            setIsInSection(isVisible);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check initial position
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    useEffect(() => {
+        const el = scrollRef.current;
+        if (!el) return;
+
+        const onWheel = (e: WheelEvent) => {
+            // Deteksi scroll dari touchpad (biasanya deltaY lebih kecil dan lebih halus)
+            const isTouchpadScroll = Math.abs(e.deltaY) < 100;
+
+            if (e.deltaY !== 0) {
+                if (!isInSection) {
+                    return;
+                }
+
+                // Cek apakah sudah mencapai ujung bawah atau atas
+                const isAtBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+                const isAtTop = el.scrollTop <= 1;
+
+                // Jika scroll ke bawah dan sudah di ujung bawah, biarkan scroll vertikal normal
+                if (e.deltaY > 0 && isAtBottom) {
+                    return;
+                }
+
+                // Jika scroll ke atas dan sudah di ujung atas, biarkan scroll vertikal normal
+                if (e.deltaY < 0 && isAtTop) {
+                    return;
+                }
+
+                // Jika belum di ujung, lakukan scroll vertikal yang smooth
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Kurangi kecepatan scroll sedikit lagi untuk kontrol yang lebih halus
+                const scrollSpeed = isTouchpadScroll ? 0.6 : 1.0;
+                const newScrollTop = el.scrollTop + (e.deltaY * scrollSpeed);
+
+                el.scrollTop = newScrollTop;
+            }
+        };
+        el.addEventListener('wheel', onWheel, { passive: false });
+        return () => {
+            el.removeEventListener('wheel', onWheel);
+        };
+    }, [isInSection]);
+
     return (
-        <section className="min-h-screen bg-[#fff7e6] container">
+        <section ref={sectionRef} className="min-h-screen bg-[#fff7e6] container">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-12 min-h-screen">
                 {/* Left Column - Text and Navigation */}
                 <div className="space-y-6 sm:space-y-8 lg:sticky lg:top-8 lg:h-fit lg:col-span-1 px-4 sm:px-6 lg:pl-10 pt-18 lg:pt-18">
@@ -233,13 +298,25 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                 </div>
 
                 {/* Right Column - Vertical Scrolling Grid */}
-                <div className="overflow-y-auto lg:max-h-screen scrollbar-hide lg:col-span-2 pt-4 sm:pt-6 lg:pt-20">
-                    <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div
+                    ref={scrollRef}
+                    className="overflow-y-auto lg:max-h-screen scrollbar-hide lg:col-span-2 pt-4 sm:pt-6 lg:pt-20"
+                    style={{
+                        scrollBehavior: 'smooth',
+                        scrollbarWidth: 'none',
+                        WebkitOverflowScrolling: 'touch',
+                        overscrollBehavior: 'contain',
+                        scrollSnapType: 'y proximity',
+                        maxHeight: 'calc(100vh - 2rem)',
+                        minHeight: '500px'
+                    }}
+                >
+                    <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-8">
                         {filteredProjects.map((project, idx) => (
                             <Link
                                 href={`/proyek/${project.slug}`}
                                 key={idx}
-                                className="relative h-40 sm:h-48 lg:h-52 overflow-hidden group cursor-pointer"
+                                className="relative h-40 sm:h-48 lg:h-64 overflow-hidden group cursor-pointer"
                                 onMouseEnter={() => setHoveredIdx(idx)}
                                 onMouseLeave={() => setHoveredIdx(null)}
                                 onClick={(e) => {
