@@ -66,6 +66,7 @@ export default function Timeline({ items }: TimelineProps) {
 
                 // Jika belum di ujung, lakukan scroll horizontal
                 e.preventDefault();
+                e.stopPropagation();
 
                 // Kurangi kecepatan scroll sedikit lagi untuk kontrol yang lebih halus
                 const scrollSpeed = isTouchpadScroll ? 0.6 : 0.9;
@@ -87,7 +88,9 @@ export default function Timeline({ items }: TimelineProps) {
                 style={{
                     scrollBehavior: 'auto',
                     scrollbarWidth: 'none',
-                    WebkitOverflowScrolling: 'touch'
+                    WebkitOverflowScrolling: 'touch',
+                    overscrollBehavior: 'contain',
+                    scrollSnapType: 'x mandatory'
                 }}
             >
                 <div className="relative flex flex-row items-stretch gap-8 sm:gap-24 min-w-max px-10 sm:pl-72 before:absolute before:left-0 before:right-0 before:top-1/2 before:-translate-y-1/2 before:h-1 before:bg-[#b3a49d] before:rounded-full">

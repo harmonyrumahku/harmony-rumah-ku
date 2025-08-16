@@ -72,6 +72,7 @@ export default function ProjectContent({ projectData }: { projectData: ProyekHom
 
                 // Jika belum di ujung, lakukan scroll horizontal
                 e.preventDefault();
+                e.stopPropagation();
 
                 // Kurangi kecepatan scroll sedikit lagi untuk kontrol yang lebih halus
                 const scrollSpeed = isTouchpadScroll ? 0.4 : 0.7;
@@ -105,7 +106,9 @@ export default function ProjectContent({ projectData }: { projectData: ProyekHom
                 style={{
                     scrollBehavior: 'auto',
                     scrollbarWidth: 'none',
-                    WebkitOverflowScrolling: 'touch'
+                    WebkitOverflowScrolling: 'touch',
+                    overscrollBehavior: 'contain',
+                    scrollSnapType: 'x mandatory'
                 }}
             >
                 <div className="grid grid-flow-col grid-rows-2 auto-cols-max">
