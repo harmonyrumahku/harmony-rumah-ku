@@ -3,7 +3,6 @@ import { Contact, ContactResponse } from "@/types/Contact";
 export const fetchContactData = async (): Promise<Contact[]> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_CONTACT) {
-      console.warn("NEXT_PUBLIC_API_CONTACT not available during build time");
       return [];
     }
 
@@ -23,8 +22,7 @@ export const fetchContactData = async (): Promise<Contact[]> => {
 
     const apiResponse: ContactResponse = await response.json();
     return apiResponse.data;
-  } catch (error) {
-    console.error("Error fetching Contact data:", error);
+  } catch {
     return [];
   }
 };

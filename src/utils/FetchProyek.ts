@@ -8,7 +8,6 @@ import {
 export const fetchProyekData = async (): Promise<ProyekHome[]> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_PROYEK) {
-      console.warn("NEXT_PUBLIC_API_PROYEK not available during build time");
       return [];
     }
 
@@ -28,8 +27,7 @@ export const fetchProyekData = async (): Promise<ProyekHome[]> => {
 
     const apiResponse: ProyekHomeResponse = await response.json();
     return apiResponse.data;
-  } catch (error) {
-    console.error("Error fetching Proyek data:", error);
+  } catch {
     return [];
   }
 };
@@ -39,7 +37,6 @@ export const fetchProyekBySlug = async (
 ): Promise<ProyekDetails | null> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_PROYEK) {
-      console.warn("NEXT_PUBLIC_API_PROYEK not available during build time");
       return null;
     }
 
@@ -58,8 +55,7 @@ export const fetchProyekBySlug = async (
 
     const apiResponse: ProyekDetailResponse = await response.json();
     return apiResponse.data || null;
-  } catch (error) {
-    console.error("Error fetching proyek by slug:", error);
+  } catch {
     return null;
   }
 };

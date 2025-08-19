@@ -3,9 +3,6 @@ import { SocialMedia, SocialMediaResponse } from "@/types/SocialMedia";
 export const fetchSocialMediaData = async (): Promise<SocialMedia[]> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_SOCIAL_MEDIA) {
-      console.warn(
-        "NEXT_PUBLIC_API_SOCIAL_MEDIA not available during build time"
-      );
       return [];
     }
 
@@ -25,8 +22,7 @@ export const fetchSocialMediaData = async (): Promise<SocialMedia[]> => {
 
     const apiResponse: SocialMediaResponse = await response.json();
     return apiResponse.data;
-  } catch (error) {
-    console.error("Error fetching Social Media data:", error);
+  } catch {
     return [];
   }
 };

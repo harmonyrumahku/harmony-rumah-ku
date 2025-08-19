@@ -1,8 +1,11 @@
 "use client"
 
 import React, { useEffect } from 'react'
+
 import Image from 'next/image'
+
 import { motion, AnimatePresence } from 'framer-motion'
+
 import { cn } from '@/lib/utils'
 
 interface ImagePreviewProps {
@@ -91,7 +94,7 @@ export default function ImagePreview({
 
                     {/* Thumbnail Gallery - Modern Grid Layout */}
                     <div className="w-full lg:w-80 xl:w-96 h-[35vh] lg:h-full p-3 lg:p-4">
-                        <div className="h-full overflow-y-auto scrollbar-hide">
+                        <div className="h-full overflow-y-auto scrollbar-hide" data-lenis-prevent>
                             {/* Gallery Header */}
                             <div className="mb-4 pb-3 border-b border-white/10">
                                 <h3 className="text-white/90 font-playfair text-lg lg:text-xl font-medium">

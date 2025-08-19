@@ -3,7 +3,6 @@ import { HomeResponse } from "@/types/Home";
 export const fetchHomeData = async (): Promise<HomeResponse> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_HOME) {
-      console.warn("home not available during build time");
       return {
         statusCode: 0,
         statusMessage: "",
@@ -29,8 +28,7 @@ export const fetchHomeData = async (): Promise<HomeResponse> => {
 
     const apiResponse: HomeResponse = await response.json();
     return apiResponse;
-  } catch (error) {
-    console.error("Error fetching Home data:", error);
+  } catch {
     return {
       statusCode: 0,
       statusMessage: "",

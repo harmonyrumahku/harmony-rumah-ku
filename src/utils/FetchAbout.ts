@@ -3,7 +3,6 @@ import { About, AboutResponse } from "@/types/About";
 export const fetchAboutData = async (): Promise<About[]> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_ABOUT) {
-      console.warn("NEXT_PUBLIC_API_ABOUT not available during build time");
       return [];
     }
 
@@ -23,8 +22,7 @@ export const fetchAboutData = async (): Promise<About[]> => {
 
     const apiResponse: AboutResponse = await response.json();
     return apiResponse.data;
-  } catch (error) {
-    console.error("Error fetching About data:", error);
+  } catch {
     return [];
   }
 };

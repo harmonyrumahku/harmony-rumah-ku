@@ -1,9 +1,13 @@
-import { Article, ArticlesResponse, ArticleDetails, ArticleDetailsResponse } from "@/types/Article";
+import {
+  Article,
+  ArticlesResponse,
+  ArticleDetails,
+  ArticleDetailsResponse,
+} from "@/types/Article";
 
 export const fetchArticleData = async (): Promise<Article[]> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_ARTICLE) {
-      console.warn("NEXT_PUBLIC_API_ARTICLE not available during build time");
       return [];
     }
 
@@ -23,19 +27,16 @@ export const fetchArticleData = async (): Promise<Article[]> => {
 
     const apiResponse: ArticlesResponse = await response.json();
     return apiResponse.data;
-  } catch (error) {
-    console.error("Error fetching Article data:", error);
+  } catch {
     return [];
   }
 };
-
 
 export const fetchArticleBySlug = async (
   slug: string
 ): Promise<ArticleDetails | null> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_ARTICLE) {
-      console.warn("NEXT_PUBLIC_API_ARTICLE not available during build time");
       return null;
     }
 
@@ -54,8 +55,7 @@ export const fetchArticleBySlug = async (
 
     const apiResponse: ArticleDetailsResponse = await response.json();
     return apiResponse.data || null;
-  } catch (error) {
-    console.error("Error fetching proyek by slug:", error);
+  } catch {
     return null;
   }
 };

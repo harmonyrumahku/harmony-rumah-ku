@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import Image from 'next/image'
 
@@ -43,6 +43,9 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
     const images = projectData.image_urls || [];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [isInSection, setIsInSection] = useState(false);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const scrollRef = useRef<HTMLDivElement>(null);
 
     // Auto-play functionality
     useEffect(() => {
@@ -55,8 +58,69 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
         return () => clearInterval(interval);
     }, [images.length]);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!sectionRef.current) return;
+
+            const rect = sectionRef.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            const isVisible = rect.top < windowHeight && rect.bottom > 0;
+            setIsInSection(isVisible);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check initial position
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    useEffect(() => {
+        const el = scrollRef.current;
+        if (!el) return;
+
+        const onWheel = (e: WheelEvent) => {
+            // Deteksi scroll dari touchpad (biasanya deltaY lebih kecil dan lebih halus)
+            const isTouchpadScroll = Math.abs(e.deltaY) < 100;
+
+            if (e.deltaY !== 0) {
+                if (!isInSection) {
+                    return;
+                }
+
+                // Cek apakah sudah mencapai ujung bawah atau atas
+                const isAtBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+                const isAtTop = el.scrollTop <= 1;
+
+                // Jika scroll ke bawah dan sudah di ujung bawah, biarkan scroll vertikal normal
+                if (e.deltaY > 0 && isAtBottom) {
+                    return;
+                }
+
+                // Jika scroll ke atas dan sudah di ujung atas, biarkan scroll vertikal normal
+                if (e.deltaY < 0 && isAtTop) {
+                    return;
+                }
+
+                // Jika belum di ujung, lakukan scroll vertikal yang smooth
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Kurangi kecepatan scroll sedikit lagi untuk kontrol yang lebih halus
+                const scrollSpeed = isTouchpadScroll ? 0.6 : 1.0;
+                const newScrollTop = el.scrollTop + (e.deltaY * scrollSpeed);
+
+                el.scrollTop = newScrollTop;
+            }
+        };
+        el.addEventListener('wheel', onWheel, { passive: false });
+        return () => {
+            el.removeEventListener('wheel', onWheel);
+        };
+    }, [isInSection]);
+
     return (
-        <section className="min-h-screen py-10 pt-20 md:pt-28 bg-[#fff7e6] container relative">
+        <section ref={sectionRef} className="min-h-screen py-10 pt-20 md:pt-28 bg-[#fff7e6] container relative">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 pb-10">
                 {/* Kiri: Info */}
                 <div className="flex flex-col gap-6 relative z-10 px-4 md:px-16 order-2 md:order-1">
@@ -120,7 +184,7 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
                 </div>
 
                 {/* Kanan: Images */}
-                <div className="overflow-y-auto lg:max-h-[120dvh] scrollbar-hide px-2 md:px-0 order-1 md:order-2">
+                <div ref={scrollRef} className="overflow-y-auto lg:max-h-[120dvh] scrollbar-hide px-2 md:px-0 order-1 md:order-2">
                     {/* Mobile/Tablet: Slider */}
                     <div className="lg:hidden overflow-hidden">
                         <div

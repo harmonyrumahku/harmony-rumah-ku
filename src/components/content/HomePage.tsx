@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import Image from 'next/image'
 
@@ -9,54 +9,7 @@ import { easeOut, motion } from 'framer-motion'
 import { HomeResponse } from '@/types/Home'
 
 export default function HomePage({ homeData }: { homeData: HomeResponse }) {
-    // State untuk menyimpan warna yang dipilih
-    const [selectedColorIndex, setSelectedColorIndex] = useState(0)
 
-    // Array warna-warna yang tersedia
-    const colorSchemes = [
-        {
-            background: "linear-gradient(135deg, #344D3D 0%, #4A6741 50%, #344D3D 100%)",
-            name: "Hijau Gelap"
-        },
-        {
-            background: "linear-gradient(135deg, #2C5530 0%, #5A7C65 50%, #2C5530 100%)",
-            name: "Hijau Medium"
-        },
-        {
-            background: "linear-gradient(135deg, #1B4332 0%, #40916C 50%, #1B4332 100%)",
-            name: "Hijau Terang"
-        },
-        {
-            background: "linear-gradient(135deg, #2D4A3E 0%, #6B8E7A 50%, #2D4A3E 100%)",
-            name: "Hijau Abu-abu"
-        },
-        {
-            background: "linear-gradient(135deg, #1F2937 0%, #374151 50%, #1F2937 100%)",
-            name: "Abu-abu Gelap"
-        },
-        {
-            background: "linear-gradient(135deg, #7C2D12 0%, #B45309 50%, #7C2D12 100%)",
-            name: "Coklat"
-        },
-        {
-            background: "linear-gradient(135deg, #1E3A8A 0%, #3B82F6 50%, #1E3A8A 100%)",
-            name: "Biru"
-        },
-        {
-            background: "linear-gradient(135deg, #7C3AED 0%, #A855F7 50%, #7C3AED 100%)",
-            name: "Ungu"
-        }
-    ]
-
-    // Effect untuk mengubah warna setiap kali komponen dimount (refresh)
-    useEffect(() => {
-        // Menggunakan timestamp untuk memastikan warna berubah setiap refresh
-        const timestamp = Date.now()
-        const newIndex = timestamp % colorSchemes.length
-        setSelectedColorIndex(newIndex)
-    }, [colorSchemes.length])
-
-    // Animation variants
     const logoVariants = {
         hidden: { scale: 0.8, opacity: 0 },
         visible: {
@@ -141,7 +94,7 @@ export default function HomePage({ homeData }: { homeData: HomeResponse }) {
                     <motion.div
                         className='w-full h-60 lg:h-full flex flex-col justify-center px-6 lg:pl-10'
                         style={{
-                            background: colorSchemes[selectedColorIndex].background
+                            background: "linear-gradient(135deg, #344D3D 0%, #4A6741 50%, #344D3D 100%)"
                         }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}

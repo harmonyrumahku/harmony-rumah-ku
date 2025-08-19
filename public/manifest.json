@@ -80,10 +80,7 @@
     }
   ],
   "handle_links": {
-    "urls": [
-      "https://harmonyrumahku.vercel.app/*",
-      "https://harmonyrumahku.com/*"
-    ]
+    "urls": ["https://harmonyrumahku.com/*"]
   },
   "protocol_handlers": [
     {
