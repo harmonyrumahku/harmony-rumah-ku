@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect } from 'react';
+
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface LoadingOverlayProps {
@@ -165,7 +166,7 @@ export default function LoadingOverlay({ isLoading, message = "Membangun Hunian.
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="fixed inset-0 bg-[#fff7e6] flex items-center justify-center z-[200] w-full h-full"
+                    className="fixed inset-0 bg-background flex items-center justify-center z-[200] w-full h-full"
                 >
                     <motion.div
                         initial={{ scale: 0.8, opacity: 0, y: 30 }}
@@ -176,7 +177,7 @@ export default function LoadingOverlay({ isLoading, message = "Membangun Hunian.
                             stiffness: 200,
                             damping: 20
                         }}
-                        className="bg-[#fff7e6] flex flex-col items-center justify-center gap-10 p-10"
+                        className="bg-background flex flex-col items-center justify-center gap-10 p-10"
                     >
                         <div className="relative">
                             <SimpleLoader />

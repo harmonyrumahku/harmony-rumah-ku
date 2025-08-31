@@ -86,9 +86,9 @@ export default function ProjectContent({ projectData }: { projectData: ProyekHom
     }, [isInSection]);
 
     return (
-        <section ref={sectionRef} className="w-full py-4 bg-[#fff7e6] container">
+        <section ref={sectionRef} className="w-full py-4 bg-[#ebffe6] container">
             <div className="flex justify-between items-center mb-6 px-4 md:px-10">
-                <h2 className="text-md md:text-3xl font-bold text-[#333333]">Project</h2>
+                <h2 className="text-md md:text-3xl font-bold text-[#333333]">Proyek</h2>
 
                 <Link
                     href="/proyek"

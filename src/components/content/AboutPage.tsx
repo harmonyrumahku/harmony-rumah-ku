@@ -8,7 +8,7 @@ import Image from 'next/image'
 
 export default function AboutPage({ aboutData }: { aboutData: About[] }) {
     return (
-        <section className='bg-[#fff7e6] py-0 md:py-3 container'>
+        <section className='bg-[#ebffe6] py-0 md:py-3 container'>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 px-4 sm:px-6 lg:px-10 gap-4">
                 <h2 className="font-bold text-[#333333] text-xl sm:text-2xl">About</h2>
 
@@ -18,7 +18,7 @@ export default function AboutPage({ aboutData }: { aboutData: About[] }) {
             {/* Responsive Layout */}
             <div className="flex flex-col lg:flex-row min-h-[70dvh]">
                 {/* Left Column - Orange Panel with Service Categories */}
-                <div className="w-full lg:w-1/3 bg-[#ed8555] px-4 sm:px-6 lg:pl-10 py-8 lg:py-0 flex flex-col justify-center">
+                <div className="w-full lg:w-1/3 bg-[#173d2a] px-4 sm:px-6 lg:pl-10 py-8 lg:py-0 flex flex-col justify-center">
                     {aboutData.map((about, idx) => (
                         <div key={idx} className="flex flex-col gap-3 sm:gap-5">
                             {

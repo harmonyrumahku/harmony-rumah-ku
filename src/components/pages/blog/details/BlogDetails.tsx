@@ -32,7 +32,7 @@ export default function ArticleDetails({ articleData }: { articleData: ArticleDe
     }
 
     return (
-        <section className="min-h-screen bg-[#fff7e6] container">
+        <section className="min-h-screen bg-background container">
             {/* Banner */}
             <div className='relative w-full aspect-[21/9] overflow-hidden'>
                 <Image

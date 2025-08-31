@@ -71,7 +71,7 @@ export default function HomePage({ homeData }: { homeData: HomeResponse }) {
             <div className="w-full lg:w-[28%] lg:min-w-[320px] bg-[var(--background)] flex flex-col justify-between order-2 lg:order-1">
                 <div className='flex flex-row lg:flex-col justify-between h-full'>
                     {/* Logo Placeholder */}
-                    <div className='w-full h-60 lg:h-full bg-[#f5ecdc] flex items-center justify-center py-8 lg:py-10'>
+                    <div className='w-full h-60 lg:h-full bg-[#ebffe6] flex items-center justify-center py-8 lg:py-10'>
                         <motion.div
                             className="aspect-square w-1/3 lg:w-1/3"
                             variants={logoVariants}

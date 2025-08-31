@@ -120,7 +120,7 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
     }, [isInSection]);
 
     return (
-        <section ref={sectionRef} className="min-h-screen py-10 pt-20 md:pt-28 bg-[#fff7e6] container relative">
+        <section ref={sectionRef} className="min-h-screen py-10 pt-20 md:pt-28 bg-background container relative">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 pb-10">
                 {/* Kiri: Info */}
                 <div className="flex flex-col gap-6 relative z-10 px-4 md:px-16 order-2 md:order-1">
@@ -296,8 +296,8 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
                     <p className='whitespace-pre-line'>{projectData.template_message}</p>
                 </div>
 
-                <Link href={`mailto:rr@rr-design.com`}>
-                    <Button className='text-black mt-6 cursor-pointer bg-[#e97d5a] hover:bg-[#e97d5a]/90 rounded-lg px-6 py-2 font-semibold'>
+                <Link href={`mailto:harmonyrumahku@gmail.com`}>
+                    <Button className='text-black mt-6 cursor-pointer bg-[#e8e5c8] hover:bg-[#e8e5c8]/90 rounded-lg px-6 py-2 font-semibold'>
                         📩 Hubungi kami – Kami siap mendengarkan.
                     </Button>
                 </Link>

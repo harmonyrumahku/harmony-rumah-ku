@@ -81,7 +81,7 @@ export default function Timeline({ items }: TimelineProps) {
     }, [isInSection]);
 
     return (
-        <section ref={sectionRef} className="w-full py-24 bg-[#e3cdb3] relative">
+        <section ref={sectionRef} className="w-full py-24 bg-[#d9f5d7] relative">
             <div
                 className="overflow-x-auto scrollbar-hide"
                 ref={scrollRef}
@@ -148,7 +148,7 @@ export default function Timeline({ items }: TimelineProps) {
                                                 {item.label}
                                             </span>
                                         )}
-                                        <span className="block w-6 h-6 rounded-full border-4 border-white bg-orange-500 shadow-lg ring-2 ring-orange-200 transition-transform duration-200 hover:scale-110" />
+                                        <span className="block w-6 h-6 rounded-full border-4 border-white bg-[#010f12] shadow-lg ring-2 ring-white transition-transform duration-200 hover:scale-110" />
                                         {idx % 2 !== 0 && (
                                             <span className="text-xs mt-2 font-semibold text-neutral-700 whitespace-nowrap">
                                                 {item.label}
@@ -220,7 +220,7 @@ export default function Timeline({ items }: TimelineProps) {
                 </div>
             </div>
 
-            <h1 className="absolute bottom-20 left-4 sm:left-20 text-[#966f42] font-bold text-2xl sm:text-4xl -z-0">Perjalanan <br /> kami...</h1>
+            <h1 className="absolute bottom-20 left-4 sm:left-20 text-[#b7cfb6] font-bold text-2xl sm:text-4xl -z-0">Perjalanan <br /> kami...</h1>
 
             <Image src={sticker} alt="sticker" className="absolute top-5 sm:top-0 left-0 w-16 h-16 sm:w-auto sm:h-auto" />
         </section>

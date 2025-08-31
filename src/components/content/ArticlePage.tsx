@@ -82,16 +82,16 @@ export default function ArticlePage({ articleData }: { articleData: Article[] })
     }, [isInSection]);
 
     return (
-        <section ref={sectionRef} className='bg-[#fff7e6] py-0 md:py-3 container'>
+        <section ref={sectionRef} className='bg-[#ebffe6] py-0 md:py-3 container'>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-2 sm:gap-4 px-4 sm:px-10">
-                <h2 className="font-bold text-[#333333] text-lg sm:text-xl md:text-2xl">Article</h2>
+                <h2 className="font-bold text-[#333333] text-lg sm:text-xl md:text-2xl">Artikel</h2>
                 <Link href="/article" className="text-[#708B75] font-medium hover:underline text-xs sm:text-sm md:text-base" rel='article'>
                     VIEW MORE
                 </Link>
             </div>
 
             {/* Main Content */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8 bg-[#e8d1b7]">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8 bg-[#d9f5d7]">
                 <div className="lg:col-span-1 px-4 sm:px-10 pt-8 md:pt-20 pb-4 sm:pb-0">
                     <p className="text-[#333333] text-base sm:text-xl leading-relaxed font-normal max-w-full md:max-w-[230px]">
                         Setiap bangunan punya cerita, dan setiap ruang punya makna. Lewat artikel-artikel kami, temukan inspirasi dan pengetahuan yang relevan untuk menjawab kebutuhan ruang Anda yang terus berkembang.

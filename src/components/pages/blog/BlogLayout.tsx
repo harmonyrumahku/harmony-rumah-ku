@@ -126,11 +126,11 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
     }, [isInSection]);
 
     return (
-        <section ref={sectionRef} className="min-h-screen bg-[#fff7e6] container">
+        <section ref={sectionRef} className="min-h-screen bg-background container">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-12 min-h-screen">
                 {/* Left Column - Text and Navigation */}
                 <div className="space-y-6 sm:space-y-8 lg:sticky lg:top-8 lg:h-fit lg:col-span-1 px-4 sm:px-6 lg:pl-10 pt-18 lg:pt-18">
-                    <p className="text-base sm:text-lg leading-relaxed text-accent max-w-lg">
+                    <p className="text-base sm:text-lg leading-relaxed max-w-lg">
                         Setiap bangunan punya cerita, dan setiap ruang punya makna. Lewat artikel-artikel kami, temukan inspirasi dan pengetahuan yang relevan untuk menjawab kebutuhan ruang Anda yang terus berkembang.
                     </p>
 
@@ -163,7 +163,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                 </Button>
 
                                 {openKategori && (
-                                    <div className="absolute top-full left-0 right-0 z-[9999] mt-2 bg-[#fff7e6] max-h-60 overflow-y-auto min-w-48 scrollbar-hide">
+                                    <div className="absolute top-full left-0 right-0 z-[9999] mt-2 bg-background max-h-60 overflow-y-auto min-w-48 scrollbar-hide">
                                         <div className="py-2">
                                             <button
                                                 onClick={() => {
@@ -215,7 +215,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                 </Button>
 
                                 {openSubcategory && selectedKategori && (
-                                    <div className="absolute top-full left-0 right-0 z-[9999] mt-2 bg-[#fff7e6] max-h-60 overflow-y-auto min-w-48 scrollbar-hide">
+                                    <div className="absolute top-full left-0 right-0 z-[9999] mt-2 bg-background max-h-60 overflow-y-auto min-w-48 scrollbar-hide">
                                         <div className="py-2">
                                             <button
                                                 onClick={() => {
@@ -274,62 +274,87 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                         minHeight: '500px'
                     }}
                 >
-                    <div className="grid grid-cols-2 lg:grid-cols-3">
-                        {filteredProjects.map((project, idx) => (
-                            <Link
-                                href={`/blog/${project.slug}`}
-                                key={idx}
-                                className="relative h-full overflow-hidden group cursor-pointer transition-all duration-300"
-                                onMouseEnter={() => setHoveredIdx(idx)}
-                                onMouseLeave={() => setHoveredIdx(null)}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    handleLinkClick(project.title);
-                                    setTimeout(() => {
-                                        window.location.href = `/blog/${project.slug}`;
-                                    }, 100);
+                    {filteredProjects.length > 0 ? (
+                        <div className="grid grid-cols-2 lg:grid-cols-3">
+                            {filteredProjects.map((project, idx) => (
+                                <Link
+                                    href={`/blog/${project.slug}`}
+                                    key={idx}
+                                    className="relative h-full overflow-hidden group cursor-pointer transition-all duration-300"
+                                    onMouseEnter={() => setHoveredIdx(idx)}
+                                    onMouseLeave={() => setHoveredIdx(null)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleLinkClick(project.title);
+                                        setTimeout(() => {
+                                            window.location.href = `/blog/${project.slug}`;
+                                        }, 100);
+                                    }}
+                                >
+                                    {/* Image Container */}
+                                    <div className="relative w-full overflow-hidden aspect-[4/3]">
+                                        <Image
+                                            src={project.thumbnail}
+                                            alt={project.title}
+                                            quality={100}
+                                            fill
+                                            loading='lazy'
+                                            className="w-full h-full object-cover transition-all duration-500"
+                                            style={{
+                                                transform: hoveredIdx === idx ? 'scale(1.05)' : 'scale(1)',
+                                            }}
+                                        />
+                                    </div>
+
+                                    {/* Content Container */}
+                                    <div className="mt-2 flex flex-col gap-1 px-2 md:px-0">
+                                        {/* Title */}
+                                        <span className='text-[#77967f]'>{project.article_categories}</span>
+
+                                        <div className='max-w-[180px]'>
+                                            <h4 className="text-2xl font-semibold line-clamp-2">
+                                                {project.title}
+                                            </h4>
+                                        </div>
+
+                                        <div className='max-w-[250px]'>
+                                            <p className="inline-block text-sm">
+                                                {project.description}
+                                            </p>
+
+                                        </div>
+                                        {/* Icon */}
+                                        <div className="flex justify-start mt-2 mb-4">
+                                            <Image src={books} alt='book' />
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="flex flex-col items-center justify-center py-16 text-center">
+                            <div className="w-24 h-24 mb-6 rounded-full bg-primary flex items-center justify-center">
+                                <Search className="w-12 h-12 text-white" />
+                            </div>
+                            <h3 className="text-xl font-semibold text-foreground mb-2">
+                                Maaf, artikel yang Anda cari tidak ditemukan
+                            </h3>
+                            <p className="text-muted-foreground mb-6 max-w-md">
+                                Coba ubah kata kunci pencarian atau filter yang Anda gunakan untuk menemukan artikel yang sesuai.
+                            </p>
+                            <Button
+                                variant="outline"
+                                onClick={() => {
+                                    setSearch('');
+                                    setSelectedKategori('');
+                                    setSelectedSubcategory('');
                                 }}
+                                className="px-6"
                             >
-                                {/* Image Container */}
-                                <div className="relative w-full overflow-hidden aspect-[4/3]">
-                                    <Image
-                                        src={project.thumbnail}
-                                        alt={project.title}
-                                        quality={100}
-                                        fill
-                                        loading='lazy'
-                                        className="w-full h-full object-cover transition-all duration-500"
-                                        style={{
-                                            transform: hoveredIdx === idx ? 'scale(1.05)' : 'scale(1)',
-                                        }}
-                                    />
-                                </div>
-
-                                {/* Content Container */}
-                                <div className="mt-2 flex flex-col gap-1 px-2 md:px-0">
-                                    {/* Title */}
-                                    <span className='text-[#77967f]'>{project.article_categories}</span>
-
-                                    <div className='max-w-[180px]'>
-                                        <h4 className="text-2xl font-semibold line-clamp-2">
-                                            {project.title}
-                                        </h4>
-                                    </div>
-
-                                    <div className='max-w-[250px]'>
-                                        <p className="inline-block text-sm">
-                                            {project.description}
-                                        </p>
-
-                                    </div>
-                                    {/* Icon */}
-                                    <div className="flex justify-start mt-2 mb-4">
-                                        <Image src={books} alt='book' />
-                                    </div>
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
+                                Reset Filter
+                            </Button>
+                        </div>
+                    )}
                 </div>
             </div>
 
