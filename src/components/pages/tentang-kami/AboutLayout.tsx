@@ -9,13 +9,13 @@ import type { AboutPages } from '@/types/AboutPages';
 export default function AboutPages({ aboutPagesData }: { aboutPagesData: AboutPages[] }) {
 
     return (
-        <section className="min-h-screen bg-background container pt-28">
+        <section className="min-h-screen bg-background container pt-32">
             <div className="px-4 md:px-10">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Left Column - Statistics */}
-                    <div className="space-y-6">
+                    <div className="space-y-10">
                         <div className="text-center lg:text-left">
-                            <div className="text-6xl font-bold text-black mb-4">{aboutPagesData[0].number}</div>
+                            <div className="text-6xl text-black mb-4">{aboutPagesData[0].number}</div>
                             <p className="text-black text-lg leading-relaxed">
                                 {aboutPagesData[0].description}
                             </p>
@@ -28,7 +28,7 @@ export default function AboutPages({ aboutPagesData }: { aboutPagesData: AboutPa
 
                     {/* Middle Column - Services */}
                     <div className="space-y-4">
-                        <h2 className="text-gray-500 text-base font-normal">ARCHITECTURE</h2>
+                        <h2 className="text-gray-500 text-xl font-normal">ARCHITECTURE</h2>
                         <div className="space-y-2">
                             {
                                 aboutPagesData.map((item, idx) => {
@@ -37,7 +37,7 @@ export default function AboutPages({ aboutPagesData }: { aboutPagesData: AboutPa
                                             {
                                                 item.category.map((item, idx) => {
                                                     return (
-                                                        <div key={idx}>{item.title}</div>
+                                                        <span key={idx} className='text-xl'>{item.title}</span>
                                                     )
                                                 })
                                             }
@@ -60,8 +60,9 @@ export default function AboutPages({ aboutPagesData }: { aboutPagesData: AboutPa
                                                 item.city.map((item, idx) => {
                                                     return (
                                                         <div key={idx} className='flex items-center space-x-3'>
-                                                            <span className="text-black text-sm min-w-[80px]">{item.title}:</span>
-                                                            <span className="text-black text-sm font-medium">{item.number}</span>
+                                                            <span className="text-black text-xl min-w-[150px]">{item.title}</span>
+                                                            <span className="text-black text-xl font-medium">{item.number}</span>
+
                                                             <div className="flex-1 bg-gray-200 rounded-full h-2">
                                                                 <div
                                                                     className="bg-[#66FF66] h-2 rounded-full"
@@ -86,10 +87,10 @@ export default function AboutPages({ aboutPagesData }: { aboutPagesData: AboutPa
                                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                                     </svg>
                                 </div>
-                                <span className="text-[#4CAF50] text-sm font-medium">PENCAPAIAN</span>
+                                <span className="text-[#4CAF50] text-xl font-medium">PENCAPAIAN</span>
                             </div>
 
-                            <p className="text-black text-sm leading-relaxed">
+                            <p className="text-black text-xl leading-relaxed">
                                 {aboutPagesData[0].award}
                             </p>
                         </div>
