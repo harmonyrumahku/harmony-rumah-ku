@@ -9,7 +9,7 @@ import type { AboutPages } from '@/types/AboutPages';
 export default function AboutPages({ aboutPagesData }: { aboutPagesData: AboutPages[] }) {
 
     return (
-        <section className="min-h-screen bg-background container pt-32">
+        <section className="min-h-screen bg-background container pt-24 md:pt-32 pb-10">
             <div className="px-4 md:px-10">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Left Column - Statistics */}
@@ -80,7 +80,7 @@ export default function AboutPages({ aboutPagesData }: { aboutPagesData: AboutPa
                         </div>
 
                         {/* Achievement Box */}
-                        <div className="bg-[#f7fff5] border border-[#f7fff5] rounded-lg p-4 max-w-[300px]">
+                        <div className="bg-[#f7fff5] border border-[#f7fff5] rounded-lg p-4">
                             <div className="flex items-center space-x-2 mb-3">
                                 <div className="w-5 h-5 text-[#4CAF50]">
                                     <svg fill="currentColor" viewBox="0 0 24 24">

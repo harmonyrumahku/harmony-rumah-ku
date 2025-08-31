@@ -14,6 +14,8 @@ import Footer from "@/components/layout/Footer/Footer";
 
 import LenisProvider from '@/base/helper/SmoothScroll'
 
+import { Toaster } from "@/components/ui/sonner"
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,6 +31,7 @@ export default function RootLayout({
             <Header />
             {children}
             <Footer />
+            <Toaster />
           </LenisProvider>
         </main>
       </body>

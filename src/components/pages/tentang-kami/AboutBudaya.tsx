@@ -46,7 +46,7 @@ export default function AboutBudaya({ aboutBudayaData }: { aboutBudayaData: Buda
                 </div>
 
                 {/* Column 2 - Pale Mint Green Background */}
-                <div className='bg-[#e8ffe9] text-[#2d2d2d] w-full md:w-[25%] p-8 lg:p-12'>
+                <div className='bg-[#e8ffe9] text-[#2d2d2d] w-full md:w-[25%] p-8 lg:p-10'>
                     <h2 className='font-playfair text-3xl lg:text-4xl font-bold mb-6'>
                         {aboutBudayaData[0].type[0].title}
                     </h2>
@@ -58,7 +58,7 @@ export default function AboutBudaya({ aboutBudayaData }: { aboutBudayaData: Buda
                 </div>
 
                 {/* Column 3 - Pale Mint Green Background */}
-                <div className='bg-[#d9f5d7] text-[#2d2d2d] w-full md:w-[25%] p-8 lg:p-12'>
+                <div className='bg-[#d9f5d7] text-[#2d2d2d] w-full md:w-[25%] p-8 lg:p-10'>
                     <h2 className='font-playfair text-3xl lg:text-4xl font-bold mb-6'>
                         {aboutBudayaData[0].type[1].title}
                     </h2>

@@ -12,6 +12,8 @@ import ContactPage from "@/components/content/ContactPage";
 
 import HomePageSkeleton from "@/base/helper/HomePageSkelaton";
 
+import AwardPage from "@/components/content/AwardPage"
+
 import { fetchProyekData } from "@/utils/FetchProyek";
 
 import { fetchHomeData } from "@/utils/FetchHome";
@@ -33,6 +35,7 @@ export default async function Page() {
       <HomePage homeData={homeData} />
       <ProjectContent projectData={projectData} />
       <AboutPage aboutData={aboutData} />
+      <AwardPage projectData={projectData} />
       <ArticlePage articleData={articleData} />
       <ContactPage contactData={contactData} />
     </Fragment>;

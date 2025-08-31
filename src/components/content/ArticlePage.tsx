@@ -93,7 +93,7 @@ export default function ArticlePage({ articleData }: { articleData: Article[] })
             {/* Main Content */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8 bg-[#d9f5d7]">
                 <div className="lg:col-span-1 px-4 sm:px-10 pt-8 md:pt-20 pb-4 sm:pb-0">
-                    <p className="text-[#333333] text-base sm:text-xl leading-relaxed font-normal max-w-full md:max-w-[230px]">
+                    <p className="text-[#333333] text-base leading-relaxed font-normal max-w-full md:max-w-[230px]">
                         Setiap bangunan punya cerita, dan setiap ruang punya makna. Lewat artikel-artikel kami, temukan inspirasi dan pengetahuan yang relevan untuk menjawab kebutuhan ruang Anda yang terus berkembang.
                     </p>
                 </div>

@@ -11,7 +11,7 @@ export default function AboutFilosofi({ aboutFilosofiData }: { aboutFilosofiData
         <section className='bg-background container'>
             <div className='grid grid-cols-1 md:grid-cols-3'>
                 {/* Top-Left: Image Section */}
-                <div className='relative h-80 md:h-96 overflow-hidden'>
+                <div className='relative h-80 md:h-full overflow-hidden'>
                     <Image
                         src={aboutFilosofiData[0].image_urls}
                         alt="Painting outdoors in nature"
