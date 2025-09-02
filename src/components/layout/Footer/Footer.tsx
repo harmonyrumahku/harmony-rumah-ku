@@ -32,10 +32,10 @@ export default function Footer() {
     } = useContactForm();
 
     return (
-        <footer className="w-full flex flex-col md:flex-row bg-[#ebffe6] min-h-[400px] container">
+        <footer className="w-full flex flex-col xl:flex-row bg-[#ebffe6] min-h-[400px] container">
             {/* Kiri: Logo, Nama, Alamat */}
             <div className="flex flex-col md:flex-row items-start p-8 w-full gap-4">
-                <div className='flex flex-col gap-6 mb-4 md:mb-0'>
+                <div className='flex flex-col gap-6 mb-4 xl:mb-0'>
                     <Image src={logo} alt="HarmonyrumahKU" width={100} height={100} />
                     <div className="text-2xl font-normal">HarmonyrumahKU</div>
                     <div className="text-sm text-gray-600">Jln. alamat</div>
@@ -70,7 +70,7 @@ export default function Footer() {
             </div>
 
             {/* Kanan: Form Kontak */}
-            <div className="w-full md:w-2/3 bg-[#d9f5d7] p-8 flex flex-col gap-4">
+            <div className="w-full xl:w-2/3 bg-[#d9f5d7] p-8 flex flex-col gap-4">
                 <div className="font-bold text-3xl mb-1">Mari Terhubung, Bangun Harmoni Bersama</div>
                 <div className="text-sm text-gray-700 mb-2">Ingin mulai mewujudkan hunian impian atau sekadar bertanya? Kami siap mendengarkan dan membantu setiap langkahnya.</div>
 
