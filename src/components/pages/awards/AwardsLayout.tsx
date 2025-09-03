@@ -18,12 +18,24 @@ import iconhome from "@/base/assets/icon-home.png"
 
 import icon from "@/base/assets/icon.png"
 
+import Link from 'next/link'
+
+import LoadingOverlay from '@/base/Loading/LoadingOverlay'
+
+import { useStateAward } from '@/components/content/Awards/lib/useStateAward'
+
 export default function AwardsLayout({ awardsData }: { awardsData: Award[] }) {
+    const {
+        isLoading,
+        loadingMessage,
+        sectionRef,
+        handleLinkClick
+    } = useStateAward();
     const firstColumn = awardsData.slice(0, Math.ceil(awardsData.length / 2))
     const secondColumn = awardsData.slice(Math.ceil(awardsData.length / 2))
 
     return (
-        <section className='min-h-screen relative container'>
+        <section ref={sectionRef} className='min-h-screen relative container'>
             {/* Pattern Background */}
             <div
                 className="absolute inset-0"
@@ -78,31 +90,42 @@ export default function AwardsLayout({ awardsData }: { awardsData: Award[] }) {
                             <div className="flex">
                                 {firstColumn.map((award) => (
                                     <Card key={award.id} className="bg-green-50 border-green-100 card-width ml-4 p-0">
-                                        <CardContent className="p-6">
-                                            <div className="flex flex-col items-start gap-4">
-                                                <Image src={quete} alt="icons" className="text-gray-600 text-2xl mt-1 flex-shrink-0" />
-                                                <div className="flex-1">
-                                                    <p className="text-black text-lg leading-relaxed">
-                                                        {award.description}
-                                                    </p>
+                                        <Link href={`/awards/${award.slug}`}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                handleLinkClick(award.name);
+                                                setTimeout(() => {
+                                                    window.location.href = `/awards/${award.slug}`;
+                                                }, 100);
+                                            }}
+                                        >
+                                            <CardContent className="p-6">
+                                                <div className="flex flex-col items-start gap-4">
+                                                    <Image src={quete} alt="icons" className="text-gray-600 text-2xl mt-1 flex-shrink-0" />
+                                                    <div className="flex-1">
+                                                        <p className="text-black text-lg leading-relaxed">
+                                                            {award.description}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </CardContent>
-                                        <CardFooter className="px-6 pb-6">
-                                            <div className="flex items-center gap-3 w-full">
-                                                <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-                                                    <Image src={award.avatar} alt={award.name} width={40} height={40} className="w-full h-full object-cover" />
+                                            </CardContent>
+
+                                            <CardFooter className="px-6 pb-6">
+                                                <div className="flex items-center gap-3 w-full">
+                                                    <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+                                                        <Image src={award.avatar} alt={award.name} width={40} height={40} className="w-full h-full object-cover" />
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-black font-medium text-sm">
+                                                            {award.name}
+                                                        </p>
+                                                        <p className="text-gray-600 text-xs">
+                                                            {award.keterangan}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <p className="text-black font-medium text-sm">
-                                                        {award.name}
-                                                    </p>
-                                                    <p className="text-gray-600 text-xs">
-                                                        {award.keterangan}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </CardFooter>
+                                            </CardFooter>
+                                        </Link>
                                     </Card>
                                 ))}
                             </div>
@@ -128,33 +151,43 @@ export default function AwardsLayout({ awardsData }: { awardsData: Award[] }) {
                             <div className="flex">
                                 {secondColumn.map((award) => (
                                     <Card key={award.id} className="bg-green-50 border-green-100 card-width w-[300px] ml-4 p-0">
-                                        <CardContent className="p-6">
-                                            <div className="flex flex-col items-start gap-4">
-                                                <Image src={quete} alt="icons" className="text-gray-600 text-2xl mt-1 flex-shrink-0" />
-                                                <div className="flex-1">
-                                                    <p className="text-black text-lg leading-relaxed">
-                                                        {award.description}
-                                                    </p>
+                                        <Link href={`/awards/${award.slug}`}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                handleLinkClick(award.name);
+                                                setTimeout(() => {
+                                                    window.location.href = `/awards/${award.slug}`;
+                                                }, 100);
+                                            }}
+                                        >
+                                            <CardContent className="p-6">
+                                                <div className="flex flex-col items-start gap-4">
+                                                    <Image src={quete} alt="icons" className="text-gray-600 text-2xl mt-1 flex-shrink-0" />
+                                                    <div className="flex-1">
+                                                        <p className="text-black text-lg leading-relaxed">
+                                                            {award.description}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </CardContent>
+                                            </CardContent>
 
-                                        <CardFooter className="px-6 pb-6">
-                                            <div className="flex items-center gap-3 w-full">
-                                                <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
-                                                    <Image src={award.avatar} alt={award.name} width={40} height={40} className="w-full h-full object-cover" />
-                                                </div>
+                                            <CardFooter className="px-6 pb-6">
+                                                <div className="flex items-center gap-3 w-full">
+                                                    <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
+                                                        <Image src={award.avatar} alt={award.name} width={40} height={40} className="w-full h-full object-cover" />
+                                                    </div>
 
-                                                <div>
-                                                    <p className="text-black font-medium text-sm">
-                                                        {award.name}
-                                                    </p>
-                                                    <p className="text-gray-600 text-xs">
-                                                        {award.keterangan}
-                                                    </p>
+                                                    <div>
+                                                        <p className="text-black font-medium text-sm">
+                                                            {award.name}
+                                                        </p>
+                                                        <p className="text-gray-600 text-xs">
+                                                            {award.keterangan}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </CardFooter>
+                                            </CardFooter>
+                                        </Link>
                                     </Card>
                                 ))}
                             </div>
@@ -162,6 +195,7 @@ export default function AwardsLayout({ awardsData }: { awardsData: Award[] }) {
                     </div>
                 </div>
             </div>
+            <LoadingOverlay isLoading={isLoading} message={loadingMessage} />
         </section>
     )
 }

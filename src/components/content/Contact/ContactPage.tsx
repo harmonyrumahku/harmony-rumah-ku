@@ -15,7 +15,7 @@ export default function ContactPage({ contactData }: { contactData: Contact[] })
                 <h2 className="font-bold text-[#333333] text-lg sm:text-xl md:text-2xl">Contact</h2>
             </div>
 
-            <div className="bg-[#ebffe6] px-10 py-10 md:py-20">
+            <div className="bg-[#ebffe6] px-10 py-10 ">
                 <div className="flex flex-col gap-2 mb-8">
                     <span className="inline-block bg-transparent border border-[#708B75] text-xs px-3 py-1 rounded-full w-fit">Terhubung dengan kami</span>
                     <h2 className="font-semibold text-[#333333] text-2xl sm:text-3xl">Wujudkan Rumah Impian Sekarang!</h2>

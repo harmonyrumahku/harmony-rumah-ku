@@ -1,7 +1,9 @@
 "use client"
 
 import React from 'react'
+
 import Link from 'next/link'
+
 import { useHeaderState } from '@/lib/useHeaderState'
 
 export default function Header() {
@@ -35,7 +37,7 @@ export default function Header() {
                                 <button
                                     key={item.href}
                                     onClick={item.handler}
-                                    className={`px-4 py-2.5 rounded-full flex items-center space-x-2 transition-all duration-300 ${isActive
+                                    className={`px-4 py-2.5 rounded-full flex items-center space-x-2 cursor-pointer transition-all duration-300 ${isActive
                                         ? 'bg-[#315440] text-white shadow-lg shadow-[#315440]/25'
                                         : 'bg-transparent text-[#315440] hover:text-[#173d2a] hover:bg-[#c4e8b4]/50'
                                         }`}
