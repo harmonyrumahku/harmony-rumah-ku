@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState, useRef } from 'react'
+import React from 'react'
 
 import { Article } from '@/types/Article'
 
@@ -8,84 +8,25 @@ import Link from 'next/link'
 
 import Image from 'next/image'
 
+import LoadingOverlay from '@/base/Loading/LoadingOverlay';
+
+import { useStateArticle } from '@/components/content/Article/lib/useStateArticle';
+
 export default function ArticlePage({ articleData }: { articleData: Article[] }) {
-    const [isInSection, setIsInSection] = useState(false);
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const sectionRef = useRef<HTMLElement>(null);
-
-    const formatDate = (dateString: string) => {
-        const date = new Date(dateString)
-        return date.toLocaleDateString('id-ID', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        })
-    }
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (!sectionRef.current) return;
-
-            const rect = sectionRef.current.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-
-            const isVisible = rect.top < windowHeight && rect.bottom > 0;
-            setIsInSection(isVisible);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Check initial position
-
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    useEffect(() => {
-        const el = scrollRef.current;
-        if (!el) return;
-
-        const onWheel = (e: WheelEvent) => {
-            // Deteksi scroll dari touchpad (biasanya deltaY lebih kecil dan lebih halus)
-            const isTouchpadScroll = Math.abs(e.deltaY) < 100;
-
-            if (e.deltaY !== 0) {
-                if (!isInSection) {
-                    return;
-                }
-
-                // Cek apakah sudah mencapai ujung kanan atau kiri
-                const isAtRightEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
-                const isAtLeftEnd = el.scrollLeft <= 1;
-
-                // Jika scroll ke kanan dan sudah di ujung kanan, biarkan scroll vertikal normal
-                if (e.deltaY > 0 && isAtRightEnd) {
-                    return;
-                }
-
-                // Jika scroll ke kiri dan sudah di ujung kiri, biarkan scroll vertikal normal
-                if (e.deltaY < 0 && isAtLeftEnd) {
-                    return;
-                }
-
-                // Jika belum di ujung, lakukan scroll horizontal
-                e.preventDefault();
-                e.stopPropagation();
-
-                // Kurangi kecepatan scroll sedikit lagi untuk kontrol yang lebih halus
-                const scrollSpeed = isTouchpadScroll ? 0.4 : 0.7;
-                el.scrollLeft += e.deltaY * scrollSpeed;
-            }
-        };
-        el.addEventListener('wheel', onWheel, { passive: false });
-        return () => {
-            el.removeEventListener('wheel', onWheel);
-        };
-    }, [isInSection]);
+    const {
+        isLoading,
+        loadingMessage,
+        scrollRef,
+        sectionRef,
+        formatDate,
+        handleLinkClick
+    } = useStateArticle();
 
     return (
         <section ref={sectionRef} className='bg-[#ebffe6] py-0 md:py-3 container'>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-2 sm:gap-4 px-4 sm:px-10">
                 <h2 className="font-bold text-[#333333] text-lg sm:text-xl md:text-2xl">Artikel</h2>
-                <Link href="/article" className="text-[#708B75] font-medium hover:underline text-xs sm:text-sm md:text-base" rel='article'>
+                <Link href="/blog" className="text-[#708B75] font-medium hover:underline text-xs sm:text-sm md:text-base" rel='article'>
                     VIEW MORE
                 </Link>
             </div>
@@ -112,7 +53,17 @@ export default function ArticlePage({ articleData }: { articleData: Article[] })
                 >
                     <div className="flex min-w-0 sm:min-w-max">
                         {articleData.map((article) => (
-                            <Link href={`/blog/${article.slug}`} key={article.id}>
+                            <Link
+                                href={`/blog/${article.slug}`}
+                                key={article.id}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleLinkClick(article.title);
+                                    setTimeout(() => {
+                                        window.location.href = `/blog/${article.slug}`;
+                                    }, 100);
+                                }}
+                            >
                                 <article className="w-64 sm:w-96 flex-shrink-0">
                                     {/* Article Image */}
                                     <div className="relative h-60 sm:h-96 w-full aspect-[4/5]">
@@ -155,6 +106,11 @@ export default function ArticlePage({ articleData }: { articleData: Article[] })
                     </div>
                 </div>
             </div>
+
+            <LoadingOverlay
+                isLoading={isLoading}
+                message={loadingMessage}
+            />
         </section>
     )
 }

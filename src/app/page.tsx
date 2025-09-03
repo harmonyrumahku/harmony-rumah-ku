@@ -1,18 +1,18 @@
 import { Fragment } from "react";
 
-import HomePage from "@/components/content/HomePage";
+import HomePage from "@/components/content/Home/HomePage";
 
-import ProjectContent from "@/components/content/ProjectContent";
+import ProjectContent from "@/components/content/Proyek/ProjectContent";
 
-import AboutPage from "@/components/content/AboutPage";
+import AboutPage from "@/components/content/About/AboutPage";
 
-import ArticlePage from "@/components/content/ArticlePage";
+import ArticlePage from "@/components/content/Article/ArticlePage";
 
-import ContactPage from "@/components/content/ContactPage";
+import ContactPage from "@/components/content/Contact/ContactPage";
 
 import HomePageSkeleton from "@/base/helper/HomePageSkelaton";
 
-import AwardPage from "@/components/content/AwardPage"
+import AwardPage from "@/components/content/Awards/AwardPage"
 
 import { fetchProyekData } from "@/utils/FetchProyek";
 
@@ -39,8 +39,7 @@ export default async function Page() {
       <ArticlePage articleData={articleData} />
       <ContactPage contactData={contactData} />
     </Fragment>;
-  } catch (error) {
-    console.error('Error fetching Project data:', error);
+  } catch {
     return (
       <HomePageSkeleton />
     );

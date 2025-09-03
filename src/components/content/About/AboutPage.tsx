@@ -12,7 +12,7 @@ export default function AboutPage({ aboutData }: { aboutData: About[] }) {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 px-4 sm:px-6 lg:px-10 gap-4">
                 <h2 className="font-bold text-[#333333] text-xl sm:text-2xl">About</h2>
 
-                <Link href="/about" className="text-[#708B75] font-medium hover:underline text-sm sm:text-base" rel='about'>VIEW MORE</Link>
+                <Link href="/tentang-kami" className="text-[#708B75] font-medium hover:underline text-sm sm:text-base" rel='about'>VIEW MORE</Link>
             </div>
 
             {/* Responsive Layout */}

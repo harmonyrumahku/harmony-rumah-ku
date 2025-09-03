@@ -11,11 +11,8 @@ import Image from 'next/image'
 export default function ContactPage({ contactData }: { contactData: Contact[] }) {
     return (
         <section className='bg-[#ebffe6] pt-4 container' id='kontak'>
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-2 sm:gap-4 px-4 sm:px-10">
+            <div className="flex mb-8 gap-2 sm:gap-4 px-4 sm:px-10">
                 <h2 className="font-bold text-[#333333] text-lg sm:text-xl md:text-2xl">Contact</h2>
-                <Link href="/contact" className="text-[#708B75] font-medium hover:underline text-xs sm:text-sm md:text-base" rel='contact'>
-                    VIEW MORE
-                </Link>
             </div>
 
             <div className="bg-[#ebffe6] px-10 py-10 md:py-20">

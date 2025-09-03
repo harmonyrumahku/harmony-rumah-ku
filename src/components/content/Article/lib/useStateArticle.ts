@@ -1,0 +1,114 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+
+export const useStateArticle = () => {
+  const [isInSection, setIsInSection] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState("Memuat artikel...");
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
+
+  const handleLinkClick = (articleTitle: string) => {
+    setLoadingMessage(`Memuat artikel "${articleTitle}"...`);
+    setIsLoading(true);
+  };
+
+  // Deteksi mobile device
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const isMobileDevice =
+        window.innerWidth < 768 ||
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );
+      setIsMobile(isMobileDevice);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      const isVisible = rect.top < windowHeight && rect.bottom > 0;
+      setIsInSection(isVisible);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial position
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || isMobile) return; // Nonaktifkan scroll ref pada mobile
+
+    const onWheel = (e: WheelEvent) => {
+      // Deteksi scroll dari touchpad (biasanya deltaY lebih kecil dan lebih halus)
+      const isTouchpadScroll = Math.abs(e.deltaY) < 100;
+
+      if (e.deltaY !== 0) {
+        if (!isInSection) {
+          return;
+        }
+
+        // Cek apakah sudah mencapai ujung kanan atau kiri
+        const isAtRightEnd =
+          el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
+        const isAtLeftEnd = el.scrollLeft <= 1;
+
+        // Jika scroll ke kanan dan sudah di ujung kanan, biarkan scroll vertikal normal
+        if (e.deltaY > 0 && isAtRightEnd) {
+          return;
+        }
+
+        // Jika scroll ke kiri dan sudah di ujung kiri, biarkan scroll vertikal normal
+        if (e.deltaY < 0 && isAtLeftEnd) {
+          return;
+        }
+
+        // Jika belum di ujung, lakukan scroll horizontal
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Kurangi kecepatan scroll sedikit lagi untuk kontrol yang lebih halus
+        const scrollSpeed = isTouchpadScroll ? 0.4 : 0.7;
+        el.scrollLeft += e.deltaY * scrollSpeed;
+      }
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => {
+      el.removeEventListener("wheel", onWheel);
+    };
+  }, [isInSection, isMobile]);
+
+  return {
+    isInSection,
+    isMobile,
+    isLoading,
+    loadingMessage,
+    scrollRef,
+    sectionRef,
+    formatDate,
+    handleLinkClick,
+  };
+};

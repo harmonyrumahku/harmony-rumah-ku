@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏡 HarmonyrumahKU
 
-## Getting Started
+**HarmonyrumahKU** adalah platform digital yang menghadirkan solusi hunian menyeluruh:  
+✨ Arsitektur • 🏗️ Konstruksi • ❤️ Kehangatan
 
-First, run the development server:
+Kami percaya bahwa rumah nyaman selalu dimulai dari cerita.  
+Website ini dibuat untuk membantu Anda merencanakan, membangun, dan mewujudkan hunian impian dengan sentuhan personal.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Preview](./screenshot.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Fitur Utama
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 🏠 **Beranda** – Visi misi: _Rumah Nyaman Dimulai dari Cerita_
+- 📂 **Proyek** – Showcase hasil arsitektur & konstruksi
+- 🏆 **Awards** – Daftar penghargaan & pencapaian
+- ✍️ **Blog** – Artikel inspiratif seputar desain & rumah
+- 👥 **Tentang Kami** – Profil & nilai yang dipegang tim
+- 💌 **Kontak** – Hubungi kami dengan mudah
+- 🤝 **Konsultasi** – Layanan konsultasi langsung
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📌 Roadmap
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [ ] Form konsultasi interaktif
+- [ ] Integrasi pembayaran online
+- [ ] Optimasi SEO & kinerja website
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🤝 Kontribusi
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Kami menyambut kontribusi dari siapa saja!  
+Silakan fork repo ini, buat branch baru, lalu ajukan pull request.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📄 Lisensi
+
+Proyek ini menggunakan lisensi **[MIT License](LICENSE)**.  
+Bebas digunakan dan dikembangkan dengan tetap menghargai hak cipta.
+
+---
+
+© 2025 **HarmonyrumahKU** – _Membangun ruang, menciptakan kenyamanan._
