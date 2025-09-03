@@ -1,8 +1,8 @@
 import {
   Award,
   AwardsResponse,
-  AwardDetail,
-  AwardDetailResponse,
+  AwardDetails,
+  AwardDetailsResponse,
 } from "@/types/Awards";
 
 export const fetchAwardsData = async (): Promise<Award[]> => {
@@ -34,7 +34,7 @@ export const fetchAwardsData = async (): Promise<Award[]> => {
 
 export const fetchAwardsBySlug = async (
   slug: string
-): Promise<AwardDetail | null> => {
+): Promise<AwardDetails | null> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_AWARDS) {
       return null;
@@ -53,7 +53,7 @@ export const fetchAwardsBySlug = async (
       throw new Error("Network response was not ok");
     }
 
-    const apiResponse: AwardDetailResponse = await response.json();
+    const apiResponse: AwardDetailsResponse = await response.json();
     return apiResponse.data || null;
   } catch {
     return null;

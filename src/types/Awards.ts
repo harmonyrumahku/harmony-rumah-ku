@@ -6,7 +6,8 @@ export interface Award {
   keterangan: string;
   slug: string;
   avatar: string;
-  status: "published" | "draft" | "archived";
+  after: string;
+  status: "published" | "draft";
   created_at: string;
 }
 
@@ -19,7 +20,7 @@ export interface AwardsResponse {
 }
 
 // Awards Details
-export interface AwardDetail {
+export interface AwardDetails {
   title: string;
   slug: string;
   name: string;
@@ -27,16 +28,18 @@ export interface AwardDetail {
   keterangan: string;
   avatar: string;
   content: string;
-  image_urls: string[];
-  status: "published" | "draft" | "archived";
+  youtube_url: string;
+  after: string[];
+  before: string[];
+  status: "published" | "draft";
   created_at: string;
   updated_at: string;
 }
 
-export interface AwardDetailResponse {
+export interface AwardDetailsResponse {
   statusCode: number;
   statusMessage: string;
   message: string;
   ok: boolean;
-  data: AwardDetail;
+  data: AwardDetails;
 }

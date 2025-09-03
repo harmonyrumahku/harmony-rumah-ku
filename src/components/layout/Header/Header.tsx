@@ -28,6 +28,7 @@ export default function Header() {
                         {navigationItems.map((item) => {
                             const isActive = pathname === item.href ||
                                 (item.href === "/" && pathname === "/") ||
+                                (item.href === "/awards" && pathname.startsWith("/awards")) ||
                                 (item.href === "/blog" && pathname.startsWith("/blog")) ||
                                 (item.href === "/proyek" && pathname.startsWith("/proyek"));
                             return (

@@ -24,6 +24,8 @@ import { fetchArticleData } from "@/utils/FetchArticle";
 
 import { fetchContactData } from "@/utils/FetchContact";
 
+import { fetchAwardsData } from "@/utils/FetchAwards";
+
 export default async function Page() {
   try {
     const projectData = await fetchProyekData();
@@ -31,11 +33,13 @@ export default async function Page() {
     const aboutData = await fetchAboutData();
     const articleData = await fetchArticleData();
     const contactData = await fetchContactData();
+    const awardsData = await fetchAwardsData();
+
     return <Fragment>
       <HomePage homeData={homeData} />
       <ProjectContent projectData={projectData} />
       <AboutPage aboutData={aboutData} />
-      <AwardPage projectData={projectData} />
+      <AwardPage awardsData={awardsData} />
       <ArticlePage articleData={articleData} />
       <ContactPage contactData={contactData} />
     </Fragment>;

@@ -30,13 +30,6 @@ Website ini dibuat untuk membantu Anda merencanakan, membangun, dan mewujudkan h
 
 ---
 
-## 🤝 Kontribusi
-
-Kami menyambut kontribusi dari siapa saja!  
-Silakan fork repo ini, buat branch baru, lalu ajukan pull request.
-
----
-
 ## 📄 Lisensi
 
 Proyek ini menggunakan lisensi **[MIT License](LICENSE)**.  

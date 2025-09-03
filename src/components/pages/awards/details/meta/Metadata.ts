@@ -1,16 +1,16 @@
 import { Metadata } from "next";
 
-import type { ArticleDetails } from "@/types/Article";
+import type { AwardDetails } from "@/types/Awards";
 
-export async function getArticle(slug: string): Promise<ArticleDetails | null> {
+export async function getAwards(slug: string): Promise<AwardDetails | null> {
   try {
-    if (!process.env.NEXT_PUBLIC_API_ARTICLE) {
-      console.warn("NEXT_PUBLIC_API_ARTICLE not available during build time");
+    if (!process.env.NEXT_PUBLIC_API_AWARDS) {
+      console.warn("NEXT_PUBLIC_API_AWARDS not available during build time");
       return null;
     }
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_ARTICLE as string}/${slug}`,
+      `${process.env.NEXT_PUBLIC_API_AWARDS as string}/${slug}`,
       {
         headers: {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_SECRET}`,
@@ -25,7 +25,7 @@ export async function getArticle(slug: string): Promise<ArticleDetails | null> {
     const apiResponse = await response.json();
     return apiResponse.data || null;
   } catch (error) {
-    console.error("Error fetching article:", error);
+    console.error("Error fetching awards:", error);
     return null;
   }
 }
@@ -35,81 +35,83 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const article = await getArticle(params.slug);
+  const awards = await getAwards(params.slug);
 
-  if (!article) {
+  if (!awards) {
     return {
-      title: "Blog Tidak Ditemukan | HarmonyrumahKU",
-      description: "Blog yang Anda cari tidak dapat ditemukan.",
+      title: "Awards Tidak Ditemukan | HarmonyrumahKU",
+      description: "Awards yang Anda cari tidak dapat ditemukan.",
       openGraph: {
-        title: "Blog Tidak Ditemukan | HarmonyrumahKU",
-        description: "Blog yang Anda cari tidak dapat ditemukan.",
+        title: "Awards Tidak Ditemukan | HarmonyrumahKU",
+        description: "Awards yang Anda cari tidak dapat ditemukan.",
         type: "website",
         siteName: "HarmonyrumahKU",
         locale: "id_ID",
       },
       twitter: {
         card: "summary",
-        title: "Blog Tidak Ditemukan | HarmonyrumahKU",
-        description: "Blog yang Anda cari tidak dapat ditemukan.",
+        title: "Awards Tidak Ditemukan | HarmonyrumahKU",
+        description: "Awards yang Anda cari tidak dapat ditemukan.",
         creator: "@harmonyrumahku",
         site: "@harmonyrumahku",
       },
     };
   }
 
-  const description =
-    article.description || `Blog ${article.title}`;
+  const description = awards.description || `Awards ${awards.title}`;
 
-  const imageUrl = article.thumbnail
-    ? Array.isArray(article.thumbnail)
-      ? article.thumbnail[0]
-      : article.thumbnail
+  const imageUrl = awards.after[0]
+    ? Array.isArray(awards.after)
+      ? awards.after[0]
+      : awards.after
     : undefined;
 
   const BASE_URL = process.env.NEXT_PUBLIC_URL as string;
 
   return {
-    title: `Blog - ${article.title} | HarmonyrumahKU`,
+    title: `Awards - ${awards.title} | HarmonyrumahKU`,
     description: description,
     keywords: [
-      "Blog Arsitektur",
-      article.title,
+      "Awards Arsitektur",
+      awards.title,
       "HarmonyrumahKU",
       "Desain Rumah",
       "Arsitektur",
-      article.article_categories,
-      article.article_sub_categories,
+      awards.name,
     ].filter(Boolean),
     authors: [{ name: "HarmonyrumahKU Team" }],
     openGraph: {
-      title: `Blog - ${article.title} | HarmonyrumahKU`,
+      title: `Awards - ${awards.title} | HarmonyrumahKU`,
       description: description,
       type: "article",
-      url: `${BASE_URL}/blog/${article.slug}`,
+      url: `${BASE_URL}/awards/${awards.slug}`,
       siteName: "HarmonyrumahKU",
       locale: "id_ID",
-      images: imageUrl ? [{
-        url: imageUrl,
-        width: 1200,
-        height: 630,
-        alt: article.title,
-      }] : [],
-      publishedTime: article.created_at,
-      modifiedTime: article.updated_at,
+      images: imageUrl
+        ? [
+            {
+              url: imageUrl,
+              width: 1200,
+              height: 630,
+              alt: awards.title,
+            },
+          ]
+        : [],
+      publishedTime: awards.created_at,
+      modifiedTime: awards.updated_at,
     },
     twitter: {
       card: "summary_large_image",
-      title: `Blog - ${article.title} | HarmonyrumahKU`,
+      title: `Awards - ${awards.title} | HarmonyrumahKU`,
       description: description,
       creator: "@harmonyrumahku",
       site: "@harmonyrumahku",
       images: imageUrl ? [imageUrl] : [],
     },
     alternates: {
-      canonical: `${BASE_URL}/blog/${article.slug}`,
+      canonical: `${BASE_URL}/awards/${awards.slug}`,
       languages: {
-        "id-ID": `${BASE_URL}/blog/${article.slug}`,
+        "id-ID": `${BASE_URL}/awards/${awards.slug}`,
       },
     },
     robots: {
