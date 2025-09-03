@@ -26,7 +26,10 @@ export default function Header() {
                 <div className="hidden lg:flex">
                     <div className="bg-[#d4f0c4]/80 backdrop-blur-sm rounded-full px-2 py-2 flex items-center space-x-2">
                         {navigationItems.map((item) => {
-                            const isActive = pathname === item.href || (item.href === "/" && pathname === "/");
+                            const isActive = pathname === item.href ||
+                                (item.href === "/" && pathname === "/") ||
+                                (item.href === "/blog" && pathname.startsWith("/blog")) ||
+                                (item.href === "/proyek" && pathname.startsWith("/proyek"));
                             return (
                                 <button
                                     key={item.href}
@@ -117,7 +120,9 @@ export default function Header() {
                     {/* Mobile Menu Content */}
                     <div className="flex flex-col items-center space-y-8">
                         {navigationItems.map((item) => {
-                            const isActive = pathname === item.href || (item.href === "/" && pathname === "/");
+                            const isActive = pathname === item.href ||
+                                (item.href === "/" && pathname === "/") ||
+                                (item.href === "/blog" && pathname.startsWith("/blog"));
                             return (
                                 <button
                                     key={item.href}

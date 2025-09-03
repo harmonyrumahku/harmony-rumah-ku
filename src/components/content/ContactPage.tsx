@@ -9,7 +9,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default function ContactPage({ contactData }: { contactData: Contact[] }) {
-    // Dummy data fallback if contactData is empty
     return (
         <section className='bg-[#ebffe6] pt-4 container' id='kontak'>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-2 sm:gap-4 px-4 sm:px-10">
