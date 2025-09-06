@@ -21,13 +21,13 @@ export async function submitContactForm(data: ContactFormData) {
     const supabase = createClient();
 
     const { data: result, error } = await supabase
-      .from(process.env.NEXT_PUBLIC_CONTACT!)
+      .from(process.env.NEXT_PUBLIC_MESSAGES!)
       .insert([
         {
           nama_lengkap: data.nama_lengkap,
           email: data.email,
           kebutuhan: data.kebutuhan,
-          status: "unread", // Default status for new submissions
+          status: "unread",
         },
       ])
       .select();
