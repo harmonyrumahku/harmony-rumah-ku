@@ -124,9 +124,6 @@ export default function Footer() {
                         />
                     </div>
 
-                    {/* Status Messages */}
-                    {/* Removed inline status messages */}
-
                     <button
                         type="submit"
                         disabled={isSubmitting || !canSubmit}

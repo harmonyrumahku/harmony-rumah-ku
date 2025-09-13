@@ -98,7 +98,7 @@ export const useContactForm = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { id, value } = e.target;
-    const fieldName = id.replace("footer-", "");
+    const fieldName = id.replace(/^(footer-|modal-)/, "");
 
     setFormData((prev) => ({
       ...prev,

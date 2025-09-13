@@ -8,13 +8,9 @@ export { metadata };
 
 metadata.manifest = "/manifest.json";
 
-import Header from "@/components/layout/Header/Header";
-
-import Footer from "@/components/layout/Footer/Footer";
-
 import LenisProvider from '@/base/helper/SmoothScroll'
 
-import { Toaster } from "@/components/ui/sonner"
+import Pathname from "@/base/routing/Pathname";
 
 export default function RootLayout({
   children,
@@ -26,12 +22,11 @@ export default function RootLayout({
       <body
         className={`${lato.variable} ${playfair.variable} antialiased`}
       >
-        <main className="overflow-hidden">
+        <main className="overflow-x-hidden overflow-y-auto">
           <LenisProvider>
-            <Header />
-            {children}
-            <Footer />
-            <Toaster />
+            <Pathname>
+              {children}
+            </Pathname>
           </LenisProvider>
         </main>
       </body>
