@@ -17,23 +17,22 @@ export function CardJasa({ service, isExpanded, onToggle }: {
                 className="bg-white rounded-[1.5rem] sm:rounded-[2rem] shadow-lg hover:shadow-xl transition-all duration-300 p-3 sm:p-4 cursor-pointer"
                 onClick={() => isExpanded && onToggle(service.id)}
             >
-                <div className="relative h-48 sm:h-64 lg:h-96 overflow-hidden rounded-[1rem] sm:rounded-[1.5rem]">
+                <div className="relative h-80 lg:h-96 overflow-hidden rounded-[1rem] sm:rounded-[1.5rem]">
                     <Image
                         src={service.image_urls}
                         alt={service.title}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
-
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
 
-                    <Link href="/konsultasi" className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 cursor-pointer">
+                    <Link href="/konsultasi" className="absolute bottom-4 right-3 sm:right-4 cursor-pointer">
                         <button className="bg-white/20 hover:bg-white/30 text-white px-2 sm:px-4 py-1 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 backdrop-blur-md border border-white/20 cursor-pointer">
                             {service.category}
                         </button>
                     </Link>
 
-                    <div className='absolute bottom-5 left-3 sm:left-4'>
+                    <div className='absolute bottom-4 left-3 sm:left-4'>
                         <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white">
                             {service.title}
                         </h3>

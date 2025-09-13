@@ -307,12 +307,12 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                         <span className='text-[#77967f]'>{project.article_categories}</span>
 
                                         <div className='max-w-[180px]'>
-                                            <h4 className="text-2xl font-semibold line-clamp-2">
+                                            <h4 className="text-2xl font-semibold">
                                                 {project.title}
                                             </h4>
                                         </div>
 
-                                        <div className='max-w-[250px]'>
+                                        <div className='max-w-[300px]'>
                                             <p className="inline-block text-sm">
                                                 {project.description}
                                             </p>
@@ -397,8 +397,8 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                             </h4>
                                         </div>
 
-                                        <div className='max-w-[250px]'>
-                                            <p className="inline-block text-sm line-clamp-1">
+                                        <div className='max-w-full md:max-w-[250px] line-clamp-1'>
+                                            <p className="inline-block text-sm">
                                                 {project.description}
                                             </p>
                                         </div>
