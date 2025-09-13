@@ -21,7 +21,14 @@ export default function ProjectContent({ awardsData }: { awardsData: Award[] }) 
     } = useStateAward();
 
     return (
-        <section ref={sectionRef} className="w-full py-4 bg-[#ebffe6] container" style={{ touchAction: isMobile ? 'pan-y' : 'auto' }}>
+        <section
+            ref={sectionRef}
+            className="w-full py-4 bg-[#ebffe6] container"
+            style={{
+                touchAction: isMobile ? 'pan-x' : 'auto',
+                overflowY: isMobile ? 'hidden' : 'visible'
+            }}
+        >
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 px-4 sm:px-6 lg:px-10 gap-4">
                 <h2 className="text-md md:text-3xl font-bold text-[#333333]">Awards</h2>
 
