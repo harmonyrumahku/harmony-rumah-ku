@@ -59,6 +59,11 @@ export function useStateAward() {
     const el = scrollRef.current;
     if (!el || isMobile) return; // Nonaktifkan scroll ref pada mobile
 
+    // Pastikan tidak ada event listener yang aktif di mobile
+    if (isMobile) {
+      return;
+    }
+
     const onWheel = (e: WheelEvent) => {
       // Deteksi scroll dari touchpad (biasanya deltaY lebih kecil dan lebih halus)
       const isTouchpadScroll = Math.abs(e.deltaY) < 100;

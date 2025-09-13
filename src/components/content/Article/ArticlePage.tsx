@@ -43,13 +43,6 @@ export default function ArticlePage({ articleData }: { articleData: Article[] })
                 <div
                     className="lg:col-span-2 overflow-x-auto scrollbar-hide"
                     ref={scrollRef}
-                    style={{
-                        scrollBehavior: 'auto',
-                        scrollbarWidth: 'none',
-                        WebkitOverflowScrolling: 'touch',
-                        overscrollBehavior: 'contain',
-                        scrollSnapType: 'x mandatory'
-                    }}
                 >
                     <div className="flex min-w-0 sm:min-w-max">
                         {articleData.map((article) => (

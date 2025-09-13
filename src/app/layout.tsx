@@ -22,7 +22,7 @@ export default function RootLayout({
       <body
         className={`${lato.variable} ${playfair.variable} antialiased`}
       >
-        <main className="overflow-x-hidden overflow-y-auto">
+        <main className="overflow-hidden">
           <LenisProvider>
             <Pathname>
               {children}

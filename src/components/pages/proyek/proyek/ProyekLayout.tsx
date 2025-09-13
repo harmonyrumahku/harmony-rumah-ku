@@ -302,11 +302,6 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                     ref={scrollRef}
                     className="overflow-y-auto lg:max-h-screen scrollbar-hide lg:col-span-2 pt-4 sm:pt-6 lg:pt-20"
                     style={{
-                        scrollBehavior: 'smooth',
-                        scrollbarWidth: 'none',
-                        WebkitOverflowScrolling: 'touch',
-                        overscrollBehavior: 'contain',
-                        scrollSnapType: 'y proximity',
                         maxHeight: 'calc(100vh - 2rem)',
                         minHeight: '700px'
                     }}

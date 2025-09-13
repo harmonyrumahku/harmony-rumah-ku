@@ -37,13 +37,6 @@ export default function ProjectContent({ projectData }: { projectData: ProyekHom
             <div
                 className="overflow-x-auto scrollbar-hide"
                 ref={scrollRef}
-                style={{
-                    scrollBehavior: 'auto',
-                    scrollbarWidth: 'none',
-                    WebkitOverflowScrolling: 'touch',
-                    overscrollBehavior: 'contain',
-                    scrollSnapType: 'x mandatory'
-                }}
             >
                 <div className="grid grid-flow-col grid-rows-2 auto-cols-max">
                     {projectData.map((project, idx) => (
