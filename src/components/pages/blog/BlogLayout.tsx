@@ -263,7 +263,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                 {/* Right Column - Vertical Scrolling Grid */}
                 <div
                     ref={scrollRef}
-                    className="overflow-y-auto lg:max-h-screen scrollbar-hide lg:col-span-2 pt-4 sm:pt-6 lg:pt-20"
+                    className="overflow-y-auto lg:max-h-screen scrollbar-hide lg:col-span-2 pt-4 sm:pt-6 lg:pt-20 hidden md:block"
                     style={{
                         maxHeight: 'calc(100vh - 2rem)',
                         minHeight: '500px'
@@ -317,6 +317,90 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                                 {project.description}
                                             </p>
 
+                                        </div>
+                                        {/* Icon */}
+                                        <div className="flex justify-start mt-2 mb-4">
+                                            <Image src={books} alt='book' />
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="flex flex-col items-center justify-center py-16 text-center">
+                            <div className="w-24 h-24 mb-6 rounded-full bg-primary flex items-center justify-center">
+                                <Search className="w-12 h-12 text-white" />
+                            </div>
+                            <h3 className="text-xl font-semibold text-foreground mb-2">
+                                Maaf, artikel yang Anda cari tidak ditemukan
+                            </h3>
+                            <p className="text-muted-foreground mb-6 max-w-md">
+                                Coba ubah kata kunci pencarian atau filter yang Anda gunakan untuk menemukan artikel yang sesuai.
+                            </p>
+                            <Button
+                                variant="outline"
+                                onClick={() => {
+                                    setSearch('');
+                                    setSelectedKategori('');
+                                    setSelectedSubcategory('');
+                                }}
+                                className="px-6"
+                            >
+                                Reset Filter
+                            </Button>
+                        </div>
+                    )}
+                </div>
+
+                {/* Mobile Grid */}
+                <div className="block md:hidden px-4 pt-6 pb-8">
+                    {filteredProjects.length > 0 ? (
+                        <div className="grid grid-cols-2 md:grid-cols-3">
+                            {filteredProjects.map((project, idx) => (
+                                <Link
+                                    href={`/blog/${project.slug}`}
+                                    key={idx}
+                                    className="relative h-full overflow-hidden group cursor-pointer transition-all duration-300"
+                                    onMouseEnter={() => setHoveredIdx(idx)}
+                                    onMouseLeave={() => setHoveredIdx(null)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleLinkClick(project.title);
+                                        setTimeout(() => {
+                                            window.location.href = `/blog/${project.slug}`;
+                                        }, 100);
+                                    }}
+                                >
+                                    {/* Image Container */}
+                                    <div className="relative w-full overflow-hidden aspect-[4/3]">
+                                        <Image
+                                            src={project.thumbnail}
+                                            alt={project.title}
+                                            quality={100}
+                                            fill
+                                            loading='lazy'
+                                            className="w-full h-full object-cover transition-all duration-500"
+                                            style={{
+                                                transform: hoveredIdx === idx ? 'scale(1.05)' : 'scale(1)',
+                                            }}
+                                        />
+                                    </div>
+
+                                    {/* Content Container */}
+                                    <div className="mt-2 flex flex-col gap-1 px-2">
+                                        {/* Title */}
+                                        <span className='text-[#77967f]'>{project.article_categories}</span>
+
+                                        <div className='max-w-[180px]'>
+                                            <h4 className="text-2xl font-semibold line-clamp-2">
+                                                {project.title}
+                                            </h4>
+                                        </div>
+
+                                        <div className='max-w-[250px]'>
+                                            <p className="inline-block text-sm line-clamp-1">
+                                                {project.description}
+                                            </p>
                                         </div>
                                         {/* Icon */}
                                         <div className="flex justify-start mt-2 mb-4">

@@ -117,7 +117,7 @@ html {
   font-size: 100%;
 
   @media only screen and (min-width: 1920px) {
-    font-size: 150%;
+    font-size: 140%;
   }
 }
 

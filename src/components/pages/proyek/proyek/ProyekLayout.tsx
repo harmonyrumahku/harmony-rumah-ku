@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 
 import { Search } from 'lucide-react'
 
@@ -16,111 +16,44 @@ import { ProyekHome } from '@/types/Proyek'
 
 import LoadingOverlay from '@/base/Loading/LoadingOverlay';
 
+import { useStateProyek } from './lib/useStateProyek';
+
 export default function ProyekLayout({ projectData }: { projectData: ProyekHome[] }) {
-    const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [loadingMessage, setLoadingMessage] = useState("Memuat halaman proyek...");
-    const [search, setSearch] = useState('');
-    const [selectedKategori, setSelectedKategori] = useState('');
-    const [openKategori, setOpenKategori] = useState(false);
-    const [selectedLayanan, setSelectedLayanan] = useState("");
-    const [openLayanan, setOpenLayanan] = useState(false);
-    const [selectedWilayah, setSelectedWilayah] = useState("");
-    const [openWilayah, setOpenWilayah] = useState(false);
-    const [isInSection, setIsInSection] = useState(false);
+    const {
+        // State
+        hoveredIdx,
+        setHoveredIdx,
+        isLoading,
+        loadingMessage,
+        search,
+        setSearch,
+        selectedKategori,
+        selectedLayanan,
+        selectedWilayah,
+        openKategori,
+        openLayanan,
+        openWilayah,
 
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const sectionRef = useRef<HTMLElement>(null);
+        // Refs
+        scrollRef,
+        sectionRef,
 
-    const handleLinkClick = (projectTitle: string) => {
-        setLoadingMessage(`Memuat detail untuk "${projectTitle}"...`);
-        setIsLoading(true);
-    };
+        // Computed values
+        kategoriOptions,
+        layananOptions,
+        wilayahOptions,
+        filteredProjects,
 
-    // Ambil unique kategori
-    const kategoriOptions = Array.from(new Set(projectData.map(p => p.type)));
-
-    // Ambil unique layanan
-    const layananOptions = Array.from(new Set(projectData.map(p => p.layanan).filter(Boolean)));
-
-    // Ambil unique wilayah
-    const wilayahOptions = Array.from(new Set(projectData.map(p => p.city).filter(Boolean)));
-
-    // Filter berdasarkan search dan combobox
-    const filteredProjects = projectData.filter(project => {
-        const searchLower = search.toLowerCase();
-        const matchSearch = searchLower === '' ||
-            project.title.toLowerCase().includes(searchLower) ||
-            project.city.toLowerCase().includes(searchLower) ||
-            (project.layanan && project.layanan.toLowerCase().includes(searchLower));
-
-        const matchKategori = selectedKategori ? project.type === selectedKategori : true;
-        const matchLayanan = selectedLayanan ? project.layanan === selectedLayanan : true;
-        const matchWilayah = selectedWilayah ? project.city === selectedWilayah : true;
-
-        return matchSearch && matchKategori && matchLayanan && matchWilayah;
-    });
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (!sectionRef.current) return;
-
-            const rect = sectionRef.current.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-
-            const isVisible = rect.top < windowHeight && rect.bottom > 0;
-            setIsInSection(isVisible);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Check initial position
-
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    useEffect(() => {
-        const el = scrollRef.current;
-        if (!el) return;
-
-        const onWheel = (e: WheelEvent) => {
-            // Deteksi scroll dari touchpad (biasanya deltaY lebih kecil dan lebih halus)
-            const isTouchpadScroll = Math.abs(e.deltaY) < 100;
-
-            if (e.deltaY !== 0) {
-                if (!isInSection) {
-                    return;
-                }
-
-                // Cek apakah sudah mencapai ujung bawah atau atas
-                const isAtBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
-                const isAtTop = el.scrollTop <= 1;
-
-                // Jika scroll ke bawah dan sudah di ujung bawah, biarkan scroll vertikal normal
-                if (e.deltaY > 0 && isAtBottom) {
-                    return;
-                }
-
-                // Jika scroll ke atas dan sudah di ujung atas, biarkan scroll vertikal normal
-                if (e.deltaY < 0 && isAtTop) {
-                    return;
-                }
-
-                // Jika belum di ujung, lakukan scroll vertikal yang smooth
-                e.preventDefault();
-                e.stopPropagation();
-
-                // Kurangi kecepatan scroll sedikit lagi untuk kontrol yang lebih halus
-                const scrollSpeed = isTouchpadScroll ? 0.6 : 1.0;
-                const newScrollTop = el.scrollTop + (e.deltaY * scrollSpeed);
-
-                el.scrollTop = newScrollTop;
-            }
-        };
-        el.addEventListener('wheel', onWheel, { passive: false });
-        return () => {
-            el.removeEventListener('wheel', onWheel);
-        };
-    }, [isInSection]);
+        // Handlers
+        handleLinkClick,
+        handleKategoriToggle,
+        handleLayananToggle,
+        handleWilayahToggle,
+        handleKategoriSelect,
+        handleLayananSelect,
+        handleWilayahSelect,
+        clearAllFilters,
+    } = useStateProyek(projectData);
 
     return (
         <section ref={sectionRef} className="min-h-screen bg-background container">
@@ -148,11 +81,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                             <div className="relative">
                                 <Button
                                     variant="ghost"
-                                    onClick={() => {
-                                        setOpenKategori(!openKategori);
-                                        setOpenLayanan(false);
-                                        setOpenWilayah(false);
-                                    }}
+                                    onClick={handleKategoriToggle}
                                     className="w-full justify-between p-0 h-auto text-left font-bold text-primary hover:text-primary hover:bg-transparent border-none shadow-none"
                                 >
                                     <span className="text-sm">
@@ -164,10 +93,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                     <div className="absolute top-full left-0 right-0 z-[9999] mt-2 bg-background max-h-60 overflow-y-auto min-w-48 scrollbar-hide">
                                         <div className="py-2">
                                             <button
-                                                onClick={() => {
-                                                    setSelectedKategori('');
-                                                    setOpenKategori(false);
-                                                }}
+                                                onClick={() => handleKategoriSelect('')}
                                                 className={`w-full text-left py-2 text-sm ${!selectedKategori ? ' font-medium' : ''}`}
                                             >
                                                 All
@@ -175,10 +101,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                             {kategoriOptions.map((kat) => (
                                                 <button
                                                     key={kat}
-                                                    onClick={() => {
-                                                        setSelectedKategori(kat);
-                                                        setOpenKategori(false);
-                                                    }}
+                                                    onClick={() => handleKategoriSelect(kat)}
                                                     className={`w-full text-left py-2 text-s ${selectedKategori === kat ? ' font-medium' : ''}`}
                                                 >
                                                     {kat}
@@ -193,11 +116,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                             <div className="relative">
                                 <Button
                                     variant="ghost"
-                                    onClick={() => {
-                                        setOpenLayanan(!openLayanan);
-                                        setOpenKategori(false);
-                                        setOpenWilayah(false);
-                                    }}
+                                    onClick={handleLayananToggle}
                                     className="w-full justify-between p-0 h-auto text-left font-bold text-primary hover:text-primary hover:bg-transparent border-none shadow-none"
                                 >
                                     <span className="text-sm">
@@ -209,10 +128,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                     <div className="absolute top-full left-0 right-0 z-[9999] mt-2 bg-background max-h-60 overflow-y-auto min-w-48 scrollbar-hide">
                                         <div className="py-2">
                                             <button
-                                                onClick={() => {
-                                                    setSelectedLayanan('');
-                                                    setOpenLayanan(false);
-                                                }}
+                                                onClick={() => handleLayananSelect('')}
                                                 className={`w-full text-left py-2 text-sm  ${!selectedLayanan ? ' font-medium' : ''}`}
                                             >
                                                 All
@@ -220,10 +136,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                             {layananOptions.map((layanan) => (
                                                 <button
                                                     key={layanan}
-                                                    onClick={() => {
-                                                        setSelectedLayanan(layanan);
-                                                        setOpenLayanan(false);
-                                                    }}
+                                                    onClick={() => handleLayananSelect(layanan)}
                                                     className={`w-full text-left py-2 text-sm transition-colors ${selectedLayanan === layanan ? ' font-medium' : ''}`}
                                                 >
                                                     {layanan}
@@ -238,11 +151,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                             <div className="relative">
                                 <Button
                                     variant="ghost"
-                                    onClick={() => {
-                                        setOpenWilayah(!openWilayah);
-                                        setOpenKategori(false);
-                                        setOpenLayanan(false);
-                                    }}
+                                    onClick={handleWilayahToggle}
                                     className="w-full justify-between p-0 h-auto text-left font-bold text-primary hover:text-primary hover:bg-transparent border-none shadow-none"
                                 >
                                     <span className="text-sm">
@@ -254,10 +163,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                     <div className="absolute top-full left-0 right-0 z-[9999] mt-2 bg-background max-h-60 overflow-y-auto min-w-48 scrollbar-hide">
                                         <div className="py-2">
                                             <button
-                                                onClick={() => {
-                                                    setSelectedWilayah('');
-                                                    setOpenWilayah(false);
-                                                }}
+                                                onClick={() => handleWilayahSelect('')}
                                                 className={`w-full text-left py-2 text-sm ${!selectedWilayah ? ' font-medium' : ''}`}
                                             >
                                                 All
@@ -265,10 +171,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                             {wilayahOptions.map((wilayah) => (
                                                 <button
                                                     key={wilayah}
-                                                    onClick={() => {
-                                                        setSelectedWilayah(wilayah);
-                                                        setOpenWilayah(false);
-                                                    }}
+                                                    onClick={() => handleWilayahSelect(wilayah)}
                                                     className={`w-full text-left py-2 text-sm  ${selectedWilayah === wilayah ? ' font-medium' : ''}`}
                                                 >
                                                     {wilayah}
@@ -282,12 +185,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                             {(selectedKategori || selectedLayanan || selectedWilayah) && (
                                 <Button
                                     variant="ghost"
-                                    onClick={() => {
-                                        setSearch('');
-                                        setSelectedKategori('');
-                                        setSelectedLayanan('');
-                                        setSelectedWilayah('');
-                                    }}
+                                    onClick={clearAllFilters}
                                     className='p-0 h-auto text-left font-normal border-none shadow-none text-sm'
                                 >
                                     Clear all filters
@@ -300,7 +198,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                 {/* Right Column - Vertical Scrolling Grid */}
                 <div
                     ref={scrollRef}
-                    className="overflow-y-auto lg:max-h-screen scrollbar-hide lg:col-span-2 pt-4 sm:pt-6 lg:pt-20"
+                    className="hidden md:block overflow-y-auto lg:max-h-screen scrollbar-hide lg:col-span-2 pt-4 sm:pt-6 lg:pt-20"
                     style={{
                         maxHeight: 'calc(100vh - 2rem)',
                         minHeight: '700px'
@@ -378,12 +276,89 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                             </p>
                             <Button
                                 variant="outline"
-                                onClick={() => {
-                                    setSearch('');
-                                    setSelectedKategori('');
-                                    setSelectedLayanan('');
-                                    setSelectedWilayah('');
-                                }}
+                                onClick={clearAllFilters}
+                                className="px-6"
+                            >
+                                Reset Filter
+                            </Button>
+                        </div>
+                    )}
+                </div>
+
+                <div className='block md:hidden'>
+                    {filteredProjects.length > 0 ? (
+                        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-8">
+                            {filteredProjects.map((project, idx) => (
+                                <Link
+                                    href={`/proyek/${project.slug}`}
+                                    key={idx}
+                                    className="relative h-64 overflow-hidden group cursor-pointer"
+                                    onMouseEnter={() => setHoveredIdx(idx)}
+                                    onMouseLeave={() => setHoveredIdx(null)}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleLinkClick(project.title);
+                                        // Navigate after a short delay to show loading
+                                        setTimeout(() => {
+                                            window.location.href = `/proyek/${project.slug}`;
+                                        }, 100);
+                                    }}
+                                >
+                                    {/* Gambar utama */}
+                                    <Image
+                                        src={project.image_urls}
+                                        alt={project.title}
+                                        quality={100}
+                                        fill
+                                        loading='lazy'
+                                        className="w-full h-full object-cover transition-all duration-500"
+                                        style={{
+                                            transform: hoveredIdx === idx ? 'scale(1.05)' : 'scale(1)',
+                                            position: 'absolute',
+                                            inset: 0,
+                                            zIndex: 1,
+                                        }}
+                                    />
+
+                                    {/* Hover Overlay */}
+                                    <div
+                                        className="absolute inset-0 transition-all duration-700 ease-in-out flex items-center justify-center z-10"
+                                        style={{
+                                            backgroundColor: hoveredIdx === idx ? 'rgba(255, 138, 101, 0.9)' : 'transparent',
+                                        }}
+                                    >
+                                        <div className="text-white px-2 sm:px-4 transition-all duration-700 ease-in-out"
+                                            style={{
+                                                opacity: hoveredIdx === idx ? 1 : 0,
+                                            }}
+                                        >
+                                            <div className="space-y-1 sm:space-y-2">
+                                                <h4 className="text-base sm:text-lg lg:text-xl xl:text-2xl font-light leading-tight">
+                                                    {project.title}
+                                                </h4>
+                                                <p className="text-sm sm:text-base lg:text-lg font-light">
+                                                    {project.city}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="flex flex-col items-center justify-center py-16 text-center">
+                            <div className="w-24 h-24 mb-6 rounded-full bg-primary flex items-center justify-center">
+                                <Search className="w-12 h-12 text-white" />
+                            </div>
+                            <h3 className="text-xl font-semibold text-foreground mb-2">
+                                Maaf, proyek yang Anda cari tidak ditemukan
+                            </h3>
+                            <p className="text-muted-foreground mb-6 max-w-md">
+                                Coba ubah kata kunci pencarian atau filter yang Anda gunakan untuk menemukan proyek yang sesuai.
+                            </p>
+                            <Button
+                                variant="outline"
+                                onClick={clearAllFilters}
                                 className="px-6"
                             >
                                 Reset Filter
