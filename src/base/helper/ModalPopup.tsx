@@ -6,7 +6,6 @@ import {
     DialogTitle,
 } from '@/components/ui/dialog'
 
-
 import logo from "@/base/assets/logo.png"
 
 import Image from 'next/image'
@@ -34,9 +33,9 @@ export default function ModalPopup({ open, onClose, onDontShowAgain }: ModalPopu
         <Dialog open={open} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-4xl max-h-[95vh] overflow-hidden flex flex-col p-0 border-0 shadow-none outline-0">
                 <DialogTitle className="sr-only">Newsletter Signup</DialogTitle>
-                <div className="flex bg-gray-900 rounded-lg overflow-hidden">
+                <div className="flex flex-col lg:flex-row bg-gray-900 rounded-lg overflow-hidden">
                     {/* Left Section - Information Panel */}
-                    <div className="w-1/2 bg-background p-8 relative">
+                    <div className="w-full lg:w-1/2 bg-background p-4 sm:p-6 lg:p-8 relative">
                         {/* Pattern Background */}
                         <div className="absolute inset-0 opacity-10">
                             <div className="w-full h-full" style={{
@@ -48,18 +47,18 @@ export default function ModalPopup({ open, onClose, onDontShowAgain }: ModalPopu
                         {/* Content */}
                         <div className="relative z-10">
                             {/* Logo */}
-                            <div className="flex items-center mb-8">
+                            <div className="flex items-center mb-4 sm:mb-6 lg:mb-8">
                                 <div className="mr-1">
-                                    <Image src={logo} alt="harmonyrumahku" width={100} height={100} />
+                                    <Image src={logo} alt="harmonyrumahku" width={60} height={60} className="sm:w-20 sm:h-20 lg:w-24 lg:h-24" />
                                 </div>
 
-                                <span className=" text-xl font-semibold mt-7">HARMONY & RUMAH KU®</span>
+                                <span className="text-sm sm:text-lg lg:text-xl font-semibold mt-3 sm:mt-5 lg:mt-7">HARMONY & RUMAH KU®</span>
                             </div>
 
                             {/* Description */}
-                            <div className=" space-y-4">
-                                <h3 className="font-bold text-2xl mb-2">Mari Terhubung, Bangun Harmoni Bersama</h3>
-                                <p className="text-sm leading-relaxed">
+                            <div className="space-y-3 sm:space-y-4">
+                                <h3 className="font-bold text-lg sm:text-xl lg:text-2xl mb-2">Mari Terhubung, Bangun Harmoni Bersama</h3>
+                                <p className="text-xs sm:text-sm leading-relaxed">
                                     Ingin mulai mewujudkan hunian impian atau sekadar bertanya? Kami siap mendengarkan dan membantu setiap langkahnya.
                                 </p>
                             </div>
@@ -67,32 +66,35 @@ export default function ModalPopup({ open, onClose, onDontShowAgain }: ModalPopu
                     </div>
 
                     {/* Right Section - Form Panel */}
-                    <div className="w-1/2 bg-[#173d2a] p-8 relative">
+                    <div className="w-full lg:w-1/2 bg-[#173d2a] p-4 sm:p-6 lg:p-8 relative">
                         {/* Close Button */}
                         <button
                             onClick={onClose}
-                            className="absolute top-4 right-4 bg-white text-gray-300 hover:text-gray-300 transition-colors"
+                            className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white transition-colors p-1 sm:p-2 rounded-full"
                         >
+                            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
                         </button>
 
                         {/* Daily Limit Notice */}
                         {showLimitNotice && (
-                            <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded-lg text-sm mb-4">
+                            <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm mb-3 sm:mb-4">
                                 <strong>Batas Harian:</strong> Anda sudah mengirim pesan hari ini.
                                 Silakan coba lagi dalam <strong>{remainingTime}</strong>.
                             </div>
                         )}
 
                         {/* Form */}
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            <div className="space-y-4">
+                        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                            <div className="space-y-3 sm:space-y-4">
                                 <div>
-                                    <label htmlFor="modal-nama_lengkap" className="text-xs font-medium mb-1 text-gray-300">Nama Lengkap</label>
+                                    <label htmlFor="modal-nama_lengkap" className="text-xs font-medium mb-1 text-gray-300 block">Nama Lengkap</label>
                                     <input
                                         id="modal-nama_lengkap"
                                         type="text"
                                         placeholder="Masukkan nama Anda"
-                                        className="bg-transparent border-0 rounded-none px-0 py-2 text-gray-300 outline-none placeholder-gray-500 focus:border-orange-500 focus:ring-0 w-full"
+                                        className="bg-transparent border-0 rounded-none px-0 py-2 text-gray-300 outline-none placeholder-gray-500 focus:border-orange-500 focus:ring-0 w-full text-sm sm:text-base"
                                         value={formData.nama_lengkap}
                                         onChange={handleInputChange}
                                         required
@@ -101,12 +103,12 @@ export default function ModalPopup({ open, onClose, onDontShowAgain }: ModalPopu
                                 </div>
 
                                 <div>
-                                    <label htmlFor="modal-email" className="text-xs font-medium mb-1 text-gray-300">Alamat Email</label>
+                                    <label htmlFor="modal-email" className="text-xs font-medium mb-1 text-gray-300 block">Alamat Email</label>
                                     <input
                                         id="modal-email"
                                         type="email"
                                         placeholder="nama@email.com"
-                                        className="bg-transparent border-0 rounded-none px-0 py-2 text-gray-300 outline-none placeholder-gray-500 focus:border-orange-500 focus:ring-0 w-full"
+                                        className="bg-transparent border-0 rounded-none px-0 py-2 text-gray-300 outline-none placeholder-gray-500 focus:border-orange-500 focus:ring-0 w-full text-sm sm:text-base"
                                         value={formData.email}
                                         onChange={handleInputChange}
                                         required
@@ -115,11 +117,11 @@ export default function ModalPopup({ open, onClose, onDontShowAgain }: ModalPopu
                                 </div>
 
                                 <div>
-                                    <label htmlFor="modal-kebutuhan" className="text-xs font-medium mb-1 text-gray-300">Ceritakan Kebutuhan Anda</label>
+                                    <label htmlFor="modal-kebutuhan" className="text-xs font-medium mb-1 text-gray-300 block">Ceritakan Kebutuhan Anda</label>
                                     <textarea
                                         id="modal-kebutuhan"
                                         placeholder="Tulis pertanyaan, ide, atau kebutuhan Anda di sini"
-                                        className="bg-transparent border-0 rounded-none px-0 py-2 text-gray-300 outline-none placeholder-gray-500 focus:border-orange-500 focus:ring-0 w-full min-h-[80px] resize-none"
+                                        className="bg-transparent border-0 rounded-none px-0 py-2 text-gray-300 outline-none placeholder-gray-500 focus:border-orange-500 focus:ring-0 w-full min-h-[60px] sm:min-h-[80px] resize-none text-sm sm:text-base"
                                         value={formData.kebutuhan}
                                         onChange={handleInputChange}
                                         required
@@ -132,18 +134,18 @@ export default function ModalPopup({ open, onClose, onDontShowAgain }: ModalPopu
                             <button
                                 type="submit"
                                 disabled={isSubmitting || !canSubmit}
-                                className="w-full bg-[#d9f2cb] hover:bg-[#d9f2cb] font-semibold py-3 px-6 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full bg-[#d9f2cb] hover:bg-[#d9f2cb] font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
                             >
                                 {isSubmitting ? 'Mengirim...' : !canSubmit ? 'Batas Harian Tercapai' : 'Kirim Pesan'}
                             </button>
 
                             {/* Footer */}
-                            <div className="flex justify-between items-center text-xs text-gray-400 mt-8">
+                            <div className="flex flex-row justify-between items-start sm:items-center text-xs text-gray-400 mt-4 sm:mt-8 space-y-2 sm:space-y-0">
                                 <span>Privasi Anda penting bagi kami.</span>
                                 <button
                                     type="button"
                                     onClick={onDontShowAgain}
-                                    className="hover:text-gray-300 transition-colors"
+                                    className="hover:text-gray-300 transition-colors text-right sm:text-left"
                                 >
                                     Jangan tampilkan lagi
                                 </button>
