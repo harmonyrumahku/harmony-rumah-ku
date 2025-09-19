@@ -2,8 +2,6 @@ import { Card } from '@/components/ui/card'
 
 import Image from 'next/image'
 
-import { Jasa } from '@/types/Jasa'
-
 import Link from 'next/link'
 
 export function CardJasa({ service, isExpanded, onToggle }: {

@@ -1,7 +1,5 @@
 import { Metadata } from "next";
 
-import type { ArticleDetails } from "@/types/Article";
-
 export async function getArticle(slug: string): Promise<ArticleDetails | null> {
   try {
     if (!process.env.NEXT_PUBLIC_API_ARTICLE) {
@@ -58,8 +56,7 @@ export async function generateMetadata({
     };
   }
 
-  const description =
-    article.description || `Blog ${article.title}`;
+  const description = article.description || `Blog ${article.title}`;
 
   const imageUrl = article.thumbnail
     ? Array.isArray(article.thumbnail)
@@ -89,12 +86,16 @@ export async function generateMetadata({
       url: `${BASE_URL}/blog/${article.slug}`,
       siteName: "HarmonyrumahKU",
       locale: "id_ID",
-      images: imageUrl ? [{
-        url: imageUrl,
-        width: 1200,
-        height: 630,
-        alt: article.title,
-      }] : [],
+      images: imageUrl
+        ? [
+            {
+              url: imageUrl,
+              width: 1200,
+              height: 630,
+              alt: article.title,
+            },
+          ]
+        : [],
       publishedTime: article.created_at,
       modifiedTime: article.updated_at,
     },

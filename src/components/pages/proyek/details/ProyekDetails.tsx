@@ -10,8 +10,6 @@ import parse, { domToReact, Element, DOMNode } from 'html-react-parser'
 
 import { motion, AnimatePresence } from 'framer-motion'
 
-import type { ProyekDetails } from '@/types/Proyek'
-
 import { H1, H2, H3, H4, P, Blockquote, List, Table as TableTypo, InlineCode, Small } from '@/components/ui/typography'
 
 import { Button } from '@/components/ui/button'

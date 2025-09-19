@@ -1,10 +1,3 @@
-import {
-  Award,
-  AwardsResponse,
-  AwardDetails,
-  AwardDetailsResponse,
-} from "@/types/Awards";
-
 export const fetchAwardsData = async (): Promise<Award[]> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_AWARDS) {

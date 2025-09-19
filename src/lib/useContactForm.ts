@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { submitContactForm, ContactFormData } from "./SubmitContact";
+import { submitContactForm } from "./SubmitContact";
 
 import { toast } from "sonner";
 

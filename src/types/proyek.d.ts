@@ -1,4 +1,4 @@
-export interface Information {
+interface Information {
   name: string;
   intro: string;
   years: string;
@@ -6,19 +6,19 @@ export interface Information {
   deskripsi: string;
 }
 
-export interface TimelineItem {
+interface TimelineItem {
   image: string[];
   label: string;
   title: string;
   deskripsi: string;
 }
 
-export interface TeamMember {
+interface TeamMember {
   name: string;
   position: string;
 }
 
-export interface ProyekDetails {
+interface ProyekDetails {
   title: string;
   information: Information[];
   proyek_layanan_name: string[];
@@ -40,7 +40,7 @@ export interface ProyekDetails {
   slug: string;
 }
 
-export interface ProyekHome {
+interface ProyekHome {
   title: string;
   image_urls: string;
   layanan: string;
@@ -49,7 +49,7 @@ export interface ProyekHome {
   slug: string;
 }
 
-export interface ApiResponse<T> {
+interface ApiResponse<T> {
   statusCode: number;
   statusMessage: string;
   message: string;
@@ -58,10 +58,10 @@ export interface ApiResponse<T> {
 }
 
 // Response untuk list/array proyek (halaman daftar)
-export type ProyekListResponse = ApiResponse<ProyekDetails[]>;
+type ProyekListResponse = ApiResponse<ProyekDetails[]>;
 
 // Response untuk single proyek (halaman detail)
-export type ProyekDetailResponse = ApiResponse<ProyekDetails>;
+type ProyekDetailResponse = ApiResponse<ProyekDetails>;
 
 // Response untuk proyek home (data yang ditampilkan di homepage)
-export type ProyekHomeResponse = ApiResponse<ProyekHome[]>;
+type ProyekHomeResponse = ApiResponse<ProyekHome[]>;

@@ -2,8 +2,6 @@
 
 import React from 'react'
 
-import { Article } from '@/types/Article'
-
 import Link from 'next/link'
 
 import Image from 'next/image'

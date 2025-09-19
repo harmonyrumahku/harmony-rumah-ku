@@ -10,7 +10,7 @@ import AboutSolusi from '@/components/pages/tentang-kami/AboutSolusi'
 
 import AboutBudaya from '@/components/pages/tentang-kami/AboutBudaya'
 
-import { fetchAboutPages, fetchAboutFilosofi, fetchAboutSolusi, fetchAboutBudaya } from '@/utils/FetchAboutPage'
+import { fetchAboutPages, fetchAboutFilosofi, fetchAboutSolusi, fetchAboutBudaya } from '@/utils/FetchAbout'
 
 import AboutSkelaton from '@/components/pages/tentang-kami/AboutSkelaton'
 

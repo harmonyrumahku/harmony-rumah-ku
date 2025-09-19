@@ -1,4 +1,4 @@
-export interface Home {
+interface Home {
   title: string;
   description: string;
   text: string;
@@ -6,7 +6,7 @@ export interface Home {
   logo: string;
 }
 
-export interface ApiResponse<T> {
+interface ApiResponse<T> {
   statusCode: number;
   statusMessage: string;
   message: string;
@@ -14,4 +14,4 @@ export interface ApiResponse<T> {
   data: T;
 }
 
-export type HomeResponse = ApiResponse<Home[]>;
+type HomeResponse = ApiResponse<Home[]>;

@@ -4,11 +4,9 @@ import Image from 'next/image'
 
 import Link from 'next/link';
 
-import { ProyekHome } from '@/types/Proyek';
-
 import LoadingOverlay from '@/base/Loading/LoadingOverlay';
 
-import { useStateProyek } from './lib/useStateProyek';
+import { useStateProyek } from '@/components/content/Proyek/lib/useStateProyek';
 
 export default function ProjectContent({ projectData }: { projectData: ProyekHome[] }) {
     const {

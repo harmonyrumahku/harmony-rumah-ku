@@ -1,7 +1,6 @@
 import React from 'react'
-import Image from 'next/image'
 
-import type { AboutSolusi } from '@/types/AboutSolusi';
+import Image from 'next/image'
 
 export default function AboutSolusi({ aboutSolusiData }: { aboutSolusiData: AboutSolusi[] }) {
     const data = aboutSolusiData[0]; // Assuming we're using the first item

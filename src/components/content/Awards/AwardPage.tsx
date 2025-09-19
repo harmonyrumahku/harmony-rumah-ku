@@ -4,8 +4,6 @@ import Image from 'next/image'
 
 import Link from 'next/link';
 
-import { Award } from '@/types/Awards';
-
 import LoadingOverlay from '@/base/Loading/LoadingOverlay';
 
 import { useStateAward } from '@/components/content/Awards/lib/useStateAward';

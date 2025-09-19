@@ -4,8 +4,6 @@ import React, { useEffect, useState, useRef } from "react";
 
 import Image from "next/image";
 
-import type { TimelineItem } from "@/types/Proyek";
-
 import sticker from "@/base/assets/stiker.png"
 
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";

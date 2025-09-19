@@ -4,8 +4,6 @@ import Image from 'next/image'
 
 import { easeOut, motion } from 'framer-motion'
 
-import { HomeResponse } from '@/types/Home'
-
 import { logoVariants, textVariants } from "@/components/content/Home/animation/Animation"
 
 export default function LeftComponents({ homeData }: { homeData: HomeResponse }) {

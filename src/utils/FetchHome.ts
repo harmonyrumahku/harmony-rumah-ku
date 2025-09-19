@@ -1,5 +1,3 @@
-import { HomeResponse } from "@/types/Home";
-
 export const fetchHomeData = async (): Promise<HomeResponse> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_HOME) {

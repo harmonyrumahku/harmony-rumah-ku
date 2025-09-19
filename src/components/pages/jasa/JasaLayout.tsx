@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react'
 
-import { Jasa } from '@/types/Jasa'
-
 import Image from 'next/image'
 
 import patern from "@/base/assets/patern.png"

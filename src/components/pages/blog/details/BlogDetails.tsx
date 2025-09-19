@@ -6,8 +6,6 @@ import { format } from 'date-fns'
 
 import { Share2, Facebook, Twitter, Instagram, Linkedin, Mail, ArrowLeft } from 'lucide-react'
 
-import type { ArticleDetails } from '@/types/Article'
-
 import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'

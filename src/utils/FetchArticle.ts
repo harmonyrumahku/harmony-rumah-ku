@@ -1,10 +1,3 @@
-import {
-  Article,
-  ArticlesResponse,
-  ArticleDetails,
-  ArticleDetailsResponse,
-} from "@/types/Article";
-
 export const fetchArticleData = async (): Promise<Article[]> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_ARTICLE) {

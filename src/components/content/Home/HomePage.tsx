@@ -2,11 +2,9 @@
 
 import React from 'react'
 
-import { HomeResponse } from '@/types/Home'
+import LeftComponents from '@/components/content/Home/ui/LeftComponents'
 
-import LeftComponents from './ui/LeftComponents'
-
-import RightComponents from './ui/RightComponents'
+import RightComponents from '@/components/content/Home/ui/RightComponents'
 
 export default function HomePage({ homeData }: { homeData: HomeResponse }) {
 

@@ -1,7 +1,5 @@
 import React from 'react'
 
-import type { BudayaData } from '@/types/AboutBudaya';
-
 export default function AboutBudaya({ aboutBudayaData }: { aboutBudayaData: BudayaData[] }) {
     return (
         <section className='bg-background container'>

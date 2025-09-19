@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
+
 import { useRouter, usePathname } from "next/navigation";
+
 import { useLenis, useScrollTo } from "@/lib/useLenis";
 
 export function useHeaderState() {

@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { About } from '@/types/About'
-
 import Link from 'next/link'
 
 import Image from 'next/image'

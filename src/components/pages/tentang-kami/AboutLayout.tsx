@@ -4,8 +4,6 @@ import React from 'react';
 
 import Image from 'next/image';
 
-import type { AboutPages } from '@/types/AboutPages';
-
 export default function AboutPages({ aboutPagesData }: { aboutPagesData: AboutPages[] }) {
 
     return (

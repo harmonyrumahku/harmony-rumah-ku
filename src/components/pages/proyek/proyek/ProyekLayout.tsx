@@ -12,11 +12,9 @@ import { Input } from '@/components/ui/input'
 
 import Image from 'next/image'
 
-import { ProyekHome } from '@/types/Proyek'
-
 import LoadingOverlay from '@/base/Loading/LoadingOverlay';
 
-import { useStateProyek } from './lib/useStateProyek';
+import { useStateProyek } from '@/components/pages/proyek/proyek/lib/useStateProyek';
 
 export default function ProyekLayout({ projectData }: { projectData: ProyekHome[] }) {
     const {

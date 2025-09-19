@@ -2,8 +2,6 @@ import React from 'react'
 
 import Image from 'next/image'
 
-import type { AboutFilosofi } from '@/types/AboutFilosofi';
-
 import bg from "@/base/assets/about.png"
 
 export default function AboutFilosofi({ aboutFilosofiData }: { aboutFilosofiData: AboutFilosofi[] }) {

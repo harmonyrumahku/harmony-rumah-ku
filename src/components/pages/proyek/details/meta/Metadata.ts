@@ -1,7 +1,5 @@
 import { Metadata } from "next";
 
-import type { ProyekDetails } from "@/types/Proyek";
-
 export async function getProyek(slug: string): Promise<ProyekDetails | null> {
   try {
     if (!process.env.NEXT_PUBLIC_API_PROYEK) {
@@ -90,12 +88,16 @@ export async function generateMetadata({
       url: `${BASE_URL}/proyek/${proyekDetails.slug}`,
       siteName: "HarmonyrumahKU",
       locale: "id_ID",
-      images: imageUrl ? [{
-        url: imageUrl,
-        width: 1200,
-        height: 630,
-        alt: proyekDetails.title,
-      }] : [],
+      images: imageUrl
+        ? [
+            {
+              url: imageUrl,
+              width: 1200,
+              height: 630,
+              alt: proyekDetails.title,
+            },
+          ]
+        : [],
     },
     twitter: {
       card: "summary_large_image",

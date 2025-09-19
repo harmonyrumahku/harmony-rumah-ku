@@ -1,5 +1,3 @@
-import { SocialMedia, SocialMediaResponse } from "@/types/SocialMedia";
-
 export const fetchSocialMediaData = async (): Promise<SocialMedia[]> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_SOCIAL_MEDIA) {

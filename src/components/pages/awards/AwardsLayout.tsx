@@ -4,8 +4,6 @@ import React from 'react'
 
 import Marquee from 'react-fast-marquee'
 
-import { Award } from '@/types/Awards'
-
 import patern from "@/base/assets/patern.png"
 
 import quete from "@/base/assets/quete.png"

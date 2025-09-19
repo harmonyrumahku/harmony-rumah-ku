@@ -1,9 +1,8 @@
 "use client"
 
 import React from 'react'
-import { motion } from 'framer-motion'
 
-import type { AwardDetails } from '@/types/Awards'
+import { motion } from 'framer-motion'
 
 import Image from 'next/image'
 

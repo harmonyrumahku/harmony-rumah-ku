@@ -1,5 +1,3 @@
-import { Contact, ContactResponse } from "@/types/Contact";
-
 export const fetchContactData = async (): Promise<Contact[]> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_CONTACT) {

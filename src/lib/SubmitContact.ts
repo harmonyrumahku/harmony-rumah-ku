@@ -1,21 +1,5 @@
 import { createClient } from "@/lib/supabase";
 
-export interface ContactFormData {
-  nama_lengkap: string;
-  email: string;
-  kebutuhan: string;
-}
-
-export interface ContactRecord {
-  id: string;
-  nama_lengkap: string;
-  email: string;
-  kebutuhan: string;
-  status: "read" | "unread";
-  created_at: string;
-  updated_at: string;
-}
-
 export async function submitContactForm(data: ContactFormData) {
   try {
     const supabase = createClient();

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { ProyekHome } from "@/types/Proyek";
 
 export function useStateProyek(projectData: ProyekHome[]) {
   // State management

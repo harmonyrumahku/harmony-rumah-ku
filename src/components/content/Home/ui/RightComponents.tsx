@@ -4,8 +4,6 @@ import Image from 'next/image'
 
 import { motion } from 'framer-motion'
 
-import { HomeResponse } from '@/types/Home'
-
 import { titleVariants, descriptionVariants } from "@/components/content/Home/animation/Animation"
 
 export default function RightComponents({ homeData }: { homeData: HomeResponse }) {

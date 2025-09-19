@@ -1,7 +1,5 @@
 import { Metadata } from "next";
 
-import type { AwardDetails } from "@/types/Awards";
-
 export async function getAwards(slug: string): Promise<AwardDetails | null> {
   try {
     if (!process.env.NEXT_PUBLIC_API_AWARDS) {

@@ -1,10 +1,3 @@
-import {
-  ProyekDetails,
-  ProyekHome,
-  ProyekHomeResponse,
-  ProyekDetailResponse,
-} from "@/types/Proyek";
-
 export const fetchProyekData = async (): Promise<ProyekHome[]> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_PROYEK) {

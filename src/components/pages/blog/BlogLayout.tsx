@@ -12,8 +12,6 @@ import { Input } from '@/components/ui/input'
 
 import Image from 'next/image'
 
-import { Article } from '@/types/Article'
-
 import LoadingOverlay from '@/base/Loading/LoadingOverlay';
 
 import books from "@/base/assets/tabler_book.png"

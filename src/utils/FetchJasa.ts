@@ -1,5 +1,3 @@
-import { Jasa, JasaResponse } from "@/types/Jasa";
-
 export const fetchJasaData = async (): Promise<Jasa[]> => {
   try {
     if (!process.env.NEXT_PUBLIC_API_JASA) {

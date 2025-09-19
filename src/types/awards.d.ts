@@ -1,5 +1,5 @@
 // Awards Types
-export interface Award {
+interface Award {
   id: number;
   name: string;
   description: string;
@@ -11,7 +11,7 @@ export interface Award {
   created_at: string;
 }
 
-export interface AwardsResponse {
+interface AwardsResponse {
   statusCode: number;
   statusMessage: string;
   message: string;
@@ -20,7 +20,7 @@ export interface AwardsResponse {
 }
 
 // Awards Details
-export interface AwardDetails {
+interface AwardDetails {
   title: string;
   slug: string;
   name: string;
@@ -36,7 +36,7 @@ export interface AwardDetails {
   updated_at: string;
 }
 
-export interface AwardDetailsResponse {
+interface AwardDetailsResponse {
   statusCode: number;
   statusMessage: string;
   message: string;

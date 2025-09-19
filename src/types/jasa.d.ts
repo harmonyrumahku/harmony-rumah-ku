@@ -1,4 +1,4 @@
-export interface Jasa {
+interface Jasa {
   id: string;
   title: string;
   description: string;
@@ -8,7 +8,7 @@ export interface Jasa {
   created_at: string;
 }
 
-export interface ApiResponse<T> {
+interface ApiResponse<T> {
   statusCode: number;
   statusMessage: string;
   message: string;
@@ -16,4 +16,4 @@ export interface ApiResponse<T> {
   data: T;
 }
 
-export type JasaResponse = ApiResponse<Jasa[]>;
+type JasaResponse = ApiResponse<Jasa[]>;
