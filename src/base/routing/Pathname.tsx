@@ -4,7 +4,7 @@ import React, { Fragment, useState, useEffect } from "react";
 
 import Header from "@/components/layout/Header/Header";
 
-import Footer from "@/components/layout/Footer/Footer";
+import FooterLayout from "@/components/layout/Footer/FooterLayout";
 
 import { Toaster } from "@/components/ui/sonner"
 
@@ -54,7 +54,7 @@ const Pathname = ({ children }: { children: React.ReactNode }) => {
             {showModal && <ModalPopup open={showModal} onClose={handleCloseModal} onDontShowAgain={handleDontShowAgain} />}
             <Header />
             {children}
-            <Footer />
+            <FooterLayout />
             <Toaster />
         </Fragment>
     );

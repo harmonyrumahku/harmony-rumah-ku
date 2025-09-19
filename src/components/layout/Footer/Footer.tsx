@@ -1,14 +1,8 @@
-"use client"
-
 import React from 'react'
 
 import Image from 'next/image'
 
 import logo from "@/base/assets/logo.png"
-
-import { FaTiktok, FaInstagram, FaFacebookF } from "react-icons/fa";
-
-import { IoLogoTwitter } from "react-icons/io";
 
 import Link from 'next/link'
 
@@ -20,7 +14,7 @@ import { Textarea } from '@/components/ui/textarea'
 
 import { useContactForm } from '@/lib/useContactForm'
 
-export default function Footer() {
+export default function Footer({ socialMediaData }: { socialMediaData: SocialMedia[] }) {
     const {
         formData,
         isSubmitting,
@@ -44,19 +38,20 @@ export default function Footer() {
                 {/* Tengah: Ikon Sosmed & Navigasi */}
                 <div className="flex flex-col justify-center items-start md:items-end w-full pr-0 md:pr-24 p-0 md:p-8 gap-6">
                     <div className="flex gap-8 mb-4">
-                        {/* Placeholder Ikon Sosmed */}
-                        <Link href="https://www.tiktok.com/@harmonyrumahku" className='bg-[#d9f5d7] rounded-full p-3' target='_blank' rel='noopener noreferrer'>
-                            <FaTiktok className='w-5 h-5' />
-                        </Link>
-                        <Link href="https://www.instagram.com/harmonyrumahku" className='bg-[#d9f5d7] rounded-full p-3' target='_blank' rel='noopener noreferrer'>
-                            <FaInstagram className='w-5 h-5' />
-                        </Link>
-                        <Link href="https://www.facebook.com/harmonyrumahku" className='bg-[#d9f5d7] rounded-full p-3' target='_blank' rel='noopener noreferrer'>
-                            <FaFacebookF className='w-5 h-5' />
-                        </Link>
-                        <Link href="https://www.twitter.com/harmonyrumahku" className='bg-[#d9f5d7] rounded-full p-3' target='_blank' rel='noopener noreferrer'>
-                            <IoLogoTwitter className='w-5 h-5' />
-                        </Link>
+                        {
+                            socialMediaData.map((socialMedia, idx) => (
+                                <Link href={socialMedia.url} className='relative aspect-square size-12 bg-[#d9f5d7] rounded-full p-3 flex items-center justify-center' target='_blank' rel='noopener noreferrer' key={idx}>
+                                    <Image
+                                        loading='lazy'
+                                        src={socialMedia.icons}
+                                        alt={socialMedia.title}
+                                        fill
+                                        className="object-contain mt-1"
+                                        style={{ mixBlendMode: 'multiply' }}
+                                    />
+                                </Link>
+                            ))
+                        }
                     </div>
 
                     <nav className="flex flex-wrap md:flex-col gap-8 md:gap-4 text-base text-gray-700">
