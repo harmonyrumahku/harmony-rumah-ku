@@ -133,8 +133,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                     <motion.p
                         className="text-base sm:text-lg leading-relaxed max-w-lg"
                         initial={{ opacity: 0, y: 12 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.2 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                     >
                         Setiap bangunan punya cerita, dan setiap ruang punya makna. Lewat artikel-artikel kami, temukan inspirasi dan pengetahuan yang relevan untuk menjawab kebutuhan ruang Anda yang terus berkembang.
@@ -145,8 +144,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                         <motion.div
                             className="relative"
                             initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.2 }}
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.45 }}
                         >
                             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 sm:w-5 sm:h-5" />
@@ -172,8 +170,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                     <motion.span
                                         className="text-sm"
                                         initial={{ opacity: 0, y: 8 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true, amount: 0.2 }}
+                                        animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.4 }}
                                     >
                                         {selectedKategori || "Kategory"}
@@ -191,8 +188,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                                 }}
                                                 className={`w-full text-left py-2 text-sm ${!selectedKategori ? ' font-medium' : ''}`}
                                                 initial={{ opacity: 0, y: 8 }}
-                                                whileInView={{ opacity: 1, y: 0 }}
-                                                viewport={{ once: true, amount: 0.2 }}
+                                                animate={{ opacity: 1, y: 0 }}
                                                 transition={{ duration: 0.35 }}
                                             >
                                                 All
@@ -207,8 +203,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                                     }}
                                                     className={`w-full text-left py-2 text-s ${selectedKategori === kat ? ' font-medium' : ''}`}
                                                     initial={{ opacity: 0, y: 8 }}
-                                                    whileInView={{ opacity: 1, y: 0 }}
-                                                    viewport={{ once: true, amount: 0.2 }}
+                                                    animate={{ opacity: 1, y: 0 }}
                                                     transition={{ duration: 0.35, delay: index * 0.05 }}
                                                 >
                                                     {kat}
@@ -238,8 +233,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                     <motion.span
                                         className="text-sm"
                                         initial={{ opacity: 0, y: 8 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true, amount: 0.2 }}
+                                        animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.4 }}
                                     >
                                         {selectedSubcategory || "Subcategory"}
@@ -256,8 +250,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                                 }}
                                                 className={`w-full text-left py-2 text-sm  ${!selectedSubcategory ? ' font-medium' : ''}`}
                                                 initial={{ opacity: 0, y: 8 }}
-                                                whileInView={{ opacity: 1, y: 0 }}
-                                                viewport={{ once: true, amount: 0.2 }}
+                                                animate={{ opacity: 1, y: 0 }}
                                                 transition={{ duration: 0.35 }}
                                             >
                                                 All
@@ -271,8 +264,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                                     }}
                                                     className={`w-full text-left py-2 text-sm transition-colors ${selectedSubcategory === subcategory ? ' font-medium' : ''}`}
                                                     initial={{ opacity: 0, y: 8 }}
-                                                    whileInView={{ opacity: 1, y: 0 }}
-                                                    viewport={{ once: true, amount: 0.2 }}
+                                                    animate={{ opacity: 1, y: 0 }}
                                                     transition={{ duration: 0.35, delay: index * 0.05 }}
                                                 >
                                                     {subcategory}
@@ -330,8 +322,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                     <motion.div
                                         className="relative w-full overflow-hidden aspect-[4/3]"
                                         initial={{ opacity: 0, scale: 1.02 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true, amount: 0.2 }}
+                                        animate={{ opacity: 1, scale: 1 }}
                                         transition={{ duration: 0.5, delay: (idx % 6) * 0.04 }}
                                     >
                                         <Image
@@ -351,8 +342,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                     <motion.div
                                         className="mt-2 flex flex-col gap-1 px-2 md:px-0"
                                         initial={{ opacity: 0, y: 10 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true, amount: 0.2 }}
+                                        animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.45, delay: 0.06 }}
                                     >
                                         {/* Title */}
@@ -427,8 +417,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                     <motion.div
                                         className="relative w-full overflow-hidden aspect-[4/3]"
                                         initial={{ opacity: 0, scale: 1.02 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true, amount: 0.2 }}
+                                        animate={{ opacity: 1, scale: 1 }}
                                         transition={{ duration: 0.5, delay: (idx % 6) * 0.04 }}
                                     >
                                         <Image
@@ -448,8 +437,7 @@ export default function BlogLayout({ articleData }: { articleData: Article[] }) 
                                     <motion.div
                                         className="mt-2 flex flex-col gap-1 px-2"
                                         initial={{ opacity: 0, y: 10 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true, amount: 0.2 }}
+                                        animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.45, delay: 0.06 }}
                                     >
                                         {/* Title */}

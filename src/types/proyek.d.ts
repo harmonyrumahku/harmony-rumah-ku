@@ -47,6 +47,7 @@ interface ProyekHome {
   type: string;
   city: string;
   slug: string;
+  created_at?: string; // ISO date string if provided by API
 }
 
 interface ApiResponse<T> {
@@ -65,3 +66,10 @@ type ProyekDetailResponse = ApiResponse<ProyekDetails>;
 
 // Response untuk proyek home (data yang ditampilkan di homepage)
 type ProyekHomeResponse = ApiResponse<ProyekHome[]>;
+
+//=================== Proyek Card =================//
+type ProjectCardProps = {
+  project: ProyekHome;
+  idx: number;
+  onLinkClick: (title?: string) => void;
+};

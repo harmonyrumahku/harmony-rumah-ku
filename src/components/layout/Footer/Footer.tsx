@@ -20,6 +20,8 @@ import { Textarea } from '@/components/ui/textarea'
 
 import { useContactForm } from '@/lib/useContactForm'
 
+import { motion } from 'framer-motion'
+
 export default function Footer() {
     const {
         formData,
@@ -37,8 +39,8 @@ export default function Footer() {
             <div className="flex flex-col md:flex-row items-start p-8 w-full gap-4">
                 <div className='flex flex-col gap-6 mb-4 xl:mb-0'>
                     <Image src={logo} alt="HarmonyrumahKU" width={100} height={100} />
-                    <div className="text-2xl font-normal">HarmonyrumahKU</div>
-                    <div className="text-sm text-gray-600">Jln. alamat</div>
+                    <motion.div className="text-2xl font-normal" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}>HarmonyrumahKU</motion.div>
+                    <motion.div className="text-sm text-gray-600" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1], delay: 0.06 }}>Jln. alamat</motion.div>
                 </div>
 
                 {/* Tengah: Ikon Sosmed & Navigasi */}
@@ -46,26 +48,34 @@ export default function Footer() {
                     <div className="flex gap-8 mb-4">
                         {/* Placeholder Ikon Sosmed */}
                         <Link href="https://www.tiktok.com/@harmonyrumahku" className='bg-[#d9f5d7] rounded-full p-3' target='_blank' rel='noopener noreferrer'>
-                            <FaTiktok className='w-5 h-5' />
+                            <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}>
+                                <FaTiktok className='w-5 h-5' />
+                            </motion.span>
                         </Link>
                         <Link href="https://www.instagram.com/harmonyrumahku" className='bg-[#d9f5d7] rounded-full p-3' target='_blank' rel='noopener noreferrer'>
-                            <FaInstagram className='w-5 h-5' />
+                            <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.05 }}>
+                                <FaInstagram className='w-5 h-5' />
+                            </motion.span>
                         </Link>
                         <Link href="https://www.facebook.com/harmonyrumahku" className='bg-[#d9f5d7] rounded-full p-3' target='_blank' rel='noopener noreferrer'>
-                            <FaFacebookF className='w-5 h-5' />
+                            <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}>
+                                <FaFacebookF className='w-5 h-5' />
+                            </motion.span>
                         </Link>
                         <Link href="https://www.twitter.com/harmonyrumahku" className='bg-[#d9f5d7] rounded-full p-3' target='_blank' rel='noopener noreferrer'>
-                            <IoLogoTwitter className='w-5 h-5' />
+                            <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.15 }}>
+                                <IoLogoTwitter className='w-5 h-5' />
+                            </motion.span>
                         </Link>
                     </div>
 
                     <nav className="flex flex-wrap md:flex-col gap-8 md:gap-4 text-base text-gray-700">
-                        <Link href="/" className="hover:underline">Beranda</Link>
-                        <Link href="/proyek" className="hover:underline">Proyek</Link>
-                        <Link href="/awards" className="hover:underline">Awards</Link>
-                        <Link href="/tentang-kami" className="hover:underline">Tentang Kami</Link>
-                        <Link href="/blog" className="hover:underline">Blog</Link>
-                        <Link href="/#kontak" className="hover:underline">Kontak</Link>
+                        <Link href="/" className="hover:underline"><motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}>Beranda</motion.span></Link>
+                        <Link href="/proyek" className="hover:underline"><motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.05 }}>Proyek</motion.span></Link>
+                        <Link href="/awards" className="hover:underline"><motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}>Awards</motion.span></Link>
+                        <Link href="/tentang-kami" className="hover:underline"><motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.15 }}>Tentang Kami</motion.span></Link>
+                        <Link href="/blog" className="hover:underline"><motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.2 }}>Blog</motion.span></Link>
+                        <Link href="/#kontak" className="hover:underline"><motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.25 }}>Kontak</motion.span></Link>
                     </nav>
                 </div>
             </div>

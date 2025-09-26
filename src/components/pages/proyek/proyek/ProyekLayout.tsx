@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { Input } from '@/components/ui/input'
 
 import Image from 'next/image'
+
 import { motion } from 'framer-motion'
 
 const MotionImage = motion(Image)
@@ -21,7 +22,6 @@ import { useStateProyek } from '@/components/pages/proyek/proyek/lib/useStatePro
 
 export default function ProyekLayout({ projectData }: { projectData: ProyekHome[] }) {
     const {
-        // State
         hoveredIdx,
         setHoveredIdx,
         isLoading,
@@ -35,17 +35,14 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
         openLayanan,
         openWilayah,
 
-        // Refs
         scrollRef,
         sectionRef,
 
-        // Computed values
         kategoriOptions,
         layananOptions,
         wilayahOptions,
         filteredProjects,
 
-        // Handlers
         handleLinkClick,
         handleKategoriToggle,
         handleLayananToggle,
@@ -64,8 +61,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                     <motion.p
                         className="text-base sm:text-lg leading-relaxed text-[#000000] max-w-lg"
                         initial={{ opacity: 0, y: 12 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                     >
                         Kami Hadir untuk Setiap Langkah Perjalanan Hunian Anda. Dari merancang ruang yang nyaman, memastikan struktur yang kokoh, hingga mengelola proyek dengan penuh tanggung jawab — <strong>semua kami hadirkan untuk menciptakan rumah yang selaras dengan hidup Anda.</strong>
@@ -76,8 +72,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                         <motion.div
                             className="relative"
                             initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.45 }}
                         >
                             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 sm:w-5 sm:h-5" />
@@ -100,8 +95,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                     <motion.span
                                         className="text-sm"
                                         initial={{ opacity: 0, y: 8 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-
+                                        animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.4 }}
                                     >
                                         {selectedKategori || "Kategory"}
@@ -115,8 +109,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                                 onClick={() => handleKategoriSelect('')}
                                                 className={`w-full text-left py-2 text-sm ${!selectedKategori ? ' font-medium' : ''}`}
                                                 initial={{ opacity: 0, y: 8 }}
-                                                whileInView={{ opacity: 1, y: 0 }}
-
+                                                animate={{ opacity: 1, y: 0 }}
                                                 transition={{ duration: 0.35 }}
                                             >
                                                 All
@@ -127,8 +120,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                                     onClick={() => handleKategoriSelect(kat)}
                                                     className={`w-full text-left py-2 text-s ${selectedKategori === kat ? ' font-medium' : ''}`}
                                                     initial={{ opacity: 0, y: 8 }}
-                                                    whileInView={{ opacity: 1, y: 0 }}
-
+                                                    animate={{ opacity: 1, y: 0 }}
                                                     transition={{ duration: 0.35, delay: index * 0.05 }}
                                                 >
                                                     {kat}
@@ -149,8 +141,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                     <motion.span
                                         className="text-sm"
                                         initial={{ opacity: 0, y: 8 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true, amount: 0.2 }}
+                                        animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.4 }}
                                     >
                                         {selectedLayanan || "Layanan"}
@@ -164,8 +155,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                                 onClick={() => handleLayananSelect('')}
                                                 className={`w-full text-left py-2 text-sm  ${!selectedLayanan ? ' font-medium' : ''}`}
                                                 initial={{ opacity: 0, y: 8 }}
-                                                whileInView={{ opacity: 1, y: 0 }}
-                                                viewport={{ once: true, amount: 0.2 }}
+                                                animate={{ opacity: 1, y: 0 }}
                                                 transition={{ duration: 0.35 }}
                                             >
                                                 All
@@ -176,8 +166,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                                     onClick={() => handleLayananSelect(layanan)}
                                                     className={`w-full text-left py-2 text-sm transition-colors ${selectedLayanan === layanan ? ' font-medium' : ''}`}
                                                     initial={{ opacity: 0, y: 8 }}
-                                                    whileInView={{ opacity: 1, y: 0 }}
-                                                    viewport={{ once: true, amount: 0.2 }}
+                                                    animate={{ opacity: 1, y: 0 }}
                                                     transition={{ duration: 0.35, delay: index * 0.05 }}
                                                 >
                                                     {layanan}
@@ -198,8 +187,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                     <motion.span
                                         className="text-sm"
                                         initial={{ opacity: 0, y: 8 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true, amount: 0.2 }}
+                                        animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.4 }}
                                     >
                                         {selectedWilayah || "Wilayah"}
@@ -213,8 +201,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                                 onClick={() => handleWilayahSelect('')}
                                                 className={`w-full text-left py-2 text-sm ${!selectedWilayah ? ' font-medium' : ''}`}
                                                 initial={{ opacity: 0, y: 8 }}
-                                                whileInView={{ opacity: 1, y: 0 }}
-                                                viewport={{ once: true, amount: 0.2 }}
+                                                animate={{ opacity: 1, y: 0 }}
                                                 transition={{ duration: 0.35 }}
                                             >
                                                 All
@@ -225,8 +212,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                                     onClick={() => handleWilayahSelect(wilayah)}
                                                     className={`w-full text-left py-2 text-sm  ${selectedWilayah === wilayah ? ' font-medium' : ''}`}
                                                     initial={{ opacity: 0, y: 8 }}
-                                                    whileInView={{ opacity: 1, y: 0 }}
-                                                    viewport={{ once: true, amount: 0.2 }}
+                                                    animate={{ opacity: 1, y: 0 }}
                                                     transition={{ duration: 0.35, delay: index * 0.05 }}
                                                 >
                                                     {wilayah}
@@ -285,9 +271,8 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                         fill
                                         loading='lazy'
                                         className="w-full h-full object-cover transition-all duration-500"
-                                        initial={{ opacity: 0, scale: 1.02 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true, amount: 0.2 }}
+                                        initial={{ scale: 1.02, opacity: 0 }}
+                                        animate={{ scale: 1, opacity: 1 }}
                                         transition={{ duration: 0.6 }}
                                         style={{
                                             transform: hoveredIdx === idx ? 'scale(1.05)' : 'scale(1)',
@@ -330,8 +315,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                             <motion.h3
                                 className="text-xl font-semibold text-foreground mb-2"
                                 initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.2 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.45 }}
                             >
                                 Maaf, proyek yang Anda cari tidak ditemukan
@@ -339,8 +323,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                             <motion.p
                                 className="text-muted-foreground mb-6 max-w-md"
                                 initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.2 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.45 }}
                             >
                                 Coba ubah kata kunci pencarian atau filter yang Anda gunakan untuk menemukan proyek yang sesuai.
@@ -383,9 +366,8 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                                         fill
                                         loading='lazy'
                                         className="w-full h-full object-cover transition-all duration-500"
-                                        initial={{ opacity: 0, scale: 1.02 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true, amount: 0.2 }}
+                                        initial={{ scale: 1.02, opacity: 0 }}
+                                        animate={{ scale: 1, opacity: 1 }}
                                         transition={{ duration: 0.6 }}
                                         style={{
                                             transform: hoveredIdx === idx ? 'scale(1.05)' : 'scale(1)',
@@ -428,8 +410,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                             <motion.h3
                                 className="text-xl font-semibold text-foreground mb-2"
                                 initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.2 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.45 }}
                             >
                                 Maaf, proyek yang Anda cari tidak ditemukan
@@ -437,8 +418,7 @@ export default function ProyekLayout({ projectData }: { projectData: ProyekHome[
                             <motion.p
                                 className="text-muted-foreground mb-6 max-w-md"
                                 initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, amount: 0.2 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.45 }}
                             >
                                 Coba ubah kata kunci pencarian atau filter yang Anda gunakan untuk menemukan proyek yang sesuai.

@@ -14,26 +14,26 @@ import HomePageSkeleton from "@/base/helper/HomePageSkelaton";
 
 import AwardPage from "@/components/content/Awards/AwardPage"
 
-import { fetchProyekData } from "@/utils/FetchProyek";
+import { fetchSliceProyekData } from "@/utils/FetchProyek";
 
 import { fetchHomeData } from "@/utils/FetchHome";
 
 import { fetchAboutData } from "@/utils/FetchAbout";
 
-import { fetchArticleData } from "@/utils/FetchArticle";
+import { fetchSliceArticleData } from "@/utils/FetchArticle";
 
 import { fetchContactData } from "@/utils/FetchContact";
 
-import { fetchAwardsData } from "@/utils/FetchAwards";
+import { fetchSliceAwardsData } from "@/utils/FetchAwards";
 
 export default async function Page() {
   try {
-    const projectData = await fetchProyekData();
+    const projectData = await fetchSliceProyekData();
     const homeData = await fetchHomeData();
     const aboutData = await fetchAboutData();
-    const articleData = await fetchArticleData();
+    const articleData = await fetchSliceArticleData();
     const contactData = await fetchContactData();
-    const awardsData = await fetchAwardsData();
+    const awardsData = await fetchSliceAwardsData();
 
     return <Fragment>
       <HomePage homeData={homeData} />

@@ -52,3 +52,37 @@ export const fetchProyekBySlug = async (
     return null;
   }
 };
+
+export const fetchSliceProyekData = async (): Promise<ProyekHome[]> => {
+  try {
+    if (!process.env.NEXT_PUBLIC_API_PROYEK) {
+      return [];
+    }
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_PROYEK as string}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_SECRET}`,
+        },
+        next: { revalidate: 5 },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const apiResponse: ProyekHomeResponse = await response.json();
+    const sortedLatestFive = (apiResponse.data || [])
+      .sort((a, b) => {
+        const aTime = a.created_at ? new Date(a.created_at).getTime() : 0;
+        const bTime = b.created_at ? new Date(b.created_at).getTime() : 0;
+        return bTime - aTime;
+      })
+      .slice(0, 60);
+    return sortedLatestFive;
+  } catch {
+    return [];
+  }
+};

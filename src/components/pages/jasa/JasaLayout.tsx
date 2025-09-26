@@ -9,6 +9,7 @@ import patern from "@/base/assets/patern.png"
 import iconhome from "@/base/assets/icon-home.png"
 
 import { CardJasa } from "@/components/pages/jasa/card/CardJasa"
+import { motion } from 'framer-motion'
 
 export default function JasaLayout({ jasaData }: { jasaData: Jasa[] }) {
     const [expandedCard, setExpandedCard] = useState<string | null>(null)
@@ -35,9 +36,23 @@ export default function JasaLayout({ jasaData }: { jasaData: Jasa[] }) {
 
             <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 pt-16 sm:pt-20 lg:pt-24">
                 <div className="text-center mb-8 sm:mb-12 lg:mb-16 max-w-full sm:max-w-[800px] mx-auto px-4">
-                    <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl inline-block font-bold text-[#1e211e] leading-tight">
-                        Mewujudkan ruang impian Anda <Image src={iconhome} alt='harmonyrumahku' className="inline-block align-baseline w-8 sm:w-10 lg:w-12 xl:w-14 -mb-2 sm:-mb-3 lg:-mb-4 h-8 sm:h-10 lg:h-12 xl:h-14" /> dari konsep hingga kenyataan
-                    </h1>
+                    <motion.h1
+                        className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl inline-block font-bold text-[#1e211e] leading-tight"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                    >
+                        Mewujudkan ruang impian Anda{' '}
+                        <motion.span
+                            className="inline-block align-baseline"
+                            initial={{ scale: 0.9, rotate: -5, opacity: 0 }}
+                            animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                            transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.1 }}
+                        >
+                            <Image src={iconhome} alt='harmonyrumahku' className="inline-block align-baseline w-8 sm:w-10 lg:w-12 xl:w-14 -mb-2 sm:-mb-3 lg:-mb-4 h-8 sm:h-10 lg:h-12 xl:h-14" />
+                        </motion.span>{' '}
+                        dari konsep hingga kenyataan
+                    </motion.h1>
                 </div>
 
                 <div className="max-w-7xl mx-auto overflow-hidden">

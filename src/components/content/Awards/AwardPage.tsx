@@ -8,6 +8,9 @@ import LoadingOverlay from '@/base/Loading/LoadingOverlay';
 
 import { useStateAward } from '@/components/content/Awards/lib/useStateAward';
 
+import { motion } from 'framer-motion';
+const MotionImage = motion(Image as React.ComponentType<React.ComponentProps<typeof Image>>);
+
 export default function ProjectContent({ awardsData }: { awardsData: Award[] }) {
     const {
         isLoading,
@@ -20,9 +23,26 @@ export default function ProjectContent({ awardsData }: { awardsData: Award[] }) 
     return (
         <section ref={sectionRef} className="w-full py-4 bg-[#ebffe6] container">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 px-4 sm:px-6 lg:px-10 gap-4">
-                <h2 className="text-md md:text-3xl font-bold text-[#333333]">Awards</h2>
+                <motion.h2
+                    className="text-md md:text-3xl font-bold text-[#333333]"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                >
+                    Awards
+                </motion.h2>
 
-                <Link href="/awards" className="text-[#708B75] font-medium hover:underline text-sm sm:text-base" rel='about'>VIEW MORE</Link>
+                <Link href="/awards" className="text-[#708B75] font-medium hover:underline text-sm sm:text-base" rel='about'>
+                    <motion.span
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true, amount: 0.6 }}
+                        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1], delay: 0.06 }}
+                    >
+                        VIEW MORE
+                    </motion.span>
+                </Link>
             </div>
 
             <div
@@ -44,7 +64,7 @@ export default function ProjectContent({ awardsData }: { awardsData: Award[] }) 
                             }}
                         >
                             {/* Gambar utama */}
-                            <Image
+                            <MotionImage
                                 src={project.after}
                                 alt={project.name}
                                 quality={100}
@@ -56,6 +76,10 @@ export default function ProjectContent({ awardsData }: { awardsData: Award[] }) 
                                     inset: 0,
                                     zIndex: 1,
                                 }}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true, amount: 0.2 }}
+                                transition={{ duration: 0.45, ease: [0.33, 1, 0.68, 1], delay: idx * 0.05 }}
                             />
                             <div
                                 className="absolute inset-y-0 left-0 w-2/3 h-full z-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-300"
@@ -65,8 +89,24 @@ export default function ProjectContent({ awardsData }: { awardsData: Award[] }) 
                             />
                             <div className="absolute left-4 bottom-10 z-20 text-[#FFFFFF] flex flex-col gap-2 py-0 px-0 group-hover:py-2 group-hover:px-4 bg-transparent backdrop-blur-none group-hover:backdrop-blur-sm group-hover:bg-black/20 rounded-md transition-all duration-300">
                                 <div className='flex flex-col gap-2'>
-                                    <h3 className='text-base font-semibold leading-tight'>{project.name}</h3>
-                                    <span className="text-base font-semibold leading-tight">{project.keterangan}</span>
+                                    <motion.h3
+                                        className='text-base font-semibold leading-tight'
+                                        initial={{ opacity: 0 }}
+                                        whileInView={{ opacity: 1 }}
+                                        viewport={{ once: true, amount: 0.3 }}
+                                        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1], delay: idx * 0.06 }}
+                                    >
+                                        {project.name}
+                                    </motion.h3>
+                                    <motion.span
+                                        className="text-base font-semibold leading-tight"
+                                        initial={{ opacity: 0 }}
+                                        whileInView={{ opacity: 1 }}
+                                        viewport={{ once: true, amount: 0.3 }}
+                                        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1], delay: idx * 0.08 }}
+                                    >
+                                        {project.keterangan}
+                                    </motion.span>
                                 </div>
                             </div>
                         </Link>

@@ -126,14 +126,14 @@ export default function AwardsLayout({ awardsData }: { awardsData: Award[] }) {
                                                     <motion.img src={quete.src} alt="icons" className="text-gray-600 text-2xl mt-1 flex-shrink-0"
                                                         initial={{ opacity: 0, scale: 0.95 }}
                                                         whileInView={{ opacity: 1, scale: 1 }}
-                                                        viewport={{ once: true, amount: 0.2 }}
+                                                        viewport={{ once: true, amount: 0.15 }}
                                                         transition={{ duration: 0.35 }}
                                                     />
                                                     <div className="flex-1">
                                                         <motion.p className="text-black text-lg leading-relaxed"
                                                             initial={{ opacity: 0, y: 10 }}
                                                             whileInView={{ opacity: 1, y: 0 }}
-                                                            viewport={{ once: true, amount: 0.2 }}
+                                                            viewport={{ once: true, amount: 0.15 }}
                                                             transition={{ duration: 0.45 }}
                                                         >
                                                             {award.description}
@@ -148,7 +148,7 @@ export default function AwardsLayout({ awardsData }: { awardsData: Award[] }) {
                                                         <motion.img src={award.avatar} alt={award.name} width={40} height={40} className="w-full h-full object-cover"
                                                             initial={{ opacity: 0, scale: 0.9 }}
                                                             whileInView={{ opacity: 1, scale: 1 }}
-                                                            viewport={{ once: true, amount: 0.2 }}
+                                                            viewport={{ once: true, amount: 0.15 }}
                                                             transition={{ duration: 0.35 }}
                                                         />
                                                     </div>
@@ -156,7 +156,7 @@ export default function AwardsLayout({ awardsData }: { awardsData: Award[] }) {
                                                         <motion.p className="text-black font-medium text-sm"
                                                             initial={{ opacity: 0, y: 8 }}
                                                             whileInView={{ opacity: 1, y: 0 }}
-                                                            viewport={{ once: true, amount: 0.2 }}
+                                                            viewport={{ once: true, amount: 0.15 }}
                                                             transition={{ duration: 0.35 }}
                                                         >
                                                             {award.name}
@@ -164,7 +164,7 @@ export default function AwardsLayout({ awardsData }: { awardsData: Award[] }) {
                                                         <motion.p className="text-gray-600 text-xs"
                                                             initial={{ opacity: 0, y: 8 }}
                                                             whileInView={{ opacity: 1, y: 0 }}
-                                                            viewport={{ once: true, amount: 0.2 }}
+                                                            viewport={{ once: true, amount: 0.15 }}
                                                             transition={{ duration: 0.35, delay: 0.05 }}
                                                         >
                                                             {award.keterangan}

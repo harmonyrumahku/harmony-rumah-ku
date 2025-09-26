@@ -6,6 +6,8 @@ import Link from 'next/link'
 
 import { useHeaderState } from '@/lib/useHeaderState'
 
+import { motion } from 'framer-motion'
+
 export default function Header() {
     const {
         menuOpen,
@@ -21,13 +23,15 @@ export default function Header() {
             <nav className='py-4 container flex items-center justify-between w-full px-4 lg:px-10'>
                 {/* Brand Logo */}
                 <Link href="/" className="text-base md:text-2xl font-semibold text-[#173d2a] tracking-wide select-none transition-all duration-300 hover:scale-105" rel='home'>
-                    HarmonyrumahKU
+                    <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}>
+                        HarmonyrumahKU
+                    </motion.span>
                 </Link>
 
                 {/* Desktop Navigation - Central Bar */}
                 <div className="hidden lg:flex">
                     <div className="bg-[#d4f0c4]/80 backdrop-blur-sm rounded-full px-2 py-2 flex items-center space-x-2">
-                        {navigationItems.map((item) => {
+                        {navigationItems.map((item, idx) => {
                             const isActive = pathname === item.href ||
                                 (item.href === "/" && pathname === "/") ||
                                 (item.href === "/awards" && pathname.startsWith("/awards")) ||
@@ -43,7 +47,7 @@ export default function Header() {
                                         }`}
                                 >
                                     {/* Icons for each navigation item */}
-                                    <span className="w-4 h-4">
+                                    <motion.span className="w-4 h-4" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: idx * 0.03 }}>
                                         {item.label === "BERANDA" && (
                                             <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
                                                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
@@ -74,8 +78,16 @@ export default function Header() {
                                                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                                             </svg>
                                         )}
-                                    </span>
-                                    <span className="font-medium text-sm">{item.label}</span>
+                                    </motion.span>
+                                    <motion.span
+                                        className="font-medium text-sm"
+                                        initial={{ opacity: 0 }}
+                                        whileInView={{ opacity: 1 }}
+                                        viewport={{ once: true, amount: 0.4 }}
+                                        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: idx * 0.05 }}
+                                    >
+                                        {item.label}
+                                    </motion.span>
                                 </button>
                             );
                         })}
@@ -85,10 +97,11 @@ export default function Header() {
                 {/* Action Buttons - Right Side */}
                 <div className="hidden lg:flex items-center space-x-3">
                     <Link href="/jasa" className="px-5 py-2 rounded-full bg-transparent border border-[#315440] text-[#315440] font-medium text-sm transition-all duration-300 hover:bg-[#315440]/10 hover:border-[#173d2a]">
-                        Jasa
+                        <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}>Jasa</motion.span>
                     </Link>
+
                     <Link href="/konsultasi" className="px-5 py-2 rounded-full bg-[#315440] text-white font-medium text-sm transition-all duration-300 hover:bg-[#173d2a] shadow-lg shadow-[#315440]/25">
-                        Konsultasi
+                        <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.05 }}>Konsultasi</motion.span>
                     </Link>
                 </div>
 
@@ -97,10 +110,10 @@ export default function Header() {
                     {/* Mobile Action Buttons */}
                     <div className="flex items-center space-x-2">
                         <Link href="/jasa" className="px-3 py-1.5 rounded-full bg-transparent border border-[#315440] text-[#315440] font-medium text-xs transition-all duration-300 hover:bg-[#315440]/10 hover:border-[#173d2a]">
-                            Jasa
+                            <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}>Jasa</motion.span>
                         </Link>
                         <Link href="/konsultasi" className="px-3 py-1.5 rounded-full bg-[#315440] text-white font-medium text-xs transition-all duration-300 hover:bg-[#173d2a] shadow-lg shadow-[#315440]/25">
-                            Konsultasi
+                            <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: 0.05 }}>Konsultasi</motion.span>
                         </Link>
                     </div>
 
@@ -122,7 +135,7 @@ export default function Header() {
                 <div className={`fixed inset-0 bg-[#ebffe6] bg-opacity-95 backdrop-blur-sm flex flex-col items-center justify-center space-y-8 z-40 transition-all duration-500 ease-in-out lg:hidden ${menuOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-full opacity-0 pointer-events-none'}`}>
                     {/* Mobile Menu Content */}
                     <div className="flex flex-col items-center space-y-8">
-                        {navigationItems.map((item) => {
+                        {navigationItems.map((item, idx) => {
                             const isActive = pathname === item.href ||
                                 (item.href === "/" && pathname === "/") ||
                                 (item.href === "/blog" && pathname.startsWith("/blog"));
@@ -139,7 +152,7 @@ export default function Header() {
                                         }`}
                                 >
                                     {/* Icons for mobile menu */}
-                                    <span className="w-5 h-5">
+                                    <motion.span className="w-5 h-5" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: idx * 0.03 }}>
                                         {item.label === "BERANDA" && (
                                             <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                                                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
@@ -170,8 +183,16 @@ export default function Header() {
                                                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                                             </svg>
                                         )}
-                                    </span>
-                                    <span className="font-medium text-sm">{item.label}</span>
+                                    </motion.span>
+                                    <motion.span
+                                        className="font-medium text-sm"
+                                        initial={{ opacity: 0 }}
+                                        whileInView={{ opacity: 1 }}
+                                        viewport={{ once: true, amount: 0.4 }}
+                                        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1], delay: idx * 0.05 }}
+                                    >
+                                        {item.label}
+                                    </motion.span>
                                 </button>
                             );
                         })}

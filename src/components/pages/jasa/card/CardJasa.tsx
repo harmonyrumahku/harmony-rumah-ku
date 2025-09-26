@@ -1,5 +1,7 @@
 import { Card } from '@/components/ui/card'
 
+import { motion, AnimatePresence } from 'framer-motion'
+
 import Image from 'next/image'
 
 import Link from 'next/link'
@@ -10,7 +12,13 @@ export function CardJasa({ service, isExpanded, onToggle }: {
     onToggle: (id: string) => void
 }) {
     return (
-        <div className="relative group">
+        <motion.div
+            className="relative group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+        >
             <Card
                 className="bg-white rounded-[1.5rem] sm:rounded-[2rem] shadow-lg hover:shadow-xl transition-all duration-300 p-3 sm:p-4 cursor-pointer"
                 onClick={() => isExpanded && onToggle(service.id)}
@@ -37,15 +45,24 @@ export function CardJasa({ service, isExpanded, onToggle }: {
                     </div>
                 </div>
 
-                <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`}>
-                    <div className="space-y-3 sm:space-y-4 pl-2 sm:pl-4 pr-2 sm:pr-4">
-
-                        <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                            {service.description}
-                        </p>
-                    </div>
-                </div>
+                <AnimatePresence initial={false}>
+                    {isExpanded && (
+                        <motion.div
+                            key="content"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.4, ease: 'easeInOut' }}
+                            className="overflow-hidden"
+                        >
+                            <div className="space-y-3 sm:space-y-4 pl-2 sm:pl-4 pr-2 sm:pr-4">
+                                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                                    {service.description}
+                                </p>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 <div className={`flex justify-center -mt-8 sm:-mt-6 cursor-pointer transition-all duration-300 ease-in-out ${isExpanded ? 'opacity-0 max-h-0 overflow-hidden' : 'opacity-100 max-h-6 sm:max-h-8'
                     }`}
@@ -54,11 +71,13 @@ export function CardJasa({ service, isExpanded, onToggle }: {
                         onToggle(service.id)
                     }}
                 >
-                    <svg
+                    <motion.svg
                         className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 hover:text-gray-600 transition-colors"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{ duration: 0.25 }}
                     >
                         <path
                             strokeLinecap="round"
@@ -66,9 +85,9 @@ export function CardJasa({ service, isExpanded, onToggle }: {
                             strokeWidth={2}
                             d="M19 9l-7 7-7-7"
                         />
-                    </svg>
+                    </motion.svg>
                 </div>
             </Card >
-        </div >
+        </motion.div >
     )
 }
