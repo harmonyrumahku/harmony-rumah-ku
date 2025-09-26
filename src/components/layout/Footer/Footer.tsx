@@ -60,11 +60,12 @@ export default function Footer() {
                     </div>
 
                     <nav className="flex flex-wrap md:flex-col gap-8 md:gap-4 text-base text-gray-700">
-                        <a href="#" className="hover:underline">Project</a>
-                        <a href="#" className="hover:underline">Awards</a>
-                        <a href="#" className="hover:underline">About</a>
-                        <a href="#" className="hover:underline">Artikel</a>
-                        <a href="#" className="hover:underline">Kontak</a>
+                        <Link href="/" className="hover:underline">Beranda</Link>
+                        <Link href="/proyek" className="hover:underline">Proyek</Link>
+                        <Link href="/awards" className="hover:underline">Awards</Link>
+                        <Link href="/tentang-kami" className="hover:underline">Tentang Kami</Link>
+                        <Link href="/blog" className="hover:underline">Blog</Link>
+                        <Link href="/#kontak" className="hover:underline">Kontak</Link>
                     </nav>
                 </div>
             </div>

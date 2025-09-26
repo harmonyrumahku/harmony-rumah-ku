@@ -1,12 +1,14 @@
 "use client"
 
 import React, { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 
 import Image from "next/image";
 
 import sticker from "@/base/assets/stiker.png"
 
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 interface TimelineProps {
@@ -118,9 +120,13 @@ export default function Timeline({ items }: TimelineProps) {
                                         <div className="mb-12 sm:mb-24 w-full flex flex-col items-center">
                                             <div className="flex flex-row gap-2 sm:gap-3 w-full justify-center">
                                                 {item.image && item.image.map((img, i) => (
-                                                    <div
+                                                    <motion.div
                                                         key={i}
                                                         className="w-full h-32 rounded-xl overflow-hidden border-2 border-white shadow-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl bg-gray-100 mb-12"
+                                                        initial={{ opacity: 0, y: 12 }}
+                                                        whileInView={{ opacity: 1, y: 0 }}
+                                                        viewport={{ once: true, amount: 0.2 }}
+                                                        transition={{ duration: 0.4, delay: i * 0.06 }}
                                                     >
                                                         <Image
                                                             src={img}
@@ -129,13 +135,13 @@ export default function Timeline({ items }: TimelineProps) {
                                                             height={112}
                                                             className="object-cover w-full h-full rounded-xl"
                                                         />
-                                                    </div>
+                                                    </motion.div>
                                                 ))}
                                             </div>
 
                                             <div className="mt-5 flex flex-col items-start w-full transition-all duration-300 group-hover:translate-y-[-2px]">
-                                                <div className="text-base font-bold text-neutral-800 mb-1 group-hover:text-[#010f12] transition-colors duration-300">{item.title}</div>
-                                                <div className="text-sm text-neutral-600 whitespace-pre-line line-clamp-2 group-hover:text-neutral-700 transition-colors duration-300">{item.deskripsi}</div>
+                                                <motion.div className="text-base font-bold text-neutral-800 mb-1 group-hover:text-[#010f12] transition-colors duration-300" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.35 }}>{item.title}</motion.div>
+                                                <motion.div className="text-sm text-neutral-600 whitespace-pre-line line-clamp-2 group-hover:text-neutral-700 transition-colors duration-300" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.35, delay: 0.05 }}>{item.deskripsi}</motion.div>
                                                 <div className="mt-2 text-xs text-[#010f12] font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
                                                     <span>Tap untuk detail</span>
                                                     <span className="animate-bounce">👆</span>
@@ -186,9 +192,13 @@ export default function Timeline({ items }: TimelineProps) {
 
                                             <div className="flex flex-row gap-2 sm:gap-3 w-full justify-center">
                                                 {item.image && item.image.map((img, i) => (
-                                                    <div
+                                                    <motion.div
                                                         key={i}
                                                         className="w-full h-32 rounded-xl overflow-hidden border-2 border-white shadow-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl bg-gray-100"
+                                                        initial={{ opacity: 0, y: 12 }}
+                                                        whileInView={{ opacity: 1, y: 0 }}
+                                                        viewport={{ once: true, amount: 0.2 }}
+                                                        transition={{ duration: 0.4, delay: i * 0.06 }}
                                                     >
                                                         <Image
                                                             src={img}
@@ -197,7 +207,7 @@ export default function Timeline({ items }: TimelineProps) {
                                                             height={112}
                                                             className="object-cover w-full h-full rounded-xl"
                                                         />
-                                                    </div>
+                                                    </motion.div>
                                                 ))}
                                             </div>
                                         </div>
@@ -233,8 +243,8 @@ export default function Timeline({ items }: TimelineProps) {
                                                 </div>
 
                                                 <div className="mt-5 flex flex-col items-start w-full">
-                                                    <div className="text-base font-bold text-neutral-800 mb-1">{item.title}</div>
-                                                    <div className="text-sm text-neutral-600 whitespace-pre-line line-clamp-2">{item.deskripsi}</div>
+                                                    <motion.div className="text-base font-bold text-neutral-800 mb-1" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.35 }}>{item.title}</motion.div>
+                                                    <motion.div className="text-sm text-neutral-600 whitespace-pre-line line-clamp-2" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.35, delay: 0.05 }}>{item.deskripsi}</motion.div>
                                                 </div>
                                             </div>
                                         )}
@@ -276,9 +286,13 @@ export default function Timeline({ items }: TimelineProps) {
 
                                                 <div className="flex flex-row gap-2 sm:gap-3 w-full justify-center">
                                                     {item.image && item.image.map((img, i) => (
-                                                        <div
+                                                        <motion.div
                                                             key={i}
                                                             className="w-full h-32 rounded-xl overflow-hidden border-2 border-white shadow-md transition-transform duration-200 hover:scale-105 bg-gray-100"
+                                                            initial={{ opacity: 0, y: 12 }}
+                                                            whileInView={{ opacity: 1, y: 0 }}
+                                                            viewport={{ once: true, amount: 0.2 }}
+                                                            transition={{ duration: 0.4, delay: i * 0.06 }}
                                                         >
                                                             <Image
                                                                 src={img}
@@ -287,7 +301,7 @@ export default function Timeline({ items }: TimelineProps) {
                                                                 height={112}
                                                                 className="object-cover w-full h-full rounded-xl"
                                                             />
-                                                        </div>
+                                                        </motion.div>
                                                     ))}
                                                 </div>
                                             </div>

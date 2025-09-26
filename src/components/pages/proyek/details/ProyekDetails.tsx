@@ -123,61 +123,94 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
                 {/* Kiri: Info */}
                 <div className="flex flex-col gap-6 relative z-10 px-4 md:px-16 order-2 md:order-1">
                     <div>
-                        <h1 className="text-3xl md:text-4xl font-bold font-playfair mb-6 leading-tight">
+                        <motion.h1
+                            className="text-3xl md:text-4xl font-bold font-playfair mb-6 leading-tight"
+                            initial={{ opacity: 0, y: 16 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                        >
                             {projectData.title}
-                        </h1>
+                        </motion.h1>
                         <div className="mb-6 grid grid-cols-[120px_1fr] gap-y-4 text-base">
-                            <div className="text-gray-500 font-normal">Klient</div>
-                            <div className="text-gray-900">{info.name}</div>
-                            <div className="text-gray-500 font-normal">Tahun</div>
-                            <div className="text-gray-900">{info.years}</div>
-                            <div className="text-gray-500 font-normal">Lokasi</div>
-                            <div className="text-gray-900">{info.location}</div>
-                            <div className="text-gray-500 font-normal">Intro</div>
-                            <div className="text-gray-900">{info.intro}</div>
-                            <div className="text-gray-500 font-normal">Deskripsi <br /> singkat</div>
-                            <div className="text-gray-900">{info.deskripsi}</div>
-                            <div className="text-gray-500 font-normal">Tim</div>
-                            <div className="text-gray-900">{team}</div>
-                            <div className="text-gray-500 font-normal">Layanan</div>
-                            <div className="text-gray-900">{layanan}</div>
+                            <motion.div className="text-gray-500 font-normal" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0 }}>
+                                Klient
+                            </motion.div>
+                            <motion.div className="text-gray-900" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.02 }}>
+                                {info.name}
+                            </motion.div>
+                            <motion.div className="text-gray-500 font-normal" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.04 }}>
+                                Tahun
+                            </motion.div>
+                            <motion.div className="text-gray-900" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.06 }}>
+                                {info.years}
+                            </motion.div>
+                            <motion.div className="text-gray-500 font-normal" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.08 }}>
+                                Lokasi
+                            </motion.div>
+                            <motion.div className="text-gray-900" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.1 }}>
+                                {info.location}
+                            </motion.div>
+                            <motion.div className="text-gray-500 font-normal" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.12 }}>
+                                Intro
+                            </motion.div>
+                            <motion.div className="text-gray-900" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.14 }}>
+                                {info.intro}
+                            </motion.div>
+                            <motion.div className="text-gray-500 font-normal" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.16 }}>
+                                Deskripsi <br /> singkat
+                            </motion.div>
+                            <motion.div className="text-gray-900" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.18 }}>
+                                {info.deskripsi}
+                            </motion.div>
+                            <motion.div className="text-gray-500 font-normal" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.2 }}>
+                                Tim
+                            </motion.div>
+                            <motion.div className="text-gray-900" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.22 }}>
+                                {team}
+                            </motion.div>
+                            <motion.div className="text-gray-500 font-normal" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.24 }}>
+                                Layanan
+                            </motion.div>
+                            <motion.div className="text-gray-900" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.26 }}>
+                                {layanan}
+                            </motion.div>
                         </div>
                     </div>
 
-                    <Image src={Blobs} alt="blobs" className="absolute top-0 -left-20 z-0 bg-hidden" />
+                    <Image src={Blobs} alt="blobs" className="absolute top-0 -left-20 z-[-1] bg-hidden pointer-none:" />
 
                     {/* Info box */}
                     <div className="bg-[rgb(255, 247, 230)] rounded-lg border border-white grid grid-cols-3 gap-6 text-center py-2 mt-6 md:mt-10">
-                        <div className='flex flex-col items-center'>
+                        <motion.div className='flex flex-col items-center' initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.35, delay: 0 }}>
                             <Image src={meter} alt="bathroom" className='w-10 h-10' />
                             <span className="text-lg font-bold">{projectData.surface_area || '-'} m²</span>
                             <div>Luas wilayah</div>
-                        </div>
-                        <div className='flex flex-col items-center'>
+                        </motion.div>
+                        <motion.div className='flex flex-col items-center' initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.35, delay: 0.05 }}>
                             <Image src={deadline} alt="bedroom" className='w-10 h-10' />
                             <span className="text-lg font-bold">{projectData.deadline || '-'} </span>
                             <div>Lama pengerjaan</div>
-                        </div>
-                        <div className='flex flex-col items-center'>
+                        </motion.div>
+                        <motion.div className='flex flex-col items-center' initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.35, delay: 0.1 }}>
                             <Image src={Livingroom} alt="livingroom" className='w-10 h-10' />
                             <span className="text-lg font-bold">{projectData.proyek_type_name || '-'} </span>
                             <div>Tipe bangunan</div>
-                        </div>
-                        <div className='flex flex-col items-center pl-5'>
+                        </motion.div>
+                        <motion.div className='flex flex-col items-center pl-5' initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.35, delay: 0.15 }}>
                             <Image src={Bedroom} alt="kitchen" className='w-10 h-10' />
                             <span className="text-lg font-bold">{projectData.bedroom_count || 0}</span>
                             <div>Kamar</div>
-                        </div>
-                        <div className='flex flex-col items-center'>
+                        </motion.div>
+                        <motion.div className='flex flex-col items-center' initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.35, delay: 0.2 }}>
                             <Image src={Bathroom} alt="bathroom" className='w-10 h-10' />
                             <span className="text-lg font-bold">{projectData.bathroom_count || 0}</span>
                             <div>Kamar mandi</div>
-                        </div>
-                        <div className='flex flex-col items-center pr-5'>
+                        </motion.div>
+                        <motion.div className='flex flex-col items-center pr-5' initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.35, delay: 0.25 }}>
                             <Image src={Garage} alt="garage" className='w-10 h-10' />
                             <span className="text-lg font-bold">{projectData.garage_count || 0}</span>
                             <div>Garasi</div>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
 
@@ -215,10 +248,14 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
                     <div className="hidden lg:block">
                         <div className='columns-2 gap-3 space-y-3'>
                             {images.map((img, i) => (
-                                <div
+                                <motion.div
                                     key={i}
                                     className="overflow-hidden rounded-lg bg-gray-200 w-full mb-3 break-inside-avoid group cursor-pointer"
                                     onClick={() => setSelectedImage(img)}
+                                    initial={{ opacity: 0, y: 16 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, amount: 0.2 }}
+                                    transition={{ duration: 0.45, delay: (i % 6) * 0.04 }}
                                 >
                                     <Image
                                         src={img}
@@ -230,7 +267,7 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
                                         loading="lazy"
                                         sizes="(max-width: 1280px) 50vw, 50vw"
                                     />
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
@@ -269,9 +306,23 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
 
             {/* Message */}
             <div className='px-4 md:px-16'>
-                <h3 className='text-2xl font-bold mb-6'>👷 Tim dengan Proyek Penuh Hati</h3>
+                <motion.h3
+                    className='text-2xl font-bold mb-6'
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.45 }}
+                >
+                    👷 Tim dengan Proyek Penuh Hati
+                </motion.h3>
                 {/* Tabel Tim */}
-                <div className="overflow-x-auto mb-6 pl-0 md:pl-10">
+                <motion.div
+                    className="overflow-x-auto mb-6 pl-0 md:pl-10"
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.45, delay: 0.05 }}
+                >
                     <Table className="bg-white rounded-lg border border-gray-300 text-sm shadow-sm w-full max-w-[350px] border-separate border-spacing-0">
                         <TableHeader>
                             <TableRow className="bg-gray-100">
@@ -288,17 +339,30 @@ export default function ProyekDetails({ projectData }: { projectData: ProyekDeta
                             ))}
                         </TableBody>
                     </Table>
-                </div>
+                </motion.div>
                 {/* Pesan */}
-                <div className="text-[15px] text-gray-700 max-w-[600px] mb-2">
+                <motion.div
+                    className="text-[15px] text-gray-700 max-w-[600px] mb-2"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.45 }}
+                >
                     <p className='whitespace-pre-line'>{projectData.template_message}</p>
-                </div>
+                </motion.div>
 
-                <Link href={`mailto:harmonyrumahku@gmail.com`}>
-                    <Button className='text-black mt-6 cursor-pointer bg-[#e8e5c8] hover:bg-[#e8e5c8]/90 rounded-lg px-6 py-2 font-semibold'>
-                        📩 Hubungi kami – Kami siap mendengarkan.
-                    </Button>
-                </Link>
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.45, delay: 0.05 }}
+                >
+                    <Link href={`mailto:harmonyrumahku@gmail.com`}>
+                        <Button className='text-black mt-6 cursor-pointer bg-[#e8e5c8] hover:bg-[#e8e5c8]/90 rounded-lg px-6 py-2 font-semibold'>
+                            📩 Hubungi kami – Kami siap mendengarkan.
+                        </Button>
+                    </Link>
+                </motion.div>
             </div>
 
             {/* Image Preview Modal */}

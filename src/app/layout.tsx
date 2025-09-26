@@ -17,6 +17,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://harmonyrumahku.my.id" }
+    ]
+  }
   return (
     <html lang="en">
       <body
@@ -29,6 +36,7 @@ export default function RootLayout({
             </Pathname>
           </LenisProvider>
         </main>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       </body>
     </html>
   );

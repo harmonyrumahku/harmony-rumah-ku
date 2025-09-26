@@ -8,7 +8,7 @@ import patern from "@/base/assets/patern.png"
 
 import quete from "@/base/assets/quete.png"
 
-import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 
@@ -50,21 +50,45 @@ export default function AwardsLayout({ awardsData }: { awardsData: Award[] }) {
                 {/* Header Button */}
                 <div className="flex justify-center mb-8">
                     <div className="bg-black text-white px-8 py-3 flex items-center gap-2 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors">
-                        <Image src={icon} className='inline-block align-baseline' alt='harmonyrumahku' />
-                        <h3>Cerita yang Menghangatkan Hati</h3>
+                        <motion.img src={icon.src} className='inline-block align-baseline' alt='harmonyrumahku'
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.4 }}
+                        />
+                        <motion.h3
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.45 }}
+                        >
+                            Cerita yang Menghangatkan Hati
+                        </motion.h3>
                     </div>
                 </div>
 
                 {/* Central Text Section */}
                 <div className="text-center mb-16 max-w-5xl mx-auto">
-                    <h1 className="text-4xl inline-block font-bold text-[#1e211e] leading-tight">
+                    <motion.h1
+                        className="text-4xl inline-block font-bold text-[#1e211e] leading-tight"
+                        initial={{ opacity: 0, y: 14 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                    >
                         Setiap penghargaan bukan sekadar trofi, tapi jejak cerita
-                        dari <Image src={iconhome} alt='harmonyrumahku' className="inline-block align-baseline w-14 -mb-4 h-14" /> rumah dan keluarga yang tumbuh bersama
-                    </h1>
+                        dari <motion.img src={iconhome.src} alt='harmonyrumahku' className="inline-block align-baseline w-14 -mb-4 h-14"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.4, delay: 0.1 }}
+                        /> rumah dan keluarga yang tumbuh bersama
+                    </motion.h1>
 
-                    <h2 className="text-5xl md:text-6xl font-['Playfair_Display'] italic text-black mt-6">
+                    <motion.h2
+                        className="text-5xl md:text-6xl font-['Playfair_Display'] italic text-black mt-6"
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.45, delay: 0.05 }}
+                    >
                         HarmonyRumahKU
-                    </h2>
+                    </motion.h2>
                 </div>
 
                 {/* Awards Grid with Marquee */}
@@ -99,27 +123,52 @@ export default function AwardsLayout({ awardsData }: { awardsData: Award[] }) {
                                         >
                                             <CardContent className="p-6">
                                                 <div className="flex flex-col items-start gap-4">
-                                                    <Image src={quete} alt="icons" className="text-gray-600 text-2xl mt-1 flex-shrink-0" />
+                                                    <motion.img src={quete.src} alt="icons" className="text-gray-600 text-2xl mt-1 flex-shrink-0"
+                                                        initial={{ opacity: 0, scale: 0.95 }}
+                                                        whileInView={{ opacity: 1, scale: 1 }}
+                                                        viewport={{ once: true, amount: 0.2 }}
+                                                        transition={{ duration: 0.35 }}
+                                                    />
                                                     <div className="flex-1">
-                                                        <p className="text-black text-lg leading-relaxed">
+                                                        <motion.p className="text-black text-lg leading-relaxed"
+                                                            initial={{ opacity: 0, y: 10 }}
+                                                            whileInView={{ opacity: 1, y: 0 }}
+                                                            viewport={{ once: true, amount: 0.2 }}
+                                                            transition={{ duration: 0.45 }}
+                                                        >
                                                             {award.description}
-                                                        </p>
+                                                        </motion.p>
                                                     </div>
                                                 </div>
                                             </CardContent>
 
                                             <CardFooter className="px-6 pb-6">
                                                 <div className="flex items-center gap-3 w-full">
-                                                    <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-                                                        <Image src={award.avatar} alt={award.name} width={40} height={40} className="w-full h-full object-cover" />
+                                                    <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
+                                                        <motion.img src={award.avatar} alt={award.name} width={40} height={40} className="w-full h-full object-cover"
+                                                            initial={{ opacity: 0, scale: 0.9 }}
+                                                            whileInView={{ opacity: 1, scale: 1 }}
+                                                            viewport={{ once: true, amount: 0.2 }}
+                                                            transition={{ duration: 0.35 }}
+                                                        />
                                                     </div>
                                                     <div>
-                                                        <p className="text-black font-medium text-sm">
+                                                        <motion.p className="text-black font-medium text-sm"
+                                                            initial={{ opacity: 0, y: 8 }}
+                                                            whileInView={{ opacity: 1, y: 0 }}
+                                                            viewport={{ once: true, amount: 0.2 }}
+                                                            transition={{ duration: 0.35 }}
+                                                        >
                                                             {award.name}
-                                                        </p>
-                                                        <p className="text-gray-600 text-xs">
+                                                        </motion.p>
+                                                        <motion.p className="text-gray-600 text-xs"
+                                                            initial={{ opacity: 0, y: 8 }}
+                                                            whileInView={{ opacity: 1, y: 0 }}
+                                                            viewport={{ once: true, amount: 0.2 }}
+                                                            transition={{ duration: 0.35, delay: 0.05 }}
+                                                        >
                                                             {award.keterangan}
-                                                        </p>
+                                                        </motion.p>
                                                     </div>
                                                 </div>
                                             </CardFooter>
@@ -160,11 +209,19 @@ export default function AwardsLayout({ awardsData }: { awardsData: Award[] }) {
                                         >
                                             <CardContent className="p-6">
                                                 <div className="flex flex-col items-start gap-4">
-                                                    <Image src={quete} alt="icons" className="text-gray-600 text-2xl mt-1 flex-shrink-0" />
+                                                    <motion.img src={quete.src} alt="icons" className="text-gray-600 text-2xl mt-1 flex-shrink-0"
+                                                        initial={{ opacity: 0, scale: 0.95 }}
+                                                        animate={{ opacity: 1, scale: 1 }}
+                                                        transition={{ duration: 0.35 }}
+                                                    />
                                                     <div className="flex-1">
-                                                        <p className="text-black text-lg leading-relaxed">
+                                                        <motion.p className="text-black text-lg leading-relaxed"
+                                                            initial={{ opacity: 0, y: 10 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            transition={{ duration: 0.45 }}
+                                                        >
                                                             {award.description}
-                                                        </p>
+                                                        </motion.p>
                                                     </div>
                                                 </div>
                                             </CardContent>
@@ -172,16 +229,28 @@ export default function AwardsLayout({ awardsData }: { awardsData: Award[] }) {
                                             <CardFooter className="px-6 pb-6">
                                                 <div className="flex items-center gap-3 w-full">
                                                     <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden">
-                                                        <Image src={award.avatar} alt={award.name} width={40} height={40} className="w-full h-full object-cover" />
+                                                        <motion.img src={award.avatar} alt={award.name} width={40} height={40} className="w-full h-full object-cover"
+                                                            initial={{ opacity: 0, scale: 0.9 }}
+                                                            animate={{ opacity: 1, scale: 1 }}
+                                                            transition={{ duration: 0.35 }}
+                                                        />
                                                     </div>
 
                                                     <div>
-                                                        <p className="text-black font-medium text-sm">
+                                                        <motion.p className="text-black font-medium text-sm"
+                                                            initial={{ opacity: 0, y: 8 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            transition={{ duration: 0.35 }}
+                                                        >
                                                             {award.name}
-                                                        </p>
-                                                        <p className="text-gray-600 text-xs">
+                                                        </motion.p>
+                                                        <motion.p className="text-gray-600 text-xs"
+                                                            initial={{ opacity: 0, y: 8 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            transition={{ duration: 0.35, delay: 0.05 }}
+                                                        >
                                                             {award.keterangan}
-                                                        </p>
+                                                        </motion.p>
                                                     </div>
                                                 </div>
                                             </CardFooter>

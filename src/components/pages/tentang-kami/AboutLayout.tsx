@@ -2,7 +2,11 @@
 
 import React from 'react';
 
+import { motion } from 'framer-motion';
+
 import Image from 'next/image';
+
+const MotionImage = motion(Image);
 
 export default function AboutPages({ aboutPagesData }: { aboutPagesData: AboutPages[] }) {
 
@@ -13,29 +17,65 @@ export default function AboutPages({ aboutPagesData }: { aboutPagesData: AboutPa
                     {/* Left Column - Statistics */}
                     <div className="space-y-10">
                         <div className="text-center lg:text-left">
-                            <div className="text-6xl text-black mb-4">{aboutPagesData[0].number}</div>
-                            <p className="text-black text-lg leading-relaxed">
+                            <motion.h1
+                                className="text-6xl text-black mb-4"
+                                initial={{ opacity: 0, y: 16 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5 }}
+                            >
+                                {aboutPagesData[0].number}
+                            </motion.h1>
+                            <motion.p
+                                className="text-black text-lg leading-relaxed"
+                                initial={{ opacity: 0, y: 16 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5 }}
+                            >
                                 {aboutPagesData[0].description}
-                            </p>
+                            </motion.p>
                         </div>
 
                         <div className="flex justify-center lg:justify-start space-x-4">
-                            <Image src={aboutPagesData[0].image_urls} alt='tentang-harmony-rumahku' quality={100} width={300} height={300} />
+                            <MotionImage
+                                src={aboutPagesData[0].image_urls}
+                                alt='tentang-harmony-rumahku'
+                                quality={100}
+                                width={300}
+                                height={300}
+                                initial={{ opacity: 0, y: 12 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5 }}
+                            />
                         </div>
                     </div>
 
                     {/* Middle Column - Services */}
                     <div className="space-y-4">
-                        <h2 className="text-gray-500 text-xl font-normal">ARCHITECTURE</h2>
+                        <motion.h2
+                            className="text-gray-500 text-xl font-normal"
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            ARCHITECTURE
+                        </motion.h2>
                         <div className="space-y-2">
                             {
-                                aboutPagesData.map((item, idx) => {
+                                aboutPagesData.map((aboutItem, aboutIdx) => {
                                     return (
-                                        <div key={idx} className='flex flex-col gap-2'>
+                                        <div key={aboutIdx} className='flex flex-col gap-2'>
                                             {
-                                                item.category.map((item, idx) => {
+                                                aboutItem.category.map((catItem, catIdx) => {
                                                     return (
-                                                        <span key={idx} className='text-xl'>{item.title}</span>
+                                                        <motion.span
+                                                            key={catIdx}
+                                                            className='text-xl'
+                                                            initial={{ opacity: 0, y: 12 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            transition={{ duration: 0.4, delay: catIdx * 0.08 }}
+                                                        >
+                                                            {catItem.title}
+                                                        </motion.span>
                                                     )
                                                 })
                                             }
@@ -46,7 +86,6 @@ export default function AboutPages({ aboutPagesData }: { aboutPagesData: AboutPa
                         </div>
                     </div>
 
-                    {/* Right Column - Cities Progress & Achievement */}
                     <div className="space-y-6">
                         {/* Cities Progress */}
                         <div className="space-y-3">
@@ -58,14 +97,31 @@ export default function AboutPages({ aboutPagesData }: { aboutPagesData: AboutPa
                                                 item.city.map((item, idx) => {
                                                     return (
                                                         <div key={idx} className='flex items-center space-x-3'>
-                                                            <span className="text-black text-xl min-w-[150px]">{item.title}</span>
-                                                            <span className="text-black text-xl font-medium">{item.number}</span>
+                                                            <motion.span
+                                                                className="text-black text-xl min-w-[150px]"
+                                                                initial={{ opacity: 0, y: 10 }}
+                                                                animate={{ opacity: 1, y: 0 }}
+                                                                transition={{ duration: 0.4 }}
+                                                            >
+                                                                {item.title}
+                                                            </motion.span>
+                                                            <motion.span
+                                                                className="text-black text-xl font-medium"
+                                                                initial={{ opacity: 0, y: 10 }}
+                                                                animate={{ opacity: 1, y: 0 }}
+                                                                transition={{ duration: 0.4 }}
+                                                            >
+                                                                {item.number}
+                                                            </motion.span>
 
                                                             <div className="flex-1 bg-gray-200 rounded-full h-2">
-                                                                <div
+                                                                <motion.div
                                                                     className="bg-[#66FF66] h-2 rounded-full"
-                                                                    style={{ width: `${item.number}%` }}
-                                                                ></div>
+                                                                    style={{ width: `${item.number}%`, transformOrigin: 'left' }}
+                                                                    initial={{ scaleX: 0 }}
+                                                                    animate={{ scaleX: 1 }}
+                                                                    transition={{ duration: 0.6 }}
+                                                                ></motion.div>
                                                             </div>
                                                         </div>
                                                     )
@@ -81,16 +137,34 @@ export default function AboutPages({ aboutPagesData }: { aboutPagesData: AboutPa
                         <div className="bg-[#f7fff5] border border-[#f7fff5] rounded-lg p-4">
                             <div className="flex items-center space-x-2 mb-3">
                                 <div className="w-5 h-5 text-[#4CAF50]">
-                                    <svg fill="currentColor" viewBox="0 0 24 24">
+                                    <motion.svg
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                        initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
+                                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                                        transition={{ duration: 0.45 }}
+                                    >
                                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                    </svg>
+                                    </motion.svg>
                                 </div>
-                                <span className="text-[#4CAF50] text-xl font-medium">PENCAPAIAN</span>
+                                <motion.span
+                                    className="text-[#4CAF50] text-xl font-medium"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.4 }}
+                                >
+                                    PENCAPAIAN
+                                </motion.span>
                             </div>
 
-                            <p className="text-black text-xl leading-relaxed">
+                            <motion.p
+                                className="text-black text-xl leading-relaxed"
+                                initial={{ opacity: 0, y: 12 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5 }}
+                            >
                                 {aboutPagesData[0].award}
-                            </p>
+                            </motion.p>
                         </div>
                     </div>
                 </div>
